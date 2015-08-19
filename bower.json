@@ -1,0 +1,29 @@
+{
+  "name": "angular-wt-editor",
+  "version": "0.0.1",
+  "homepage": "https://github.com/WorktileTech/angular-wt-editor",
+  "authors": [
+    "YCTech"
+  ],
+  "description": "wt-editor for markdown",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "angular",
+    "editor",
+    "markdown"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src"
+  ],
+  "dependencies": {
+    "angular": "~1.4.4"
+  }
+}

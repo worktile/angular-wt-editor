@@ -1,4 +1,4 @@
-angular-wt-editor
+wt-editor angular markdown editor
 =================
 
-angular-wt-editor
+angular markdown editor
