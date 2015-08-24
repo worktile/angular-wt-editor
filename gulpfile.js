@@ -25,7 +25,8 @@ gulp.task('templates:dev', function () {
     return gulp.src(paths.tpl)
         .pipe(ngTemplate("wt-editor.tpl.js", {
             root  : "wt-editor",
-            module: "wt.editor.tpl"
+            module: "wt.editor.tpl",
+            standalone:true
         }))
         .pipe(gulp.dest('src'));
 });

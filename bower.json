@@ -24,6 +24,16 @@
     "src"
   ],
   "dependencies": {
-    "angular": "~1.4.4"
+    "angular": "~1.4.4",
+    "angular-bootstrap": "~0.10.0",
+    "bootstrap": "~3.1.1",
+    "fontawesome": "latest",
+    "underscore-min": null,
+    "ace-min-noconflict": null,
+    "markedown": null,
+    "github-markdown-css": null,
+    "katex-build": null,
+    "mermaid-min": null,
+    "jquery.cookie-min": null
   }
 }

@@ -1,13 +1,11 @@
 angular.module("wt-editor")
-    .directive("wt-editor", [function () {
+    .directive("wtEditor", [function () {
         return {
             require: ['wtEditor', '^ngModel'],
             controller: [function() {
 
             }],
-            scope: {
-                ngModel: "ngModel"
-            },
+            templateUrl:"wt-editor/editor.html",
             link: function (scope, element, attrs, ctrls) {
 
             }
