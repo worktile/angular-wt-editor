@@ -7,29 +7,54 @@
 /***common color****/
 @layout-boder:#ededed;
 @layout-toolbar-bg:#ededed;
+@layout-toolbar-icon-bg:#ddd;
+@layout-toolbar-icon-border:#ccc;
+@layout-toolbar-dividor-bg:#ddd;
 
 /***layout***/
-.markdown-editor{
+.wt-editor{
   width: 100%;
-  height: 600px;
+  height: 100%;
   border : 1px @layout-boder solid;
   margin: auto;
   display: flex;
   flex-direction: column;
-  .markdown-editor-toobar{
-    height: 20px;
+  .wt-editor-toobar{
+    padding: 5px 10px;
     background: @layout-toolbar-bg;
+    .file-icon,.styling-icon,.heading-icon,.list-icon,.link-icon,.icon-icon,.math-icon,.mermaid-icon,.con-icon{
+      padding: 5px;
+      border: 1px solid transparent;
+      &:hover{
+        background-color: @layout-toolbar-icon-bg;
+        border-color: @layout-toolbar-icon-border;
+        cursor: pointer;
+      }
+    }
+    .dividor {
+      font-style: normal;
+      color: @layout-toolbar-dividor-bg;
+      margin: 0 5px;
+    }
   }
-  .markdown-editor-container{
+  .wt-editor-container{
     flex: 1;
     display: flex;
     flex-direction: row;
   }
-  .markdown-editor-container-code{
+  .wt-editor-container-code{
     position: relative;
     flex: 1;
+    overflow: auto;
+    background: #f0ad4e;
+    .wt-editor-panel {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
   }
-  .markdown-editor-container-preview{
+  .wt-editor-container-preview{
     flex: 1;
+    overflow: auto;
   }
 }
