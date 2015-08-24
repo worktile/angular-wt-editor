@@ -10,7 +10,7 @@ angular markdown editor
 
 1. 执行 `git clone https://github.com/WorktileTech/angular-wt-editor`
 
-1. 执行 `nmp install gulp -g` 和 `nmp install bower -g`
+1. 执行 `npm install gulp -g` 和 `npm install bower -g`
 
 1. 执行 `npm install` 和 `bower install`
 

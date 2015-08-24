@@ -1,1 +1,1 @@
-var wtEditor = angular.module("wt-editor", []);
+var wtEditor = angular.module("wt-editor", ["wt.editor.tpl"]);
