@@ -27,7 +27,7 @@ gulp.task('templates:dev', function () {
             root  : "wt-editor",
             module: "wt.editor.tpl"
         }))
-        .pipe(gulp.dest('src/js'));
+        .pipe(gulp.dest('src'));
 });
 
 gulp.task('templates:dist', function () {
@@ -42,25 +42,25 @@ gulp.task('templates:dist', function () {
 gulp.task('scripts:dev', function () {
     return gulp.src(paths.scripts)
         .pipe(concat('wt-editor.js'))
-        .pipe(gulp.dest('src/js'));
+        .pipe(gulp.dest('src'));
 });
 
 gulp.task('scripts:build', ['clean'], function (result) {
     // Minify and copy all JavaScript (except vendor scripts)
     // with sourcemaps all the way down
-    return gulp.src('src/tpl/*.html')
-        .pipe(ngTemplate("wt-editor.tpl.js", {
-            root  : "wt-editor",
-            module: "wt.editor.tpl"
-        }))
-        .src(paths.scripts)
-        .pipe(concat('wt-editor.js'))
-        .pipe(gulp.dest('dest'));
-    var js = gulp.src(paths.scripts)
-        .pipe(concat('wt-editor.js'));
-
-    return merge(tpl, js)
-        .pipe(gulp.dest('dest'));
+    //return gulp.src('src/tpl/*.html')
+    //    .pipe(ngTemplate("wt-editor.tpl.js", {
+    //        root  : "wt-editor",
+    //        module: "wt.editor.tpl"
+    //    }))
+    //    .src(paths.scripts)
+    //    .pipe(concat('wt-editor.js'))
+    //    .pipe(gulp.dest('dest'));
+    //var js = gulp.src(paths.scripts)
+    //    .pipe(concat('wt-editor.js'));
+    //
+    //return merge(tpl, js)
+    //    .pipe(gulp.dest('dest'));
     //.pipe(concat('wt-editor.min.js'))
     //.pipe(uglify())
     //.pipe(gulp.dest('dest'));
@@ -76,6 +76,7 @@ gulp.task('lessc:dev', function () {
 // Rerun the task when a file changes
 gulp.task('watch', function () {
     gulp.watch(paths.scripts, ['scripts:dev']);
+    gulp.watch(paths.scripts, ['templates:dev']);
     gulp.watch(paths.less, ['lessc:dev']);
 });
 
