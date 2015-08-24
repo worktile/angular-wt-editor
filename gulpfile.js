@@ -4,11 +4,13 @@ var uglify = require('gulp-uglify');
 var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
+var htmlmin = require('gulp-htmlmin');
+var ngTemplate = require('gulp-angular-templatecache');
 
 var paths = {
-    scripts: ['src/*.js'],
-    less: ['css/*.less'],
-    images: 'css/img/**/*'
+    scripts: ['src/js/*.js'],
+    less: ['src/css/*.less'],
+    tpl: ['src/tpl/*.html']
 };
 
 // Not all tasks need to use streams
@@ -18,7 +20,19 @@ gulp.task('clean', function (cb) {
     del(['dest'], cb);
 });
 
-gulp.task('scripts', ['clean'], function () {
+gulp.task('templates:dist', function() {
+    gulp.src('src/tpl/*.html')
+        .pipe(minifyHtml({empty: true, quotes: true}))
+        .pipe(ngTemplate({
+            moduleName: 'genTemplates',
+            standalone: true,
+            filePath: 'js/templates.js'
+        }))
+        .pipe(gulp.dest('dist'));  // output file: 'dist/js/templates.js'
+});
+
+gulp.task('scripts', ['clean'], function (result) {
+    console.log(result);
     // Minify and copy all JavaScript (except vendor scripts)
     // with sourcemaps all the way down
     return gulp.src(paths.scripts)
@@ -33,9 +47,9 @@ gulp.task('scripts', ['clean'], function () {
 
 // Copy all static images
 gulp.task('lessc', function () {
-    return gulp.src('./css/main.less')
+    return gulp.src('./src/css/main.less')
         .pipe(less())
-        .pipe(gulp.dest('./css/'));
+        .pipe(gulp.dest('./src/css/'));
 });
 
 // Rerun the task when a file changes
@@ -46,3 +60,5 @@ gulp.task('watch', function () {
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['watch', 'scripts', 'lessc']);
+
+gulp.task('build', ['watch', 'scripts', 'lessc']);
