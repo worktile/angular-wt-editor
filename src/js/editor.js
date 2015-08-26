@@ -7,10 +7,12 @@ angular.module("wt-editor")
         fontSize          : '14px',
         theme             : 'kuroir',
         isPreview         : false,
+        isPreviewButton   : false,
         autofocus         : true, //默认聚焦
         width             : '100%', //宽度
         height            : '100%',  //高度
-        isFullscreen        : true, //是否显示最大化按钮
+        isFullscreen      : false, //默认是否全屏显示
+        isFullButton      : true, //是否显示最大化按钮
         hiddenButtons     : [],//要不显示的图标
         additionalButtons : [],//扩展的图标
         language          : [],//国际化设置
@@ -234,6 +236,25 @@ angular.module("wt-editor")
         }
 
 
+        this.setFullScreen = function(id,flag){
+            var _obj = $('#'+id);
+            if(flag){
+                _obj.css({
+                    width:document.documentElement.clientWidth,
+                    height:document.documentElement.clientHeight,
+                    left:0,
+                    top:0
+                });
+            }else{
+                _obj.css({
+                    width:'100%',
+                    height:'100%'
+                });
+            }
+
+        }
+
+
 
     }])
     .directive("wtEditor", ['wtEditorConfig','$timeout',function (wtEditorConfig,$timeout) {
@@ -253,6 +274,9 @@ angular.module("wt-editor")
                 angular.extend(wtEditorConfig,scope.config);
                 //是否显示预览
                 vm.isPreview = wtEditorConfig.isPreview;
+                vm.isPreviewButton = wtEditorConfig.isPreviewButton;
+                vm.isFullButton = wtEditorConfig.isFullButton;
+                vm.isFullscreen = wtEditorConfig.isFullscreen;
                 //设置甘特图
                 controller[0].initGantt();
                 //设置markdown
@@ -392,6 +416,24 @@ angular.module("wt-editor")
                         $timeout(function () {
                             controller[0].refreshHTML(vm.editor);
                         }, 50);
+                    }
+                }
+
+                //full screen
+                vm.toggleFullScreen = function(){
+                    if(vm.isFullButton){
+                        vm.isFullscreen = !vm.isFullscreen;
+                        vm.isPreviewButton = vm.isFullscreen;
+                        vm.isPreview = !vm.isFullscreen;
+                        wtEditorConfig.isPreview = vm.isPreview;
+                        wtEditorConfig.isPreviewButton = vm.isPreviewButton;
+
+                        if(vm.isPreview === true){
+                            vm.togglePreview();
+                        }
+
+                        wtEditorConfig.isFullscreen = vm.isFullscreen;
+                        controller[0].setFullScreen('wtEditor',vm.isFullscreen);
                     }
                 }
 
