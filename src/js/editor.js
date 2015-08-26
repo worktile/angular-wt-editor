@@ -236,7 +236,7 @@ angular.module("wt-editor")
         }
 
 
-        this.setFullScreen = function(id,flag){
+        this.setFullScreen = function(id,flag,editor){
             var _obj = $('#'+id);
             if(flag){
                 _obj.css({
@@ -251,6 +251,11 @@ angular.module("wt-editor")
                     height:'100%'
                 });
             }
+            setTimeout(function(){
+                editor.resize(true);
+                editor.focus();
+            },100)
+
 
         }
 
@@ -433,7 +438,9 @@ angular.module("wt-editor")
                         }
 
                         wtEditorConfig.isFullscreen = vm.isFullscreen;
-                        controller[0].setFullScreen('wtEditor',vm.isFullscreen);
+                        controller[0].setFullScreen('wtEditor',vm.isFullscreen,vm.editor);
+
+
                     }
                 }
 
