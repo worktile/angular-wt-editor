@@ -4,10 +4,10 @@ String.prototype.repeat = function (i) {
 }
 angular.module("wt-editor")
     .constant('wtEditorConfig', {
-        fontSize         : '14px',
+        fontSize         : '16px',
         theme            : 'kuroir',
         isPreview        : false,//是否显示预览
-        isPreviewButton  : false,//是否显示预览按钮
+        isPreviewButton  : true,//是否显示预览按钮
         autofocus        : true, //默认聚焦
         width            : '100%', //宽度
         height           : '100%',  //高度
@@ -184,8 +184,7 @@ angular.module("wt-editor")
         }, {
             id       : 28,
             title    : '最大化',
-            title2    : '最大化',
-            title3    : '还原',
+            title2    : '还原',
             className: 'fa fa-expand',
             type     : 'expand'
         }],
@@ -449,7 +448,12 @@ angular.module("wt-editor")
 
 
         }
-
+        this.resizeEditor = function(editor){
+            setTimeout(function () {
+                editor.resize(true);
+                editor.focus();
+            }, 100)
+        }
         var emojiFn = function (htmlstr) {
             return htmlstr.replace(wtEditorConfig.emojRegx, function (match) {
                 if (wtEditorConfig.emojis.indexOf(match) !== -1) {
@@ -482,25 +486,24 @@ angular.module("wt-editor")
                 //继承设置
                 angular.extend(wtEditorConfig, scope.config);
                 if (wtEditorConfig.type === 'simple') {
-                    vm.toolbars = _.union(wtEditorConfig.styleToolBar, wtEditorConfig.dividorToolbar,
-                        wtEditorConfig.hToolbar, wtEditorConfig.dividorToolbar,
+                    vm.toolbars = _.union(wtEditorConfig.styleToolBar, [{id:'d1',type: 'dividor'}],
+                        wtEditorConfig.hToolbar, [{id:'d2',type: 'dividor'}],
                         wtEditorConfig.horizonToolbar,
-                        wtEditorConfig.listToolbar, wtEditorConfig.dividorToolbar,
-                        wtEditorConfig.linkToolbar, wtEditorConfig.dividorToolbar,
+                        wtEditorConfig.listToolbar, [{id:'d3',type: 'dividor'}],
+                        wtEditorConfig.linkToolbar, [{id:'d4',type: 'dividor'}],
                         wtEditorConfig.expandToolbar);
                 } else if (wtEditorConfig.type === 'all') {
-                    vm.toolbars = _.union(wtEditorConfig.styleToolBar, wtEditorConfig.dividorToolbar,
-                        wtEditorConfig.hToolbar, wtEditorConfig.dividorToolbar,
+                    vm.toolbars = _.union(wtEditorConfig.styleToolBar, [{id:'d1',type: 'dividor'}],
+                        wtEditorConfig.hToolbar, [{id:'d2',type: 'dividor'}],
                         wtEditorConfig.horizonToolbar,
-                        wtEditorConfig.listToolbar, wtEditorConfig.dividorToolbar,
-                        wtEditorConfig.linkToolbar, wtEditorConfig.dividorToolbar,
-                        wtEditorConfig.iconToolbar, wtEditorConfig.dividorToolbar,
+                        wtEditorConfig.listToolbar, [{id:'d3',type: 'dividor'}],
+                        wtEditorConfig.linkToolbar, [{id:'d4',type: 'dividor'}],
+                        wtEditorConfig.iconToolbar, [{id:'d5',type: 'dividor'}],
                         wtEditorConfig.mathToolbar,
-                        wtEditorConfig.mermaidToolbar, wtEditorConfig.dividorToolbar,
+                        wtEditorConfig.mermaidToolbar, [{id:'d6',type: 'dividor'}],
                         wtEditorConfig.expandToolbar);
                 }
 
-                debugger
 
                 //隐藏个性化按钮
                 _.remove(vm.toolbars, function (n) {
@@ -680,32 +683,31 @@ angular.module("wt-editor")
                 vm.togglePreview = function () {
                     vm.isPreview = !vm.isPreview;
                     wtEditorConfig.isPreview = vm.isPreview;
-
                     if (vm.isPreview === true) {
                         $timeout(function () {
                             controller[0].refreshHTML(vm.editor);
                         }, 50);
                     }
-
+                    controller[0].resizeEditor(vm.editor);
                 }
 
                 //full screen
                 vm.toggleFullScreen = function () {
                     if (vm.isFullButton) {
                         vm.isFullscreen = !vm.isFullscreen;
-                        vm.isPreviewButton = vm.isFullscreen;
-                        vm.isPreview = !vm.isFullscreen;
-                        wtEditorConfig.isPreview = vm.isPreview;
-                        wtEditorConfig.isPreviewButton = vm.isPreviewButton;
+                        //vm.isPreviewButton = vm.isFullscreen;
+                        //vm.isPreview = !vm.isFullscreen;
+                        //wtEditorConfig.isPreview = vm.isPreview;
+                        //wtEditorConfig.isPreviewButton = vm.isPreviewButton;
                         var _fullobj = _.find(vm.toolbars,function(n){
                             return n.id === 28;
                         });
                         if (vm.isPreview === true) {
                             vm.togglePreview();
-                            _fullobj.title = _fullobj.title2;
-                        }else{
-                            _fullobj.title = _fullobj.title3;
                         }
+
+
+
 
                         wtEditorConfig.isFullscreen = vm.isFullscreen;
                         controller[0].setFullScreen('wtEditor', vm.isFullscreen, vm.editor);

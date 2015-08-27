@@ -5,15 +5,16 @@
 */
 
 /***common color****/
-@layout-boder:#c9d8db;
+@layout-boder:#E3E6EC;
 @layout-shadow:rgba(0, 0, 0, 0.15);
 @layout-toolbar-bg:#fff;
 @layout-toolbar-border:#eee;
 @layout-toolbar-icon-bg:#ddd;
 @layout-toolbar-icon-color:#333;
 @layout-toolbar-icon-border:#ccc;
-@layout-toolbar-dividor-bg:#ddd;
+@layout-toolbar-dividor-bg:#cfcfcf;
 @layout-code-content:#fff;
+@layout-code-content-shadow:#eee;
 @layout-code-line:#fcfcfc;
 @layout-code-line-color:#ddd;
 /***layout***/
@@ -24,7 +25,7 @@
   width: 100%;
   height: 100%;
   border : 1px @layout-boder solid;
-  box-shadow:0 8px 40px @layout-shadow;
+  box-shadow:0 3px 20px @layout-shadow;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -49,13 +50,13 @@
       list-style: none;
       .wtEditorToolBarli{
         display: inline-block;
-        padding: 5px 3px;
+        padding: 0;
         margin: 0;
       }
     }
 
     .toolbar-icon,.file-icon,.styling-icon,.heading-icon,.list-icon,.link-icon,.image-icon,.code-icon,.table-icon,.icon-icon,.math-icon,.mermaid-icon,.con-icon{
-      padding: 5px;
+      padding: 10px;
       border: 1px solid transparent;
       color: @layout-toolbar-icon-color;
       opacity: 0.5;
@@ -70,9 +71,9 @@
       background: @layout-toolbar-dividor-bg;
       margin: 0 5px;
       display: inline-block;
-      width: 2px;
-      height: 12px;
-      vertical-align: middle;
+      width: 1px;
+      height: 18px;
+      vertical-align: top;
     }
   }
   .wt-editor-container{
@@ -85,12 +86,14 @@
     flex: 1;
     overflow: auto;
     background: #f0ad4e;
+
     .wt-editor-panel {
       position: absolute;
       width: 100%;
       height: 100%;
       .ace_content{
         background: @layout-code-content;
+        box-shadow:inset 0 0 5px @layout-code-content-shadow;
       }
       .ace_gutter-layer{
         background: @layout-code-line;
@@ -103,5 +106,6 @@
   .wt-editor-container-preview{
     flex: 1;
     overflow: auto;
+    border-left: 1px @layout-toolbar-border solid;
   }
 }
