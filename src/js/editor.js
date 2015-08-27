@@ -261,13 +261,13 @@ angular.module("wt-editor")
             // 实时监听用户的编辑
             editor.session.on('change', function () {
                 if(wtEditorConfig.onChange) {
-                    wtEditorConfig.onChange();
+                    wtEditorConfig.onChange(editor.session.getValue());
                 }
                 if (wtEditorConfig.isPreview === true) {
                     _.debounce(function () {
                         // 用户停止输入128毫秒之后才会触发
                         if(wtEditorConfig.onPreview) {
-                            wtEditorConfig.onPreview();
+                            wtEditorConfig.onPreview(editor.session.getValue());
                         }
                         var modelist = ace.require('ace/ext/modelist').modesByName;
                         var highlight = ace.require('ace/ext/static_highlight');
