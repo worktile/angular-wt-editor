@@ -500,6 +500,8 @@ angular.module("wt-editor")
                         wtEditorConfig.expandToolbar);
                 }
 
+                debugger
+
                 //隐藏个性化按钮
                 _.remove(vm.toolbars, function (n) {
                     if (n.id) {
