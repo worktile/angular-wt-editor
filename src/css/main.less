@@ -35,7 +35,19 @@
       user-select: none;
     }
 
-    .file-icon,.styling-icon,.heading-icon,.list-icon,.link-icon,.image-icon,.code-icon,.table-icon,.icon-icon,.math-icon,.mermaid-icon,.con-icon{
+    .wtEditorToolBarUl{
+      display: block;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      .wtEditorToolBarli{
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    .toolbar-icon,.file-icon,.styling-icon,.heading-icon,.list-icon,.link-icon,.image-icon,.code-icon,.table-icon,.icon-icon,.math-icon,.mermaid-icon,.con-icon{
       padding: 5px;
       border: 1px solid transparent;
       &:hover{
@@ -46,8 +58,12 @@
     }
     .dividor {
       font-style: normal;
-      color: @layout-toolbar-dividor-bg;
+      background: @layout-toolbar-dividor-bg;
       margin: 0 5px;
+      display: inline-block;
+      width: 2px;
+      height: 12px;
+      vertical-align: middle;
     }
   }
   .wt-editor-container{

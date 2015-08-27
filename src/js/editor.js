@@ -6,16 +6,191 @@ angular.module("wt-editor")
     .constant('wtEditorConfig', {
         fontSize          : '14px',
         theme             : 'kuroir',
-        isPreview         : false,
-        isPreviewButton   : false,
+        isPreview         : false,//是否显示预览
+        isPreviewButton   : false,//是否显示预览按钮
         autofocus         : true, //默认聚焦
         width             : '100%', //宽度
         height            : '100%',  //高度
         isFullscreen      : false, //默认是否全屏显示
         isFullButton      : true, //是否显示最大化按钮
-        hiddenButtons     : [],//要不显示的图标
+        type              : 1, //toolbar按钮显示的类型 ［1:简易, 2:全部按钮 3:自定义］
+        styleToolBar      : [{
+            id            : 1,
+            title         : '粗体',
+            className     : 'fa fa-bold',
+            modifier      : '**',
+            type       : 'styleFn'
+        },{
+            id            : 2,
+            title         : '斜体',
+            className     : 'fa fa-italic',
+            modifier      : '*',
+            type          : 'styleFn'
+        },{
+            id            : 3,
+            title         : '删除线',
+            className     : 'fa fa-strikethrough',
+            modifier      : '~~',
+            type          : 'styleFn'
+        }],
+        hToolbar          : [{
+            id            : 4,
+            title         : '标题 1',
+            className     : 'fa',
+            level         : '1',
+            type          : 'headingFn'
+        },{
+            id            : 5,
+            title         : '标题 2',
+            className     : 'fa',
+            level         : '2',
+            type          : 'headingFn'
+        },{
+            id            : 6,
+            title         : '标题 3',
+            className     : 'fa',
+            level         : '3',
+            type          : 'headingFn'
+        },{
+            id            : 7,
+            title         : '标题 4',
+            className     : 'fa',
+            level         : '4',
+            type          : 'headingFn'
+        },{
+            id            : 8,
+            title         : '标题 5',
+            className     : 'fa',
+            level         : '5',
+            type          : 'headingFn'
+        },{
+            id            : 9,
+            title         : '标题 6',
+            className     : 'fa',
+            level         : '6',
+            type          : 'headingFn'
+        }],
+        horizonToolbar    : [{
+            id            : 10,
+            title         : '横线',
+            className     : 'fa fa-minus',
+            type          : 'horizonFn'
+        }],
+        listToolbar       : [{
+            id            : 11,
+            title         : '引用',
+            className     : 'fa fa-quote-left',
+            prefix        : '> ',
+            type          : 'listFn'
+        },{
+            id            : 12,
+            title         : '无序列表',
+            className     : 'fa fa-list-ul',
+            prefix        : '- ',
+            type          : 'listFn'
+        },{
+            id            : 13,
+            title         : '有序列表',
+            className     : 'fa fa-list-ol',
+            prefix        : '1. ',
+            type          : 'listFn'
+        },{
+            id            : 14,
+            title         : '未完成任务列表',
+            className     : 'fa fa-square-o',
+            prefix        : '- [ ] ',
+            type          : 'listFn'
+        },{
+            id            : 15,
+            title         : '已完成任务列表',
+            className     : 'fa fa-check-square-o',
+            prefix        : '- [x] ',
+            type          : 'listFn'
+        }],
+        linkToolbar       : [{
+            id            : 16,
+            title         : '链接',
+            className     : 'fa fa-link',
+            text          : '链接文字',
+            url           : 'http://example.com',
+            type          : 'linkFn'
+        },{
+            id            : 17,
+            title         : '图片描述',
+            className     : 'fa fa-image',
+            text          : '图片描述',
+            url           : 'http://example.com/example.png',
+            type          : 'imageFn'
+        },{
+            id            : 18,
+            title         : '代码',
+            className     : 'fa fa-code',
+            type          : 'codeFn'
+        },{
+            id            : 19,
+            title         : '表格',
+            className     : 'fa fa-table',
+            type          : 'tableFn'
+        }],
+        iconToolbar       : [{
+            id            : 20,
+            title         : 'Emoji 图标',
+            className     : 'fa fa-smile-o',
+            target        : 'emoji-modal',
+            type          : 'emoji'
+        },{
+            id            : 21,
+            title         : 'Font Awesome 图标',
+            className     : 'fa fa fa-flag-o',
+            target        : 'fa-modal',
+            type          : 'emoji'
+        }],
+        mathToolbar       : [{
+            id            : 22,
+            title         : '数学公式',
+            className     : 'fa fa-superscript',
+            sample        : 'E = mc^2',
+            type          : 'mathFn'
+        }],
+        mermaidToolbar    : [{
+            id            : 23,
+            title         : '流程图',
+            className     : 'fa fa-long-arrow-right',
+            type          : 'flowchart'
+        },{
+            id            : 24,
+            title         : '顺序图',
+            className     : 'fa fa-exchange',
+            type          : 'diagram'
+        },{
+            id            : 25,
+            title         : '甘特图',
+            className     : 'fa fa-sliders',
+            type          : 'gantt'
+        }],
+        helpToolbar       : [{
+            id            : 26,
+            title         : '帮助',
+            className     : 'fa fa-question-circle',
+            target        : 'help-modal',
+            type          : 'help'
+        }],
+        expandToolbar     : [{
+            id            : 27,
+            title         : '预览',
+            className     : 'fa fa-columns',
+            target        : 'help-modal',
+            type          : 'preview'
+        },{
+            id            : 28,
+            title         : '最大化',
+            className     : 'fa fa-expand',
+            type          : 'expand'
+        }],
+        dividorToolbar    :[{type: 'dividor'}],
+        hiddenButtons     : [],//要不显示的图标[]
         additionalButtons : [],//扩展的图标
-        language          : [],//国际化设置
+        language          : [],//国际化设置[未]
         onShow            : null,//显示编辑器的时候调用
         onPreview         : null,//渲染的时候调用
         onChange          : null,//内容变化时调用
@@ -295,6 +470,15 @@ angular.module("wt-editor")
                     emojiValue        : '', //插入表情代码
                     faValue           : ''
                 };
+                vm.toolbars = _.union(wtEditorConfig.styleToolBar,[{type: 'dividor'}],
+                    wtEditorConfig.hToolbar,wtEditorConfig.dividorToolbar,
+                    wtEditorConfig.horizonToolbar,
+                    wtEditorConfig.listToolbar,wtEditorConfig.dividorToolbar,
+                    wtEditorConfig.linkToolbar,wtEditorConfig.dividorToolbar,
+                    wtEditorConfig.iconToolbar,wtEditorConfig.dividorToolbar,
+                    wtEditorConfig.mathToolbar,
+                    wtEditorConfig.mermaidToolbar,wtEditorConfig.dividorToolbar,
+                    wtEditorConfig.expandToolbar);
                 //继承设置
                 angular.extend(wtEditorConfig,scope.config);
                 //是否显示预览
