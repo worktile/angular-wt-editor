@@ -15,3 +15,5 @@ angular markdown editor
 1. 执行 `npm install` 和 `bower install`
 
 1. 执行 `gulp` 生成js，打开 demo.html 即可
+
+##demo示例
