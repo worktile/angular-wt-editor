@@ -20,7 +20,7 @@
 /***layout***/
 .wt-editor-full-screen{
   position: absolute;
-  z-index: 1000000000;
+  z-index: 100000;
 }
 .wt-editor{
   width: 100%;
@@ -74,6 +74,7 @@
       display: inline-block;
       width: 1px;
       height: 18px;
+      line-height: 20px;
       vertical-align: top;
     }
   }
@@ -87,6 +88,19 @@
     flex: 1;
     overflow: auto;
     background: #f0ad4e;
+
+    .wt-editor-textarea{
+      border: 0;
+      display: block;
+      width: 100%;
+      resize: none;
+      font-size:18px;
+
+      &:focus {
+        border  : 0;
+        outline : none;
+      }
+    }
 
     .wt-editor-panel {
       position: absolute;

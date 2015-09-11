@@ -19,93 +19,108 @@ angular.module("wt-editor")
             title    : '粗体',
             className: 'fa fa-bold',
             modifier : '**',
-            type     : 'styleFn'
+            type     : 'styleFn',
+            name     : 'bold'
         }, {
             id       : 2,
             title    : '斜体',
             className: 'fa fa-italic',
             modifier : '*',
-            type     : 'styleFn'
+            type     : 'styleFn',
+            name     : 'italic'
         }, {
             id       : 3,
             title    : '删除线',
             className: 'fa fa-strikethrough',
             modifier : '~~',
-            type     : 'styleFn'
+            type     : 'styleFn',
+            name     : 'strikethrough'
         }],
         hToolbar         : [{
             id       : 4,
             title    : '标题 1',
             className: 'fa',
             level    : '1',
-            type     : 'headingFn'
+            type     : 'headingFn',
+            name     : 'h1'
         }, {
             id       : 5,
             title    : '标题 2',
             className: 'fa',
             level    : '2',
-            type     : 'headingFn'
+            type     : 'headingFn',
+            name     : 'h2'
         }, {
             id       : 6,
             title    : '标题 3',
             className: 'fa',
             level    : '3',
-            type     : 'headingFn'
+            type     : 'headingFn',
+            name     : 'h3'
         }, {
             id       : 7,
             title    : '标题 4',
             className: 'fa',
             level    : '4',
-            type     : 'headingFn'
+            type     : 'headingFn',
+            name     : 'h4'
         }, {
             id       : 8,
             title    : '标题 5',
             className: 'fa',
             level    : '5',
-            type     : 'headingFn'
+            type     : 'headingFn',
+            name     : 'h5'
         }, {
             id       : 9,
             title    : '标题 6',
             className: 'fa',
             level    : '6',
-            type     : 'headingFn'
+            type     : 'headingFn',
+            name     : 'h6'
         }],
         horizonToolbar   : [{
             id       : 10,
             title    : '横线',
             className: 'fa fa-minus',
-            type     : 'horizonFn'
+            type     : 'horizonFn',
+            name     : 'hr'
         }],
         listToolbar      : [{
             id       : 11,
             title    : '引用',
             className: 'fa fa-quote-left',
             prefix   : '> ',
-            type     : 'listFn'
+            type     : 'listFn',
+            name     : 'quote'
         }, {
             id       : 12,
             title    : '无序列表',
             className: 'fa fa-list-ul',
             prefix   : '- ',
-            type     : 'listFn'
+            type     : 'listFn',
+            name     : 'list'
         }, {
             id       : 13,
             title    : '有序列表',
             className: 'fa fa-list-ol',
             prefix   : '1. ',
-            type     : 'listFn'
+            type     : 'listFn',
+            name     : 'list-2'
         }, {
             id       : 14,
             title    : '未完成任务列表',
             className: 'fa fa-square-o',
             prefix   : '- [ ] ',
-            type     : 'listFn'
+            type     : 'listFn',
+            name     : 'square'
         }, {
             id       : 15,
             title    : '已完成任务列表',
             className: 'fa fa-check-square-o',
             prefix   : '- [x] ',
-            type     : 'listFn'
+            type     : 'listFn',
+            name     : 'check-square'
         }],
         linkToolbar      : [{
             id       : 16,
@@ -113,24 +128,28 @@ angular.module("wt-editor")
             className: 'fa fa-link',
             text     : '链接文字',
             url      : 'http://example.com',
-            type     : 'linkFn'
+            type     : 'linkFn',
+            name     : 'link'
         }, {
             id       : 17,
             title    : '图片描述',
             className: 'fa fa-image',
             text     : '图片描述',
             url      : 'http://example.com/example.png',
-            type     : 'imageFn'
+            type     : 'imageFn',
+            name     : 'image'
         }, {
             id       : 18,
             title    : '代码',
             className: 'fa fa-code',
-            type     : 'codeFn'
+            type     : 'codeFn',
+            name     : 'code'
         }, {
             id       : 19,
             title    : '表格',
             className: 'fa fa-table',
-            type     : 'tableFn'
+            type     : 'tableFn',
+            name     : 'table'
         }],
         iconToolbar      : [{
             id       : 20,
@@ -150,23 +169,27 @@ angular.module("wt-editor")
             title    : '数学公式',
             className: 'fa fa-superscript',
             sample   : 'E = mc^2',
-            type     : 'mathFn'
+            type     : 'mathFn',
+            name     : 'math'
         }],
         mermaidToolbar   : [{
             id       : 23,
             title    : '流程图',
             className: 'fa fa-long-arrow-right',
-            type     : 'flowchart'
+            type     : 'flowchart',
+            name     : 'flow'
         }, {
             id       : 24,
             title    : '顺序图',
             className: 'fa fa-exchange',
-            type     : 'diagram'
+            type     : 'diagram',
+            name     : 'diagram'
         }, {
             id       : 25,
             title    : '甘特图',
             className: 'fa fa-sliders',
-            type     : 'gantt'
+            type     : 'gantt',
+            name     : 'gantt'
         }],
         helpToolbar      : [{
             id       : 26,
@@ -446,12 +469,9 @@ angular.module("wt-editor")
                     height: '100%'
                 });
             }
-            setTimeout(function () {
-                editor.resize(true);
-                editor.focus();
-            }, 100)
-
-
+            $timeout(function () {
+                $scope.vm.editorHeight.height  = $('.wt-editor-container-code').height()+'px';
+            });
         }
         this.resizeEditor = function(editor){
             setTimeout(function () {
@@ -470,6 +490,93 @@ angular.module("wt-editor")
             });
         }
 
+        this.hasSelection = function() {
+            var ta = $scope.vm.editor;
+            if (ta.selectionStart === ta.textLength) {
+                return false;
+            }
+            return true;
+        };
+
+        this.getSelection = function() {
+            var ta = $scope.vm.editor;;
+
+            return {
+                target: ta,
+                start: ta.selectionStart,
+                end: ta.selectionEnd,
+                text: ta.value.substring(ta.selectionStart, ta.selectionEnd)
+            };
+        };
+
+        this.insertPlacehodler = function(text, padLeft, padRight) {
+            var ta = $scope.vm.editor;
+            ta.focus();
+            $scope.value += text;
+            ta.selectionStart = ta.textLength - text.length + padLeft;
+            ta.selectionEnd = ta.textLength - padRight;
+        };
+
+        this.insertTextPlacehodler = function(text, start, end,padLeft, padRight) {
+            var ta = $scope.vm.editor;
+            ta.focus();
+            var leftText = ta.value.substring(0, start);
+            var rightText = ta.value.substring(end);
+            $scope.value  = leftText + text + rightText;
+
+            ta.selectionStart = ta.textLength - text.length + padLeft;
+            ta.selectionEnd = ta.textLength - padRight;
+        };
+
+        this.insertText = function(text, start, end) {
+            var ta = $scope.vm.editor;
+            ta.focus();
+            var leftText = ta.value.substring(0, start);
+            var rightText = ta.value.substring(end);
+            //ta.value = leftText + text + rightText;
+            $scope.value = leftText + text + rightText;
+        };
+
+
+        this.isRowFirst = function(start){
+            var ta = $scope.vm.editor;
+            //获取光标前的内容，index是光标的位置
+            var val=ta.value.substr(0,start);
+            //获取光标所在行的信息
+            var _text=val.substr(val.lastIndexOf("\n")+1);
+            if(_text.length === 0){
+                return true;
+            }
+            return false;
+        }
+        this.getRowText = function(start){
+            var ta = $scope.vm.editor;
+            //获取光标前的内容，index是光标的位置
+            var val=ta.value.substr(0,start);
+            //获取光标所在行的信息
+            var _text=val.substr(val.lastIndexOf("\n")+1);
+            return _text;
+        }
+
+
+        this.previewHTML = function () {
+            var _value = marked($scope.vm.editor.value);
+            _value = emojiFn(_value);
+            $('.markdown-body').empty().append(_value); // realtime preview
+            mermaid.init();
+            if(wtEditorConfig.onPreview) {
+                wtEditorConfig.onPreview();
+            }
+            $scope.vm.editor.focus();
+        }
+
+
+
+
+
+
+
+
 
     }])
     .directive("wtEditor", ['wtEditorConfig', '$timeout', function (wtEditorConfig, $timeout) {
@@ -486,7 +593,8 @@ angular.module("wt-editor")
                     value     : scope.value, //默认显示的内容
                     emojiValue: '', //插入表情代码
                     faValue   : '',
-                    toolbars  : []
+                    toolbars  : [],
+                    editorHeight    : {height:$('.wt-editor-container-code').height()+'px'}
                 };
                 //继承设置
                 angular.extend(wtEditorConfig, scope.config);
@@ -553,136 +661,173 @@ angular.module("wt-editor")
                 vm.isPreviewButton = wtEditorConfig.isPreviewButton;
                 vm.isFullButton = wtEditorConfig.isFullButton;
                 vm.isFullscreen = wtEditorConfig.isFullscreen;
+
+
+                vm.editor = document.getElementById('wtEditorObj');
+
+
+
+                function insert (flag,title,sel){
+                    var ss = controller[0].getRowText(sel.start);
+                    if(ss.length>0){
+                        controller[0].insertTextPlacehodler(flag+' '+ss,sel.start-ss.length, sel.end, sel.start+flag.length+1, vm.editor.value-sel.start-flag.length-1);
+                        vm.editor.selectionStart = ss.length+flag.length+1;
+                        vm.editor.selectionEnd = ss.length+flag.length+1;
+                    }else{
+                        controller[0].insertTextPlacehodler(flag +' '+ title +ss,sel.start, sel.end, flag.length+1, 0);
+                    }
+                }
+
+                vm.styleFn = function(param,$event) {
+                    var sel = controller[0].getSelection();
+                    switch(param) {
+                        case "bold":
+                            if (controller[0].hasSelection()) {
+                                controller[0].insertText("**" + sel.text + "**", sel.start, sel.end);
+                            } else {
+                                controller[0].insertTextPlacehodler("**bold**",sel.start, sel.end, 2, 2);
+                            }
+                            vm.editor.focus();
+                            break;
+                        case "italic":
+                            if (controller[0].hasSelection()) {
+                                controller[0].insertText("_" + sel.text + "_", sel.start, sel.end);
+                            } else {
+                                controller[0].insertTextPlacehodler("_italic_",sel.start, sel.end, 1, 1);
+                            }
+                            break;
+                        case "underline":
+                            if (controller[0].hasSelection()) {
+                                controller[0].insertText("<u>" + sel.text + "</u>", sel.start, sel.end);
+                            } else {
+                                controller[0].insertTextPlacehodler("<u>underline</u>",sel.start, sel.end, 3, 4);
+                            }
+                            break;
+                        case "h1":
+                            insert("#","标题1",sel);
+                            break;
+                        case "h2":
+                            insert("##","标题2",sel);
+                            break;
+                        case "h3":
+                            insert("###","标题3",sel);
+                            break;
+                        case "h4":
+                            insert("####","标题4",sel);
+                            break;
+                        case "h5":
+                            insert("#####","标题5",sel);
+                            break;
+                        case "h6":
+                            insert("######","标题1",sel);
+                            break;
+                        case "list":
+                            insert("-","列表",sel);
+                            break;
+                        case "list-2":
+                            insert("1.","列表",sel);
+                            break;
+                        case "link":
+                            sel.target.value += "\n";
+                            var iUrl = "http://xxx.com";
+                            var _text = "链接文字";
+                            if(sel.text.length > 0) {
+                                _text = sel.text
+                            }
+                            var aUrl = "["+_text+"]("+iUrl+")";
+                            controller[0].insertText(aUrl, sel.start, sel.end);
+
+                            break;
+                        case "image":
+                            sel.target.value += "\n";
+                            var iUrl = "http://xxx.com";
+                            var aUrl = "![图片描述](" + iUrl + ")";
+                            controller[0].insertText(aUrl, sel.start, sel.end);
+
+                            break;
+                        case "code":
+                            if (controller[0].hasSelection()) {
+                                if(sel.text.length === 0) {
+                                    controller[0].insertText("\n```\n 代码片段 \n```\n", sel.start, sel.end);
+                                }else{
+                                    controller[0].insertText("`" + sel.text + "`", sel.start, sel.end);
+                                }
+                            } else {
+                                controller[0].insertText("\n```\n 代码片段 \n```\n", sel.start, sel.end);
+                            }
+                            break;
+                        case "table":
+                            var sample = $($event.target).data('sample');
+                            controller[0].isRowFirst(sel.start);
+                            if (controller[0].isRowFirst(sel.start)) {
+                                controller[0].insertText('\n' + sample + '\n\n',sel.start, sel.end);
+                            } else {
+                                controller[0].insertText('\n\n' + sample + '\n\n',sel.start, sel.end);
+                            }
+                            break;
+                        case "hr":
+                            sel.target.value += "\n---\n";
+                            sel.target.focus();
+                            break;
+                        case "quote":
+                            if (controller[0].hasSelection()) {
+                                controller[0].insertText("> " + sel.text, sel.start, sel.end);
+                            } else {
+                                controller[0].insertPlacehodler("> 引用", 2, 0);
+                            }
+                            break;
+                        case "square":
+                            sel.target.value += "- [ ] ";
+                            sel.target.focus();
+                            break;
+                        case "check-square":
+                            sel.target.value += "- [x] ";
+                            sel.target.focus();
+                            break;
+                        case "strikethrough":
+                            if (controller[0].hasSelection()) {
+                                controller[0].insertText("~~" + sel.text + "~~", sel.start, sel.end);
+                            } else {
+                                controller[0].insertPlacehodler("~~strikethrough~~", 2, 2);
+                            }
+                            break;
+                        case "math":
+                            var text = sel.text;
+                            if (text.length == 0) {
+                                text = $($event.target).data('sample');
+                            }
+                            controller[0].insertText('\n```math\n' + text + '\n```\n', sel.start, sel.end);
+                            break;
+                        case "flow":
+                            var text = sel.text;
+                            if (text.length == 0) {
+                                text = $($event.target).data('sample');
+                            }
+                            controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
+                            break;
+                        case "diagram":
+                            var text = sel.text;
+                            if (text.length == 0) {
+                                text = $($event.target).data('sample');
+                            }
+                            controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
+                            break;
+                        case "gantt":
+                            var text = sel.text;
+                            if (text.length == 0) {
+                                text = $($event.target).data('sample');
+                            }
+                            controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
+                            break;
+                    }
+                };
+
+
+                //
                 //设置甘特图
                 controller[0].initGantt();
                 //设置markdown
                 vm.renderer = controller[0].initMarked();
-                //初始化编辑器
-                vm.editor = controller[0].initEditor('wtEditorObj');
-
-                //初始化toolbar
-
-                //加粗 斜体 横线
-                vm.styleFn = function ($event) {
-                    var modifier = $($event.target).data('modifier');
-                    var range = vm.editor.selection.smartRange();
-                    var p = vm.editor.getCursorPosition();
-                    p.column += modifier.length; // 光标位置会产生偏移
-                    vm.editor.session.replace(range, modifier + vm.editor.session.getTextRange(range) + modifier);
-                    vm.editor.moveCursorToPosition(p); // 恢复光标位置
-                    vm.editor.selection.clearSelection(); // 不知为何上一个语句会选中一部分文字
-                    vm.editor.focus();
-                }
-
-                //h1 -- h6
-                vm.headingFn = function ($event) {
-                    var level = $($event.target).data('level');
-                    var p = vm.editor.getCursorPosition();
-                    p.column += level + 1; // 光标位置会产生偏移
-                    vm.editor.navigateTo(vm.editor.getSelectionRange().start.row, 0); // navigateLineStart 在 wrap 的时候有问题
-                    vm.editor.insert('#'.repeat(level) + ' ');
-                    vm.editor.moveCursorToPosition(p); // 恢复光标位置
-                    vm.editor.focus();
-                }
-
-
-                // <hr/>
-                vm.horizonFn = function ($event) {
-                    var p = vm.editor.getCursorPosition();
-                    if (p.column == 0) { // 光标在行首
-                        vm.editor.selection.clearSelection();
-                        vm.editor.insert('\n---\n');
-                    } else {
-                        vm.editor.navigateTo(vm.editor.getSelectionRange().start.row, Number.MAX_VALUE); // navigateLineEnd 在 wrap 的时候有问题
-                        vm.editor.insert('\n\n---\n');
-                    }
-                    vm.editor.focus();
-                }
-
-                // list icons
-                vm.listFn = function ($event) {
-                    var prefix = $($event.target).data('prefix');
-                    var p = vm.editor.getCursorPosition();
-                    p.column += prefix.length; // 光标位置会产生偏移
-                    var range = vm.editor.selection.getRange();
-                    for (var i = range.start.row + 1; i < range.end.row + 2; i++) {
-                        vm.editor.gotoLine(i);
-                        vm.editor.insert(prefix);
-                    }
-                    vm.editor.moveCursorToPosition(p); // 恢复光标位置
-                    vm.editor.focus();
-                }
-
-
-                //插入链接
-                vm.linkFn = function ($event) {
-                    var _target = $($event.target);
-                    var range = vm.editor.selection.smartRange();
-                    var text = vm.editor.session.getTextRange(range);
-                    if (text.trim().length == 0) {
-                        text = _target.data('sample-text');
-                    }
-                    var url = _target.data('sample-url');
-                    vm.editor.session.replace(range, '[' + text + '](' + url + ')');
-                    vm.editor.focus();
-                }
-
-                //插入图片
-                vm.imageFn = function ($event) {
-                    var _target = $($event.target);
-                    var text = vm.editor.session.getTextRange(vm.editor.selection.getRange()).trim();
-                    if (text.length == 0) {
-                        text = _target.data('sample-text');
-                    }
-                    var url = _target.data('sample-url')
-                    vm.editor.insert('![' + text + '](' + url + ')');
-                    vm.editor.focus();
-                }
-
-                //插入代码
-                vm.codeFn = function ($event) {
-                    var text = vm.editor.session.getTextRange(vm.editor.selection.getRange()).trim();
-                    vm.editor.insert('\n```\n' + text + '\n```\n');
-                    vm.editor.focus();
-                    vm.editor.navigateUp(2);
-                    vm.editor.navigateLineEnd();
-                }
-
-
-                //插入表格
-                vm.tableFn = function ($event) {
-                    var sample = $($event.target).data('sample');
-                    vm.editor.insert(''); // 删除选中的部分
-                    var p = vm.editor.getCursorPosition();
-                    if (p.column == 0) { // 光标在行首
-                        vm.editor.selection.clearSelection();
-                        vm.editor.insert('\n' + sample + '\n\n');
-                    } else {
-                        vm.editor.navigateTo(vm.editor.getSelectionRange().start.row, Number.MAX_VALUE);
-                        vm.editor.insert('\n\n' + sample + '\n');
-                    }
-                    vm.editor.focus();
-                }
-
-                //数学公式
-                vm.mathFn = function ($event) {
-                    var text = vm.editor.session.getTextRange(vm.editor.selection.getRange()).trim();
-                    if (text.length == 0) {
-                        text = $($event.target).data('sample');
-                    }
-                    vm.editor.insert('\n```math\n' + text + '\n```\n');
-                    vm.editor.focus();
-                }
-
-                //流程图
-                vm.mermaidFn = function ($event) {
-                    var text = vm.editor.session.getTextRange(vm.editor.selection.getRange()).trim();
-                    if (text.length == 0) {
-                        text = $($event.target).data('sample');
-                    }
-                    vm.editor.insert('\n```\n' + text + '\n```\n');
-                    vm.editor.focus();
-                }
 
                 //preview
                 vm.togglePreview = function () {
@@ -690,12 +835,11 @@ angular.module("wt-editor")
                     wtEditorConfig.isPreview = vm.isPreview;
                     if (vm.isPreview === true) {
                         $timeout(function () {
-                            controller[0].refreshHTML(vm.editor);
+                            controller[0].previewHTML();
                         }, 50);
                     }
-                    controller[0].resizeEditor(vm.editor);
                 }
-
+                //
                 //full screen
                 vm.toggleFullScreen = function () {
                     if (vm.isFullButton) {
@@ -712,8 +856,8 @@ angular.module("wt-editor")
                         controller[0].setFullScreen('wtEditor', vm.isFullscreen, vm.editor);
                     }
                 }
-
-
+                //
+                //
                 //插入表情
                 vm.insertEmoji = function () {
                     vm.emojiValue = vm.emojiValue.trim();
@@ -724,7 +868,8 @@ angular.module("wt-editor")
                     if (!/:$/.test(vm.emojiValue)) {
                         vm.emojiValue = vm.emojiValue + ':';
                     }
-                    vm.editor.insert(vm.emojiValue);
+                    var sel = controller[0].getSelection();
+                    controller[0].insertText(vm.emojiValue, sel.start, sel.end);
                     vm.editor.focus();
                     vm.emojiValue = '';
                 }
@@ -732,35 +877,37 @@ angular.module("wt-editor")
                 vm.insertFa = function () {
                     vm.faValue = vm.faValue.trim();
                     if (vm.faValue.length > 0) {
-                        vm.editor.insert("<i class='fa fa-" + vm.faValue + "'></i>");
+                        var sel = controller[0].getSelection();
+                        controller[0].insertText("<i class='fa fa-" + vm.faValue + "'></i>", sel.start, sel.end);
                         vm.editor.focus();
                         vm.faValue = '';
                     }
                 }
-
-
+                //
+                //
                 //插入内容
                 vm.insertContent = function(content){
-                    vm.editor.insert(content);
+                    var sel = controller[0].getSelection();
+                    controller[0].insertText(content, sel.start, sel.end);
                     vm.editor.focus();
                 }
                 //获取内容
                 vm.getContent = function(){
-                    return vm.editor.session.getValue();
+                    return vm.editor.value;
                 }
 
-                //设置默认value
-                vm.editor.session.setValue(scope.value);
                 //监控modal变化
-                //scope.$watch('value', function(newValue, oldValue) {
-                    //if(newValue === vm.editor.session.getValue()){
-                    //    return
-                    //}else{
-                    //    vm.editor.session.setValue(newValue);
-                    //    vm.editor.focus();
-                    //}
-                //});
-
+                scope.$watch('value', function(newValue, oldValue) {
+                    var __value = vm.editor.value;
+                    if(wtEditorConfig.onChange) {
+                        wtEditorConfig.onChange(__value);
+                    }
+                    if (wtEditorConfig.isPreview === true) {
+                        $timeout(function(){
+                            controller[0].previewHTML();
+                        },128);
+                    }
+                });
 
                 //初始化完调用显示函数
                 if(wtEditorConfig.onShow){
