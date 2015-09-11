@@ -28,7 +28,14 @@ angular.module("wt-editor")
             modifier : '*',
             type     : 'styleFn',
             name     : 'italic'
-        }, {
+        },{
+            id       : 2,
+            title    : '下划线',
+            className: 'fa fa-underline',
+            modifier : 'u',
+            type     : 'styleFn',
+            name     : 'underline'
+        },{
             id       : 3,
             title    : '删除线',
             className: 'fa fa-strikethrough',
@@ -83,7 +90,7 @@ angular.module("wt-editor")
             id       : 10,
             title    : '横线',
             className: 'fa fa-minus',
-            type     : 'horizonFn',
+            type     : 'styleFn',
             name     : 'hr'
         }],
         listToolbar      : [{
@@ -91,35 +98,35 @@ angular.module("wt-editor")
             title    : '引用',
             className: 'fa fa-quote-left',
             prefix   : '> ',
-            type     : 'listFn',
+            type     : 'styleFn',
             name     : 'quote'
         }, {
             id       : 12,
             title    : '无序列表',
             className: 'fa fa-list-ul',
             prefix   : '- ',
-            type     : 'listFn',
+            type     : 'styleFn',
             name     : 'list'
         }, {
             id       : 13,
             title    : '有序列表',
             className: 'fa fa-list-ol',
             prefix   : '1. ',
-            type     : 'listFn',
+            type     : 'styleFn',
             name     : 'list-2'
         }, {
             id       : 14,
             title    : '未完成任务列表',
             className: 'fa fa-square-o',
             prefix   : '- [ ] ',
-            type     : 'listFn',
+            type     : 'styleFn',
             name     : 'square'
         }, {
             id       : 15,
             title    : '已完成任务列表',
             className: 'fa fa-check-square-o',
             prefix   : '- [x] ',
-            type     : 'listFn',
+            type     : 'styleFn',
             name     : 'check-square'
         }],
         linkToolbar      : [{
@@ -128,7 +135,7 @@ angular.module("wt-editor")
             className: 'fa fa-link',
             text     : '链接文字',
             url      : 'http://example.com',
-            type     : 'linkFn',
+            type     : 'styleFn',
             name     : 'link'
         }, {
             id       : 17,
@@ -136,13 +143,13 @@ angular.module("wt-editor")
             className: 'fa fa-image',
             text     : '图片描述',
             url      : 'http://example.com/example.png',
-            type     : 'imageFn',
+            type     : 'styleFn',
             name     : 'image'
         }, {
             id       : 18,
             title    : '代码',
             className: 'fa fa-code',
-            type     : 'codeFn',
+            type     : 'styleFn',
             name     : 'code'
         }, {
             id       : 19,
@@ -223,9 +230,8 @@ angular.module("wt-editor")
         emojRegx         : /\:[a-z0-9_\-\+]+\:/g
     })
     .controller('wtEditorCtrl', ['$scope','$timeout', 'wtEditorConfig', function ($scope,$timeout, wtEditorConfig) {
-        //controller 定义事件
-        //directive 定义业务逻辑
 
+        //初始化甘特图
         this.initGantt = function () {
             mermaid.ganttConfig = {
                 // Configuration for Gantt diagrams
@@ -250,130 +256,7 @@ angular.module("wt-editor")
             };
         }
 
-        this.initEditor = function (id) {
-            var editor = ace.edit(id);
-            editor.session.setUseWorker(false);
-            editor.$blockScrolling = Infinity;
-            editor.renderer.setShowPrintMargin(false);
-            editor.session.setMode('ace/mode/markdown');
-            editor.session.setUseWrapMode(true);
-            editor.setScrollSpeed(1);
-            editor.setOption("scrollPastEnd", true);
-            editor.session.setFoldStyle('manual');
-            editor.focus();
-            editor.session.on('changeScrollTop', function (scroll) {
-                //sync_preview();
-            });
-            editor.setFontSize(wtEditorConfig.fontSize);
-            editor.setTheme('ace/theme/' + wtEditorConfig.theme);
-
-            // 编辑器的一些拓展方法
-            editor.selection.smartRange = function () {
-                var range = editor.selection.getRange();
-                if (!range.isEmpty()) {
-                    return range; // 用户手动选中了一些文字，直接用这个
-                }
-                // 没有选中任何东西
-                var _range = range; // 备份原始range
-                range = editor.selection.getWordRange(range.start.row, range.start.column); // 当前单词的range
-                if (editor.session.getTextRange(range).trim().length == 0) { // 选中的东西是空或者全空白
-                    range = _range; // 还使用原始的range
-                }
-                return range;
-            };
-            // 实时监听用户的编辑
-            editor.session.on('change', function () {
-                var __value = editor.session.getValue();
-                $timeout(function(){
-                    $scope.value = __value;
-                });
-                wtEditorConfig.value = __value;
-                if(wtEditorConfig.onChange) {
-                    wtEditorConfig.onChange(__value);
-                }
-                if (wtEditorConfig.isPreview === true) {
-                    _.debounce(function () {
-                        // 用户停止输入128毫秒之后才会触发
-                        if(wtEditorConfig.onPreview) {
-                            wtEditorConfig.onPreview(__value);
-                        }
-                        var modelist = ace.require('ace/ext/modelist').modesByName;
-                        var highlight = ace.require('ace/ext/static_highlight');
-                        var _value = marked(__value);
-                        _value = emojiFn(_value);
-                        $('.markdown-body').empty().append(_value); // realtime preview
-                        $('pre > code').each(function () { // code highlight
-                            var code = $(this);
-                            var language = (code.attr('class') || 'lang-javascript').substring(5).toLowerCase();
-                            if (modelist[language] == undefined) {
-                                language = 'javascript';
-                            }
-                            highlight(code[0], {
-                                    mode           : 'ace/mode/' + language,
-                                    theme          : 'ace/theme/github',
-                                    startLineNumber: 1,
-                                    showGutter     : false,
-                                    trim           : true
-                                },
-                                function (highlighted) {
-                                }
-                            );
-                        });
-                        mermaid.init();
-                        //sync_preview();
-                    }, 128, false)();
-                }
-            });
-
-
-            // modals
-            $(document).on('close', '.remodal', function (e) {
-                editor.focus(); // 关闭modal，编辑器自动获得焦点
-            });
-
-            // overwrite some ACE editor keyboard shortcuts
-            editor.commands.addCommands([
-                {
-                    name   : "preferences",
-                    bindKey: {win: "Ctrl-,", mac: "Command-,"},
-                    exec   : function (editor) {
-                        $('i.fa-cog').click(); // show M+ preferences modal
-                    }
-                }
-            ]);
-            return editor;
-        };
-        this.refreshHTML = function (editor) {
-            // 用户停止输入128毫秒之后才会触发
-            var modelist = ace.require('ace/ext/modelist').modesByName;
-            var highlight = ace.require('ace/ext/static_highlight');
-            var _value = marked(editor.session.getValue());
-            _value = emojiFn(_value);
-            $('.markdown-body').empty().append(_value); // realtime preview
-            $('pre > code').each(function () { // code highlight
-                var code = $(this);
-                var language = (code.attr('class') || 'lang-javascript').substring(5).toLowerCase();
-                if (modelist[language] == undefined) {
-                    language = 'javascript';
-                }
-                highlight(code[0], {
-                        mode           : 'ace/mode/' + language,
-                        theme          : 'ace/theme/github',
-                        startLineNumber: 1,
-                        showGutter     : false,
-                        trim           : true,
-                    },
-                    function (highlighted) {
-                    }
-                );
-            });
-            mermaid.init();
-            if(wtEditorConfig.onPreview) {
-                wtEditorConfig.onPreview();
-            }
-            editor.focus();
-        }
-
+        //初始解析器
         this.initMarked = function () {
             // 设置marked
             var renderer = new marked.Renderer();
@@ -453,7 +336,7 @@ angular.module("wt-editor")
             return renderer;
         }
 
-
+        //设置全屏显示
         this.setFullScreen = function (id, flag, editor) {
             var _obj = $('#' + id);
             if (flag) {
@@ -473,12 +356,8 @@ angular.module("wt-editor")
                 $scope.vm.editorHeight.height  = $('.wt-editor-container-code').height()+'px';
             });
         }
-        this.resizeEditor = function(editor){
-            setTimeout(function () {
-                editor.resize(true);
-                editor.focus();
-            }, 100)
-        }
+
+        //表情转换
         var emojiFn = function (htmlstr) {
             return htmlstr.replace(wtEditorConfig.emojRegx, function (match) {
                 if (wtEditorConfig.emojis.indexOf(match) !== -1) {
@@ -490,14 +369,18 @@ angular.module("wt-editor")
             });
         }
 
+        //是否有选择内容
         this.hasSelection = function() {
             var ta = $scope.vm.editor;
-            if (ta.selectionStart === ta.textLength) {
-                return false;
+
+            if (ta.selectionStart === ta.selectionEnd) {
+                return false
+            }else{
+                return true;
             }
-            return true;
         };
 
+        //获取选择内容
         this.getSelection = function() {
             var ta = $scope.vm.editor;;
 
@@ -509,25 +392,21 @@ angular.module("wt-editor")
             };
         };
 
-        this.insertPlacehodler = function(text, padLeft, padRight) {
-            var ta = $scope.vm.editor;
-            ta.focus();
-            $scope.value += text;
-            ta.selectionStart = ta.textLength - text.length + padLeft;
-            ta.selectionEnd = ta.textLength - padRight;
-        };
-
+        //插入默认文字
         this.insertTextPlacehodler = function(text, start, end,padLeft, padRight) {
             var ta = $scope.vm.editor;
             ta.focus();
             var leftText = ta.value.substring(0, start);
             var rightText = ta.value.substring(end);
+            //ta.value  = leftText + text + rightText;
             $scope.value  = leftText + text + rightText;
-
-            ta.selectionStart = ta.textLength - text.length + padLeft;
-            ta.selectionEnd = ta.textLength - padRight;
+            $timeout(function(){
+                ta.selectionStart = start + padLeft;
+                ta.selectionEnd = end +text.length  - padRight;
+            });
         };
 
+        //插入加工后的选择文字
         this.insertText = function(text, start, end) {
             var ta = $scope.vm.editor;
             ta.focus();
@@ -537,7 +416,7 @@ angular.module("wt-editor")
             $scope.value = leftText + text + rightText;
         };
 
-
+        //是否是行首
         this.isRowFirst = function(start){
             var ta = $scope.vm.editor;
             //获取光标前的内容，index是光标的位置
@@ -549,6 +428,8 @@ angular.module("wt-editor")
             }
             return false;
         }
+
+        //获取光标所在行信息
         this.getRowText = function(start){
             var ta = $scope.vm.editor;
             //获取光标前的内容，index是光标的位置
@@ -558,7 +439,7 @@ angular.module("wt-editor")
             return _text;
         }
 
-
+        //预览解析
         this.previewHTML = function () {
             var _value = marked($scope.vm.editor.value);
             _value = emojiFn(_value);
@@ -570,12 +451,16 @@ angular.module("wt-editor")
             $scope.vm.editor.focus();
         }
 
-
-
-
-
-
-
+        //同步
+        this.setPriviewScroll = function(){
+            if(wtEditorConfig.isPreview){
+                var _codeh = $('#wtEditorObj')[0].scrollHeight;
+                var _prev = $('.wt-editor-container-preview')[0].scrollHeight;
+                var _ff = _codeh/_prev;
+                var _ll = $('#wtEditorObj').scrollTop();
+                $('.wt-editor-container-preview').scrollTop(_ll/_ff);
+            }
+        }
 
 
     }])
@@ -617,7 +502,6 @@ angular.module("wt-editor")
                         wtEditorConfig.expandToolbar);
                 }
 
-
                 //隐藏个性化按钮
                 _.remove(vm.toolbars, function (n) {
                     if (n.id) {
@@ -653,54 +537,74 @@ angular.module("wt-editor")
                     });
                 }
 
-
-
-
                 //是否显示预览
                 vm.isPreview = wtEditorConfig.isPreview;
                 vm.isPreviewButton = wtEditorConfig.isPreviewButton;
                 vm.isFullButton = wtEditorConfig.isFullButton;
                 vm.isFullscreen = wtEditorConfig.isFullscreen;
 
-
                 vm.editor = document.getElementById('wtEditorObj');
 
-
-
+                //插入方法
                 function insert (flag,title,sel){
                     var ss = controller[0].getRowText(sel.start);
                     if(ss.length>0){
                         controller[0].insertTextPlacehodler(flag+' '+ss,sel.start-ss.length, sel.end, sel.start+flag.length+1, vm.editor.value-sel.start-flag.length-1);
-                        vm.editor.selectionStart = ss.length+flag.length+1;
-                        vm.editor.selectionEnd = ss.length+flag.length+1;
+                        $timeout(function(){
+                            vm.editor.selectionStart = ss.length+flag.length+1;
+                            vm.editor.selectionEnd = ss.length+flag.length+1;
+                        })
+
                     }else{
                         controller[0].insertTextPlacehodler(flag +' '+ title +ss,sel.start, sel.end, flag.length+1, 0);
                     }
                 }
 
+                //插入markdown
                 vm.styleFn = function(param,$event) {
                     var sel = controller[0].getSelection();
                     switch(param) {
                         case "bold":
                             if (controller[0].hasSelection()) {
-                                controller[0].insertText("**" + sel.text + "**", sel.start, sel.end);
+                                controller[0].insertText(" **" + sel.text + "** ", sel.start, sel.end);
                             } else {
-                                controller[0].insertTextPlacehodler("**bold**",sel.start, sel.end, 2, 2);
+                                var ss = controller[0].getRowText(sel.start);
+                                if(ss.length>0) {
+                                    controller[0].insertTextPlacehodler(" **加粗** ", sel.start, sel.end, 3, 3);
+                                }else{
+                                    controller[0].insertTextPlacehodler("**加粗**", sel.start, sel.end, 2, 2);
+                                }
                             }
-                            vm.editor.focus();
                             break;
                         case "italic":
                             if (controller[0].hasSelection()) {
-                                controller[0].insertText("_" + sel.text + "_", sel.start, sel.end);
+                                controller[0].insertText(" _" + sel.text + "_ ", sel.start, sel.end);
                             } else {
-                                controller[0].insertTextPlacehodler("_italic_",sel.start, sel.end, 1, 1);
+                                var ss = controller[0].getRowText(sel.start);
+                                if(ss.length>0) {
+                                    controller[0].insertTextPlacehodler(" _斜体_ ", sel.start, sel.end, 2, 2);
+                                }else{
+                                    controller[0].insertTextPlacehodler("_斜体_", sel.start, sel.end, 1, 1);
+                                }
                             }
                             break;
                         case "underline":
                             if (controller[0].hasSelection()) {
                                 controller[0].insertText("<u>" + sel.text + "</u>", sel.start, sel.end);
                             } else {
-                                controller[0].insertTextPlacehodler("<u>underline</u>",sel.start, sel.end, 3, 4);
+                                controller[0].insertTextPlacehodler("<u>下划线</u>",sel.start, sel.end, 3, 4);
+                            }
+                            break;
+                        case "strikethrough":
+                            if (controller[0].hasSelection()) {
+                                controller[0].insertText(" ~~" + sel.text + "~~ ", sel.start, sel.end);
+                            } else {
+                                var ss = controller[0].getRowText(sel.start);
+                                if(ss.length>0) {
+                                    controller[0].insertTextPlacehodler(" ~~删除线~~ ", sel.start, sel.end, 3, 3);
+                                }else{
+                                    controller[0].insertTextPlacehodler("~~删除线~~", sel.start, sel.end, 2, 2);
+                                }
                             }
                             break;
                         case "h1":
@@ -721,14 +625,31 @@ angular.module("wt-editor")
                         case "h6":
                             insert("######","标题1",sel);
                             break;
+                        case "hr":
+                            sel.target.value += "\n---\n";
+                            sel.target.focus();
+                            break;
+                        case "quote":
+                            insert(">","引用",sel);
+                            break;
                         case "list":
                             insert("-","列表",sel);
                             break;
                         case "list-2":
                             insert("1.","列表",sel);
                             break;
+
+                        case "square":
+                            //sel.target.value += "- [ ] ";
+                            insert("- [ ] ","",sel);
+                            //sel.target.focus();
+                            break;
+                        case "check-square":
+                            sel.target.value += "- [x] ";
+                            sel.target.focus();
+                            break;
+
                         case "link":
-                            sel.target.value += "\n";
                             var iUrl = "http://xxx.com";
                             var _text = "链接文字";
                             if(sel.text.length > 0) {
@@ -739,8 +660,7 @@ angular.module("wt-editor")
 
                             break;
                         case "image":
-                            sel.target.value += "\n";
-                            var iUrl = "http://xxx.com";
+                            var iUrl = "http://lesschat.com/x.png";
                             var aUrl = "![图片描述](" + iUrl + ")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
 
@@ -765,32 +685,8 @@ angular.module("wt-editor")
                                 controller[0].insertText('\n\n' + sample + '\n\n',sel.start, sel.end);
                             }
                             break;
-                        case "hr":
-                            sel.target.value += "\n---\n";
-                            sel.target.focus();
-                            break;
-                        case "quote":
-                            if (controller[0].hasSelection()) {
-                                controller[0].insertText("> " + sel.text, sel.start, sel.end);
-                            } else {
-                                controller[0].insertPlacehodler("> 引用", 2, 0);
-                            }
-                            break;
-                        case "square":
-                            sel.target.value += "- [ ] ";
-                            sel.target.focus();
-                            break;
-                        case "check-square":
-                            sel.target.value += "- [x] ";
-                            sel.target.focus();
-                            break;
-                        case "strikethrough":
-                            if (controller[0].hasSelection()) {
-                                controller[0].insertText("~~" + sel.text + "~~", sel.start, sel.end);
-                            } else {
-                                controller[0].insertPlacehodler("~~strikethrough~~", 2, 2);
-                            }
-                            break;
+
+
                         case "math":
                             var text = sel.text;
                             if (text.length == 0) {
@@ -822,8 +718,6 @@ angular.module("wt-editor")
                     }
                 };
 
-
-                //
                 //设置甘特图
                 controller[0].initGantt();
                 //设置markdown
@@ -839,16 +733,10 @@ angular.module("wt-editor")
                         }, 50);
                     }
                 }
-                //
                 //full screen
                 vm.toggleFullScreen = function () {
                     if (vm.isFullButton) {
                         vm.isFullscreen = !vm.isFullscreen;
-                        //vm.isPreviewButton = vm.isFullscreen;
-                        //vm.isPreview = !vm.isFullscreen;
-                        //wtEditorConfig.isPreview = vm.isPreview;
-                        //wtEditorConfig.isPreviewButton = vm.isPreviewButton;
-
                         if (vm.isPreview === true) {
                             vm.togglePreview();
                         }
@@ -856,8 +744,6 @@ angular.module("wt-editor")
                         controller[0].setFullScreen('wtEditor', vm.isFullscreen, vm.editor);
                     }
                 }
-                //
-                //
                 //插入表情
                 vm.insertEmoji = function () {
                     vm.emojiValue = vm.emojiValue.trim();
@@ -883,8 +769,6 @@ angular.module("wt-editor")
                         vm.faValue = '';
                     }
                 }
-                //
-                //
                 //插入内容
                 vm.insertContent = function(content){
                     var sel = controller[0].getSelection();
@@ -913,6 +797,10 @@ angular.module("wt-editor")
                 if(wtEditorConfig.onShow){
                     wtEditorConfig.onShow();
                 }
+
+                //$('#wtEditorObj').bind('scroll', function (e) {
+                //    controller[0].setPriviewScroll()
+                //});
             }
         };
     }]);
