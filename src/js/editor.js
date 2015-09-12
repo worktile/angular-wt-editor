@@ -551,11 +551,18 @@ angular.module("wt-editor")
                         top:0,
                         left:0
                     },
+                    linkText:null,
+                    linkUrl:'',
+                    linkPos:{},
                     imgFlag:false,
                     imgStyle:{
                         top:0,
                         left:0
-                    }
+                    },
+                    imgUrl:'',
+                    imgAlt:'',
+                    imgPos:{},
+                    focusId:''
                 };
                 //继承设置
                 angular.extend(wtEditorConfig, scope.config);
@@ -758,6 +765,12 @@ angular.module("wt-editor")
                             var aUrl = "["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
                             controller[0].setFocus(sel.start,sel.start+aUrl.length);
+                            vm.linkText = _text;
+                            vm.linkUrl = iUrl;
+                            vm.linkPos.start = sel.start;
+                            vm.linkPos.text = aUrl;
+                            vm.linkPos.end = sel.start+aUrl.length;
+
                             showLinkSetting();
                             break;
                         case "image":
@@ -770,9 +783,16 @@ angular.module("wt-editor")
                                     _text = sel.text;
                                 }
                             }
-                            var aUrl = "["+_text+"]("+iUrl+")";
+                            var aUrl = "!["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
                             controller[0].setFocus(sel.start,sel.start+aUrl.length);
+                            vm.imgAlt = _text;
+                            vm.imgUrl = iUrl;
+
+                            vm.imgPos.start = sel.start;
+                            vm.imgPos.text = aUrl;
+                            vm.imgPos.end = sel.start+aUrl.length;
+
                             showImgSetting();
                             break;
                         case "code":
@@ -907,6 +927,7 @@ angular.module("wt-editor")
                     if (wtEditorConfig.isPreview === true) {
                         $timeout(function(){
                             controller[0].previewHTML();
+                            $('#'+vm.focusId).focus()
                         },128);
                     }
                 });
@@ -928,6 +949,28 @@ angular.module("wt-editor")
                         top:(_of.top+20)+'px'
                     }
                 }
+                //监控link变化
+                vm.setLinkText = function(){
+                    var _url = vm.linkPos.text.split(']')[1];
+                    var aUrl = "["+vm.linkText+"]"+_url;
+                    var leftText = vm.editor.value.substring(0, vm.linkPos.start);
+                    var rightText = vm.editor.value.substring(vm.linkPos.end);
+                    scope.value = leftText + aUrl + rightText;
+                    vm.linkPos.text = aUrl;
+                    vm.linkPos.end = vm.linkPos.start+aUrl.length;
+                    vm.focusId = 'link-text';
+                }
+                //监控link变化
+                vm.setLinkUrl = function(){
+                    var _text = vm.linkPos.text.split('(')[0];
+                    var aUrl = _text+"("+vm.linkUrl+")";
+                    var leftText = vm.editor.value.substring(0, vm.linkPos.start);
+                    var rightText = vm.editor.value.substring(vm.linkPos.end);
+                    scope.value = leftText + aUrl + rightText;
+                    vm.linkPos.text = aUrl;
+                    vm.linkPos.end = vm.linkPos.start+aUrl.length;
+                    vm.focusId = 'link-url';
+                }
                 function showImgSetting(){
                     vm.imgFlag = true;
                     var _of = $(vm.editor).caret('offset');
@@ -935,6 +978,28 @@ angular.module("wt-editor")
                         left:(_of.left)+'px',
                         top:(_of.top+20)+'px'
                     }
+                }
+
+                //监控link变化
+                vm.setImgAlt = function(){
+                    var _url = vm.imgPos.text.split(']')[1];
+                    var aUrl = "!["+vm.imgAlt+"]"+_url;
+                    var leftText = vm.editor.value.substring(0, vm.imgPos.start);
+                    var rightText = vm.editor.value.substring(vm.imgPos.end);
+                    scope.value = leftText + aUrl + rightText;
+                    vm.imgPos.text = aUrl;
+                    vm.imgPos.end = vm.imgPos.start+aUrl.length;
+                    vm.focusId = 'img-alt';
+                }
+                vm.setImgUrl = function(){
+                    var _text = vm.imgPos.text.split('(')[0];
+                    var aUrl = _text+"("+vm.imgUrl+")";
+                    var leftText = vm.editor.value.substring(0, vm.imgPos.start);
+                    var rightText = vm.editor.value.substring(vm.imgPos.end);
+                    scope.value = leftText + aUrl + rightText;
+                    vm.imgPos.text = aUrl;
+                    vm.imgPos.end = vm.imgPos.start+aUrl.length;
+                    vm.focusId = 'img-url';
                 }
 
                 //$('#wtEditorObj').bind('scroll', function (e) {
