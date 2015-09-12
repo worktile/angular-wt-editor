@@ -972,6 +972,7 @@ angular.module("wt-editor")
                     vm.focusId = 'link-url';
                 }
                 function showImgSetting(){
+                    vm.focusId = 'img-alt';
                     vm.imgFlag = true;
                     var _of = $(vm.editor).caret('offset');
                     vm.imgStyle = {
