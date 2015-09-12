@@ -37,6 +37,7 @@
     //padding: 5px 10px;
     background: @layout-toolbar-bg;
     border-bottom: 1px @layout-toolbar-border solid;
+    position: relative;
     .noselect {
       /* toolbar上面的按钮无论怎样点击都不应该选中 */
       -webkit-touch-callout: none;
@@ -59,6 +60,35 @@
         &.active{
           background:@layout-toolbar-active-bg ;
         }
+        .toolbar-menu{
+          position: absolute;
+          top: 38px;
+          left: -1px;
+          z-index: 1;
+          background: #fff;
+          width: 162px;
+          border: 1px #e8e8e8 solid;
+          box-shadow:1px 2px 4px @layout-shadow;
+          ul{
+            display: block;
+            padding:0;
+            margin: 0;
+            list-style: none;
+            li{
+              padding: 0;
+              margin: 0;
+              display: block;
+              padding: 10px;
+              vertical-align: middle;
+              cursor: pointer;
+              &:hover{
+                background: #f6f6f6;
+              }
+            }
+          }
+        }
+
+
       }
     }
 
@@ -100,6 +130,7 @@
       width: 100%;
       resize: none;
       font-size:18px;
+      line-height: 18px;
       padding: 30px 15px;
 
       &:focus {
@@ -128,5 +159,6 @@
     flex: 1;
     overflow: auto;
     border-left: 1px @layout-toolbar-border solid;
+    padding: 30px 15px;
   }
 }
