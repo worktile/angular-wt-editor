@@ -545,7 +545,17 @@ angular.module("wt-editor")
                     faValue   : '',
                     toolbars  : [],
                     editorHeight    : {height:$('.wt-editor-container-code').height()+'px'},
-                    header_action : false
+                    header_action : false,
+                    linkFlag:false,
+                    linkStyle:{
+                        top:0,
+                        left:0
+                    },
+                    imgFlag:false,
+                    imgStyle:{
+                        top:0,
+                        left:0
+                    }
                 };
                 //继承设置
                 angular.extend(wtEditorConfig, scope.config);
@@ -747,7 +757,8 @@ angular.module("wt-editor")
                             }
                             var aUrl = "["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
-                            controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
+                            controller[0].setFocus(sel.start,sel.start+aUrl.length);
+                            showLinkSetting();
                             break;
                         case "image":
                             var _text = "图片描述";
@@ -761,7 +772,8 @@ angular.module("wt-editor")
                             }
                             var aUrl = "["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
-                            controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
+                            controller[0].setFocus(sel.start,sel.start+aUrl.length);
+                            showImgSetting();
                             break;
                         case "code":
                             if(sel.text.length === 0) {
@@ -860,6 +872,7 @@ angular.module("wt-editor")
                     var sel = controller[0].getSelection();
                     controller[0].insertText(vm.emojiValue, sel.start, sel.end);
                     vm.editor.focus();
+                    //controller[0].setFocus(sel.start+vm.emojiValue.length,sel.start+vm.emojiValue.length);
                     vm.emojiValue = '';
                 }
                 //插入图标
@@ -867,8 +880,10 @@ angular.module("wt-editor")
                     vm.faValue = vm.faValue.trim();
                     if (vm.faValue.length > 0) {
                         var sel = controller[0].getSelection();
-                        controller[0].insertText("<i class='fa fa-" + vm.faValue + "'></i>", sel.start, sel.end);
+                        var _str = "<i class='fa fa-" + vm.faValue + "'></i>";
+                        controller[0].insertText(_str, sel.start, sel.end);
                         vm.editor.focus();
+                        //controller[0].setFocus(sel.start+_str.length,sel.start+_str.length);
                         vm.faValue = '';
                     }
                 }
@@ -901,20 +916,45 @@ angular.module("wt-editor")
                     wtEditorConfig.onShow();
                 }
 
+                //设置header bg
                 vm.setHeaderLi = function(id){
-                    if(vm.header_action){
-                        $('#'+id+'li').removeClass('active');
-                        vm.header_action = false;
-                    }else{
-                        $('#'+id+'li').addClass('active');
-                        vm.header_action = true;
+                    vm.header_action = !vm.header_action;
+                }
+                function showLinkSetting(){
+                    vm.linkFlag = true;
+                    var _of = $(vm.editor).caret('offset');
+                    vm.linkStyle = {
+                        left:(_of.left)+'px',
+                        top:(_of.top+20)+'px'
                     }
-
+                }
+                function showImgSetting(){
+                    vm.imgFlag = true;
+                    var _of = $(vm.editor).caret('offset');
+                    vm.imgStyle = {
+                        left:(_of.left)+'px',
+                        top:(_of.top+20)+'px'
+                    }
                 }
 
                 //$('#wtEditorObj').bind('scroll', function (e) {
                 //    controller[0].setPriviewScroll()
                 //});
+
+                $(document).click(function(ev){
+                    var _obj = $(ev.target);
+                    scope.$apply(function(){
+                        if(!_obj.hasClass('fa-link') && _obj.attr('flag') != 'link'){
+                            vm.linkFlag = false;
+                        }
+                        if(!_obj.hasClass('fa-image') && _obj.attr('flag') != 'img'){
+                            vm.imgFlag = false;
+                        }
+                        if(!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h'){
+                            vm.header_action = false;
+                        }
+                    });
+                });
             }
         };
     }]);

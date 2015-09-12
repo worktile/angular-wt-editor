@@ -161,4 +161,32 @@
     border-left: 1px @layout-toolbar-border solid;
     padding: 30px 15px;
   }
+
+  .link-box,.img-box{
+    position: absolute;
+    background: @layout-bg;
+    border : 1px @layout-boder solid;
+    box-shadow:2px 2px 4px @layout-shadow;
+    z-index: 100000;
+    div{
+      margin: 5px;
+    }
+    label{
+      float: left;
+      width: 50px;
+      line-height: 25px;
+      vertical-align: middle;
+      text-align: right;
+    }
+    input{
+      width: 200px;
+      height: 25px;
+      border: 1px @layout-boder solid;
+      float: left;
+      margin-left: 10px;
+      outline: none;
+    }
+  }
+
 }
+
