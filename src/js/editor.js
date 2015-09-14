@@ -1035,9 +1035,9 @@ angular.module("wt-editor")
                     var _row = "行";
 
                     for(var i = 0;i<cols;i++){
-                        _header += "| 列";
-                        _header_hr+= "| ---";
-                        _row += "| 行";
+                        _header += "| 列 ";
+                        _header_hr+= "| --- ";
+                        _row += "| 行 ";
                     }
                     var _str = "";
                     for(var i = 0;i<rows;i++){
