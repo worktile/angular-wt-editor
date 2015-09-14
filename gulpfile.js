@@ -7,6 +7,8 @@ var del = require('del');
 var htmlmin = require('gulp-htmlmin');
 var ngTemplate = require('gulp-angular-templatecache');
 var merge = require('merge-stream');
+var autoprefixer = require('gulp-autoprefixer');
+var minifycss = require('gulp-minify-css');
 
 var paths = {
     scripts: ['src/js/*.js'],
@@ -33,10 +35,11 @@ gulp.task('templates:dev', function () {
 
 gulp.task('templates:dist', function () {
     return gulp.src('src/tpl/*.html')
-        .pipe(ngTemplate("wt-editor.tpl.js", {
+        .pipe(ngTemplate("wt-editor.tpl-min.js", {
             root  : "wt-editor",
             module: "wt.editor.tpl"
         }))
+        .pipe(uglify())
         .pipe(gulp.dest('dist'));  // output file: 'dist/js/templates.js'
 });
 
@@ -45,34 +48,32 @@ gulp.task('scripts:dev', function () {
         .pipe(concat('wt-editor.js'))
         .pipe(gulp.dest('src'));
 });
-
-gulp.task('scripts:build', ['clean'], function (result) {
-    // Minify and copy all JavaScript (except vendor scripts)
-    // with sourcemaps all the way down
-    //return gulp.src('src/tpl/*.html')
-    //    .pipe(ngTemplate("wt-editor.tpl.js", {
-    //        root  : "wt-editor",
-    //        module: "wt.editor.tpl"
-    //    }))
-    //    .src(paths.scripts)
-    //    .pipe(concat('wt-editor.js'))
-    //    .pipe(gulp.dest('dest'));
-    //var js = gulp.src(paths.scripts)
-    //    .pipe(concat('wt-editor.js'));
-    //
-    //return merge(tpl, js)
-    //    .pipe(gulp.dest('dest'));
-    //.pipe(concat('wt-editor.min.js'))
-    //.pipe(uglify())
-    //.pipe(gulp.dest('dest'));
+gulp.task('scripts:dist', function () {
+    return gulp.src(paths.scripts)
+        .pipe(uglify())
+        .pipe(concat('wt-editor-min.js'))
+        .pipe(gulp.dest('dist'));
 });
 
-// Copy all static images
 gulp.task('lessc:dev', function () {
-    return gulp.src('./src/css/main.less')
+    return gulp.src('./src/css/*.less')
         .pipe(less())
         .pipe(gulp.dest('./src/css/'));
 });
+
+gulp.task('lessc:dist', function () {
+    return gulp.src('./src/css/*.less')
+        .pipe(less())
+        .pipe(concat('all-min.css'))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade : false
+        }))
+        .pipe(minifycss())
+        .pipe(gulp.dest('dist'));
+
+});
+
 
 // Rerun the task when a file changes
 gulp.task('watch', function () {
@@ -84,4 +85,4 @@ gulp.task('watch', function () {
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['watch', 'scripts:dev', 'templates:dev', 'lessc:dev']);
 
-gulp.task('build', ['watch', 'scripts', 'lessc']);
+gulp.task('build', ['clean','watch', 'scripts:dist', 'lessc:dist','templates:dist']);
