@@ -19,6 +19,8 @@
 @layout-code-content-shadow:#eee;
 @layout-code-line:#fcfcfc;
 @layout-code-line-color:#ddd;
+@layout-table-menu-bg:#f3f3f3;
+@layout-table-menu-hover:#cfcfcf;
 /***layout***/
 .wt-editor-full-screen{
   position: absolute;
@@ -117,11 +119,13 @@
   .wt-editor-container{
     flex: 1;
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
   }
   .wt-editor-container-code{
     position: relative;
     flex: 1;
+    -webkit-flex: 1;
     overflow: auto;
 
     .wt-editor-textarea{
@@ -132,11 +136,21 @@
       font-size:18px;
       line-height: 18px;
       padding: 30px 15px;
+      box-sizing: border-box;
 
       &:focus {
         border  : 0;
         outline : none;
       }
+    }
+
+    .textarea-mask{
+      position : absolute;
+      top: 0;
+      left: 0;
+      height: 200px;
+      width: 100%;
+      background: @layout-shadow;
     }
 
     .wt-editor-panel {
@@ -157,9 +171,12 @@
   }
   .wt-editor-container-preview{
     flex: 1;
+    -webkit-flex: 1;
     overflow: auto;
     border-left: 1px @layout-toolbar-border solid;
     padding: 30px 15px;
+    //box-sizing: border-box;
+    //overflow: auto;
   }
 
   .link-box,.img-box{
@@ -183,8 +200,42 @@
       height: 25px;
       border: 1px @layout-boder solid;
       float: left;
-      //margin-left: 10px;
       outline: none;
+    }
+  }
+
+  .table-menu{
+    position: absolute;
+    z-index: 100;
+    top:38px;
+    background: @layout-bg;
+    border: 1px @layout-boder solid;
+    ul{
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: block;
+      padding-bottom: 2px;
+      li{
+        padding: 0;
+        margin: 0;
+        display: block;
+        margin-top: 2px;
+        line-height: 15px;
+        height: 15px;
+        padding-right: 2px;
+        i{
+          width: 15px;
+          height: 15px;
+          background: @layout-table-menu-bg;
+          display: inline-block;
+          //margin-top: 5px;
+          margin-left: 2px;
+          &.active{
+            background: @layout-table-menu-hover;
+          }
+        }
+      }
     }
   }
 

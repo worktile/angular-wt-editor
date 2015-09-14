@@ -397,20 +397,6 @@ angular.module("wt-editor")
             };
         };
 
-        //插入默认文字
-        this.insertTextPlacehodler = function(text, start, end,padLeft, padRight) {
-            var ta = $scope.vm.editor;
-            ta.focus();
-            var leftText = ta.value.substring(0, start);
-            var rightText = ta.value.substring(end);
-            //ta.value  = leftText + text + rightText;
-            $scope.value  = leftText + text + rightText;
-            $timeout(function(){
-                ta.selectionStart = start + padLeft;
-                ta.selectionEnd = end +text.length  - padRight;
-            });
-        };
-
         //插入加工后的选择文字
         this.insertText = function(text, start, end) {
             var ta = $scope.vm.editor;
@@ -544,7 +530,7 @@ angular.module("wt-editor")
                     emojiValue: '', //插入表情代码
                     faValue   : '',
                     toolbars  : [],
-                    editorHeight    : {height:$('.wt-editor-container-code').height()+'px'},
+                    editorHeight    : {height:($('#wtEditor').height()-39)+'px',overflow:'auto'},
                     header_action : false,
                     linkFlag:false,
                     linkStyle:{
@@ -562,7 +548,17 @@ angular.module("wt-editor")
                     imgUrl:'',
                     imgAlt:'',
                     imgPos:{},
-                    focusId:''
+                    focusId:'',
+                    table_action:false,
+                    tableMenu:[
+                        [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5]],
+                        [[1,0],[1,1],[1,2],[1,3],[1,4],[1,5]],
+                        [[2,0],[2,1],[2,2],[2,3],[2,4],[2,5]],
+                        [[3,0],[3,1],[3,2],[3,3],[3,4],[3,5]],
+                        [[4,0],[4,1],[4,2],[4,3],[4,4],[4,5]]
+                    ],
+                    tableActiveX:1,
+                    tableActiveY:1
                 };
                 //继承设置
                 angular.extend(wtEditorConfig, scope.config);
@@ -583,7 +579,7 @@ angular.module("wt-editor")
                         wtEditorConfig.horizonToolbar,
                         wtEditorConfig.listToolbar, [{id:'d3',type: 'dividor'}],
                         wtEditorConfig.linkToolbar, [{id:'d4',type: 'dividor'}],
-                        wtEditorConfig.iconToolbar, [{id:'d5',type: 'dividor'}],
+                        //wtEditorConfig.iconToolbar, [{id:'d5',type: 'dividor'}],
                         wtEditorConfig.mathToolbar,
                         wtEditorConfig.mermaidToolbar, [{id:'d6',type: 'dividor'}],
                         wtEditorConfig.expandToolbar);
@@ -805,18 +801,11 @@ angular.module("wt-editor")
                             }
                             break;
                         case "table":
-                            var sample = $($event.target).data('sample');
-                            if(sel.text.length>0){
-                                controller[0].clearSelection();
-                                sel = controller[0].getSelection();
-                            }
-                            if (controller[0].isRowFirst(sel.start)) {
-                                controller[0].insertText('\n' + sample + '\n\n',sel.start, sel.end);
-                                controller[0].setFocus(sel.start+sample.length+2,sel.start+sample.length+2);
-                            } else {
-                                controller[0].insertText('\n\n' + sample + '\n\n',sel.start, sel.end);
-                                controller[0].setFocus(sel.start+sample.length+4,sel.start+sample.length+4);
-                            }
+                            //var sample = $($event.target).data('sample');
+                            //var sample = " 列名 1 | 列名 2 \n ---|---\n 第一行第一列 | 第一行第二列\n 第二行第一列 | 第二行第二列";
+
+
+                            vm.table_action = true
                             break;
                         case "math":
                             var text = sel.text;
@@ -944,10 +933,25 @@ angular.module("wt-editor")
                 function showLinkSetting(){
                     vm.linkFlag = true;
                     var _of = $(vm.editor).caret('offset');
-                    vm.linkStyle = {
-                        left:(_of.left)+'px',
-                        top:(_of.top+20)+'px'
+                    var _editoroff = $(vm.editor).offset();
+
+                    var _left = _of.left;
+                    var _top = _of.top+20;
+
+                    if((_left+210)>(_editoroff.left+$(vm.editor).width())){
+                        _left = _editoroff.left+$(vm.editor).width()-210;
                     }
+
+                    if((_top-20+67)>(_editoroff.top+$(vm.editor).height())){
+                        _top = _editoroff.top+$(vm.editor).height()-67-20;
+                    }
+
+
+                    vm.linkStyle = {
+                        left:_left+'px',
+                        top:(_top)+'px'
+                    }
+                    vm.editorHeight.overflow="hidden";
                 }
                 //监控link变化
                 vm.setLinkText = function(){
@@ -979,6 +983,7 @@ angular.module("wt-editor")
                         left:(_of.left)+'px',
                         top:(_of.top+20)+'px'
                     }
+                    vm.editorHeight.overflow="hidden";
                 }
 
                 //监控link变化
@@ -1003,6 +1008,47 @@ angular.module("wt-editor")
                     vm.focusId = 'img-url';
                 }
 
+
+                vm.setTableMemu = function(x,y){
+                    vm.tableActiveX = x
+                    vm.tableActiveY = y==0?1:y
+                }
+
+                vm.insertTable = function(x,y){
+                    var cols = y;
+                    var rows = x+1;
+                    var _header =  "列";
+                    var _header_hr = "---";
+                    var _row = "行";
+
+                    for(var i = 0;i<cols;i++){
+                        _header += "| 列";
+                        _header_hr+= "| ---";
+                        _row += "| 行";
+                    }
+                    var _str = "";
+                    for(var i = 0;i<rows;i++){
+                        _str+=_row+"\n";
+                    }
+
+                    var sample = _header+"\n"+_header_hr+"\n"+_str;
+                    var sel = controller[0].getSelection();
+                    if(sel.text.length>0){
+                        controller[0].clearSelection();
+                        sel = controller[0].getSelection();
+                    }
+                    if (controller[0].isRowFirst(sel.start)) {
+                        controller[0].insertText('\n' + sample + '\n\n',sel.start, sel.end);
+                        controller[0].setFocus(sel.start+sample.length+2,sel.start+sample.length+2);
+                    } else {
+                        controller[0].insertText('\n\n' + sample + '\n\n',sel.start, sel.end);
+                        controller[0].setFocus(sel.start+sample.length+4,sel.start+sample.length+4);
+                    }
+
+                    vm.table_action = false;
+
+                }
+
                 //$('#wtEditorObj').bind('scroll', function (e) {
                 //    controller[0].setPriviewScroll()
                 //});
@@ -1010,15 +1056,22 @@ angular.module("wt-editor")
                 $(document).click(function(ev){
                     var _obj = $(ev.target);
                     scope.$apply(function(){
-                        if(!_obj.hasClass('fa-link') && _obj.attr('flag') != 'link'){
+                        if(!_obj.hasClass('fa-link') && _obj.attr('flag') != 'link' && _obj.hasClass('textarea-mask')){
                             vm.linkFlag = false;
+                            vm.editorHeight.overflow="auto";
                         }
-                        if(!_obj.hasClass('fa-image') && _obj.attr('flag') != 'img'){
+                        if(!_obj.hasClass('fa-image') && _obj.attr('flag') != 'img' && _obj.hasClass('textarea-mask')){
                             vm.imgFlag = false;
+                            vm.editorHeight.overflow="auto";
                         }
                         if(!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h'){
                             vm.header_action = false;
                         }
+                        if(!_obj.hasClass('fa-table') && _obj.attr('flag') != 'table'){
+                            vm.table_action = false;
+                        }
+
+
                     });
                 });
             }
