@@ -943,7 +943,7 @@ angular.module("wt-editor")
                     }
 
                     if((_top-20+67)>(_editoroff.top+$(vm.editor).height())){
-                        _top = _editoroff.top+$(vm.editor).height()-67-20;
+                        _top = _editoroff.top+$(vm.editor).height()-67;
                     }
 
 
@@ -979,9 +979,22 @@ angular.module("wt-editor")
                     vm.focusId = 'img-alt';
                     vm.imgFlag = true;
                     var _of = $(vm.editor).caret('offset');
+                    var _editoroff = $(vm.editor).offset();
+
+                    var _left = _of.left;
+                    var _top = _of.top+20;
+
+                    if((_left+210)>(_editoroff.left+$(vm.editor).width())){
+                        _left = _editoroff.left+$(vm.editor).width()-210;
+                    }
+
+                    if((_top-20+67)>(_editoroff.top+$(vm.editor).height())){
+                        _top = _editoroff.top+$(vm.editor).height()-67;
+                    }
+
                     vm.imgStyle = {
-                        left:(_of.left)+'px',
-                        top:(_of.top+20)+'px'
+                        left:_left+'px',
+                        top:_top+'px'
                     }
                     vm.editorHeight.overflow="hidden";
                 }
@@ -1014,9 +1027,9 @@ angular.module("wt-editor")
                     vm.tableActiveY = y==0?1:y
                 }
 
-                vm.insertTable = function(x,y){
-                    var cols = y;
-                    var rows = x+1;
+                vm.insertTable = function(){
+                    var cols = vm.tableActiveY;
+                    var rows = vm.tableActiveX+1;
                     var _header =  "列";
                     var _header_hr = "---";
                     var _row = "行";
