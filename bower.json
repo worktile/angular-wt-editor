@@ -29,7 +29,7 @@
     "bootstrap": "~3.1.1",
     "fontawesome": "latest",
     "lodash": null,
-    "markedown": null,
+    "marked"     : "https://github.com/WorktileTech/marked.git",
     "katex-build": null,
     "mermaid-min": null,
     "Caret.js"   : null
