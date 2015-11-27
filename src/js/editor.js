@@ -531,7 +531,7 @@ angular.module("wt-editor")
                     emojiValue: '', //插入表情代码
                     faValue   : '',
                     toolbars  : [],
-                    editorHeight    : {height:($('#wtEditor').height()-39)+'px',overflow:'auto'},
+                    editorHeight    : {overflow:'auto'},
                     header_action : false,
                     linkFlag:false,
                     linkStyle:{

@@ -34,6 +34,7 @@
   background: @layout-bg;
   margin: auto;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   .wt-editor-toobar{
     //padding: 5px 10px;
@@ -127,16 +128,18 @@
     flex: 1;
     -webkit-flex: 1;
     overflow: auto;
+    display: flex;
+    display: -webkit-flex;
 
     .wt-editor-textarea{
       border: 0;
       display: block;
-      width: 100%;
       resize: none;
       font-size:18px;
       line-height: 18px;
       padding: 30px 15px;
       box-sizing: border-box;
+      flex: 1;
 
       &:focus {
         border  : 0;
