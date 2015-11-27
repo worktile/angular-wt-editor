@@ -31,4 +31,3 @@ bower_components
 src/**/*.css
 src/wt-editor.js
 src/wt-editor.tpl.js
-dist
