@@ -48,8 +48,15 @@ gulp.task('scripts:dev', function () {
         .pipe(concat('wt-editor.js'))
         .pipe(gulp.dest('src'));
 });
-gulp.task('scripts:dist', function () {
-    return gulp.src(paths.scripts)
+//gulp.task('scripts:dist', function () {
+//    return gulp.src(paths.scripts)
+//        .pipe(uglify())
+//        .pipe(concat('wt-editor-min.js'))
+//        .pipe(gulp.dest('dist'));
+//});
+
+gulp.task('scripts:dist', ['templates:dev'],function () {
+    return gulp.src(paths.scripts.concat(["src/wt-editor.tpl.js"]))
         .pipe(uglify())
         .pipe(concat('wt-editor-min.js'))
         .pipe(gulp.dest('dist'));
