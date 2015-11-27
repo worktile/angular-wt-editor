@@ -518,6 +518,7 @@ angular.module("wt-editor")
     .directive("wtEditor", ['wtEditorConfig', '$timeout', function (wtEditorConfig, $timeout) {
         return {
             require    : ["wtEditor", 'ngModel'],
+            replace    : true,
             scope      : {
                 value : '=ngModel',
                 config: '='
