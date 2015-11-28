@@ -236,7 +236,10 @@ angular.module("wt-editor")
         emojRegx         : /\:[a-z0-9_\-\+]+\:/g
     })
     .controller('wtEditorCtrl', ['$scope','$timeout', 'wtEditorConfig', function ($scope,$timeout, wtEditorConfig) {
-
+        var mermaidError;
+        mermaid.parseError = function (err, hash) {
+            mermaidError = err;
+        };
         //初始化甘特图
         this.initGantt = function () {
             mermaid.ganttConfig = {
@@ -531,7 +534,8 @@ angular.module("wt-editor")
                     emojiValue: '', //插入表情代码
                     faValue   : '',
                     toolbars  : [],
-                    editorHeight    : {overflow:'auto'},
+                    editorHeight    : {},
+                    editorContainerCode:{},
                     header_action : false,
                     linkFlag:false,
                     linkStyle:{
@@ -907,7 +911,6 @@ angular.module("wt-editor")
                 vm.getContent = function(){
                     return vm.editor.value;
                 }
-
                 //监控modal变化
                 scope.$watch('value', function(newValue, oldValue) {
                     var __value = vm.editor.value;
@@ -920,6 +923,7 @@ angular.module("wt-editor")
                             $('#'+vm.focusId).focus()
                         },128);
                     }
+                    vm.editorHeight.height = (vm.editor.scrollHeight+60)+'px';
                 });
 
                 //初始化完调用显示函数
@@ -952,7 +956,7 @@ angular.module("wt-editor")
                         left:_left+'px',
                         top:(_top)+'px'
                     }
-                    vm.editorHeight.overflow="hidden";
+                    vm.editorContainerCode.overflow="hidden";
                 }
                 //监控link变化
                 vm.setLinkText = function(){
@@ -997,7 +1001,7 @@ angular.module("wt-editor")
                         left:_left+'px',
                         top:_top+'px'
                     }
-                    vm.editorHeight.overflow="hidden";
+                    vm.editorContainerCode.overflow="hidden";
                 }
 
                 //监控link变化
@@ -1072,11 +1076,11 @@ angular.module("wt-editor")
                     scope.$apply(function(){
                         if(!_obj.hasClass('fa-link') && _obj.attr('flag') != 'link' && _obj.hasClass('textarea-mask')){
                             vm.linkFlag = false;
-                            vm.editorHeight.overflow="auto";
+                            vm.editorContainerCode.overflow="auto";
                         }
                         if(!_obj.hasClass('fa-image') && _obj.attr('flag') != 'img' && _obj.hasClass('textarea-mask')){
                             vm.imgFlag = false;
-                            vm.editorHeight.overflow="auto";
+                            vm.editorContainerCode.overflow="auto";
                         }
                         if(!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h'){
                             vm.header_action = false;

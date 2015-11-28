@@ -128,8 +128,6 @@
     flex: 1;
     -webkit-flex: 1;
     overflow: auto;
-    display: flex;
-    display: -webkit-flex;
 
     .wt-editor-textarea{
       border: 0;
@@ -139,7 +137,7 @@
       line-height: 18px;
       padding: 30px 15px;
       box-sizing: border-box;
-      flex: 1;
+      width: 100%;
 
       &:focus {
         border  : 0;
@@ -179,7 +177,6 @@
     border-left: 1px @layout-toolbar-border solid;
     padding: 30px 15px;
     box-sizing: border-box;
-    overflow: auto;
   }
 
   .link-box,.img-box{
