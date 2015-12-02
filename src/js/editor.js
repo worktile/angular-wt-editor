@@ -765,14 +765,15 @@ angular.module("wt-editor")
                             }
                             var aUrl = "["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
-                            controller[0].setFocus(sel.start,sel.start+aUrl.length);
-                            vm.linkText = _text;
-                            vm.linkUrl = iUrl;
-                            vm.linkPos.start = sel.start;
-                            vm.linkPos.text = aUrl;
-                            vm.linkPos.end = sel.start+aUrl.length;
+                            controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
+                            //controller[0].setFocus(sel.start,sel.start+aUrl.length);
+                            //vm.linkText = _text;
+                            //vm.linkUrl = iUrl;
+                            //vm.linkPos.start = sel.start;
+                            //vm.linkPos.text = aUrl;
+                            //vm.linkPos.end = sel.start+aUrl.length;
 
-                            showLinkSetting();
+                            //showLinkSetting();
                             break;
                         case "image":
                             var _text = "图片描述";
@@ -786,15 +787,16 @@ angular.module("wt-editor")
                             }
                             var aUrl = "!["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
-                            controller[0].setFocus(sel.start,sel.start+aUrl.length);
+                            controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
+                            //controller[0].setFocus(sel.start,sel.start+aUrl.length);
                             vm.imgAlt = _text;
                             vm.imgUrl = iUrl;
 
-                            vm.imgPos.start = sel.start;
-                            vm.imgPos.text = aUrl;
-                            vm.imgPos.end = sel.start+aUrl.length;
+                            //vm.imgPos.start = sel.start;
+                            //vm.imgPos.text = aUrl;
+                            //vm.imgPos.end = sel.start+aUrl.length;
 
-                            showImgSetting();
+                            //showImgSetting();
                             break;
                         case "code":
                             if(sel.text.length === 0) {
