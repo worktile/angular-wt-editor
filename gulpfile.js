@@ -57,6 +57,11 @@ gulp.task('scripts:dev', function () {
 
 gulp.task('scripts:dist', ['templates:dev'],function () {
     return gulp.src(paths.scripts.concat(["src/wt-editor.tpl.js"]))
+        .pipe(concat('wt-editor.js'))
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('scripts:dist_all_min', ['templates:dev'],function () {
+    return gulp.src(paths.scripts.concat(["src/wt-editor.tpl.js"]))
         .pipe(uglify())
         .pipe(concat('wt-editor-min.js'))
         .pipe(gulp.dest('dist'));
@@ -71,7 +76,18 @@ gulp.task('lessc:dev', function () {
 gulp.task('lessc:dist', function () {
     return gulp.src('./src/css/*.less')
         .pipe(less())
-        .pipe(concat('all-min.css'))
+        .pipe(concat('editor.css'))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade : false
+        }))
+        .pipe(gulp.dest('dist'));
+
+});
+gulp.task('lessc:dist_all_min', function () {
+    return gulp.src('./src/css/*.less')
+        .pipe(less())
+        .pipe(concat('editor-min.css'))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade : false
@@ -92,4 +108,4 @@ gulp.task('watch', function () {
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['watch', 'scripts:dev', 'templates:dev', 'lessc:dev']);
 
-gulp.task('build', ['clean','watch', 'scripts:dist', 'lessc:dist','templates:dist']);
+gulp.task('build', ['clean','watch', 'scripts:dist','scripts:dist_all_min', 'lessc:dist','lessc:dist_all_min','templates:dist']);
