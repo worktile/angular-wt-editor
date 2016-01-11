@@ -6,6 +6,7 @@ angular.module("wt-editor")
     .constant('wtEditorConfig', {
         fontSize         : '16px',
         theme            : 'kuroir',
+        className        : '',
         isPreview        : false,//是否显示预览
         isPreviewButton  : true,//是否显示预览按钮
         autofocus        : true, //默认聚焦
@@ -563,7 +564,8 @@ angular.module("wt-editor")
                         [[4,0],[4,1],[4,2],[4,3],[4,4],[4,5]]
                     ],
                     tableActiveX:1,
-                    tableActiveY:1
+                    tableActiveY:1,
+                    className : scope.config.className
                 };
                 //继承设置
                 angular.extend(wtEditorConfig, scope.config);
@@ -973,7 +975,6 @@ angular.module("wt-editor")
                             $('#'+vm.focusId).focus()
                         },128);
                     }
-                    vm.editorHeight.height = (vm.editor.scrollHeight+60)+'px';
                 });
 
                 //初始化完调用显示函数
@@ -1142,6 +1143,9 @@ angular.module("wt-editor")
 
                     });
                 });
+                $timeout(function(){
+                    vm.editorHeight.height = ($('.wt-editor-container-code').height())+'px';
+                },128);
             }
         };
     }]);
