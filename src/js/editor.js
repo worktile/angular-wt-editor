@@ -569,6 +569,54 @@ angular.module("wt-editor")
                 angular.extend(wtEditorConfig, scope.config);
                 if (wtEditorConfig.type === 'simple') {
                     vm.toolbars = _.union(
+                        [{
+                            id       : 1,
+                            title    : '粗体',
+                            className: 'fa fa-bold',
+                            modifier : '**',
+                            type     : 'styleFn',
+                            name     : 'bold'
+                        }, {
+                            id       : 2,
+                            title    : '斜体',
+                            className: 'fa fa-italic',
+                            modifier : '*',
+                            type     : 'styleFn',
+                            name     : 'italic'
+                        }],[{
+                            id       : 16,
+                            title    : '链接',
+                            className: 'fa fa-link',
+                            text     : '链接文字',
+                            url      : 'http://example.com',
+                            type     : 'styleFn',
+                            name     : 'link'
+                        }], [{id:'d1',type: 'dividor'}],
+                        wtEditorConfig.horizonToolbar,
+                        [{
+                            id       : 11,
+                            title    : '引用',
+                            className: 'fa fa-quote-left',
+                            prefix   : '> ',
+                            type     : 'styleFn',
+                            name     : 'quote'
+                        }, {
+                            id       : 12,
+                            title    : '无序列表',
+                            className: 'fa fa-list-ul',
+                            prefix   : '- ',
+                            type     : 'styleFn',
+                            name     : 'list'
+                        }, {
+                            id       : 13,
+                            title    : '有序列表',
+                            className: 'fa fa-list-ol',
+                            prefix   : '1. ',
+                            type     : 'styleFn',
+                            name     : 'list-2'
+                        }]);
+                }else if(wtEditorConfig.type === 'complex'){
+                    vm.toolbars = _.union(
                         wtEditorConfig.hToolbars,
                         wtEditorConfig.styleToolBar, [{id:'d1',type: 'dividor'}],
                         //wtEditorConfig.hToolbar, [{id:'d2',type: 'dividor'}],
@@ -576,7 +624,7 @@ angular.module("wt-editor")
                         wtEditorConfig.listToolbar, [{id:'d3',type: 'dividor'}],
                         wtEditorConfig.linkToolbar, [{id:'d4',type: 'dividor'}],
                         wtEditorConfig.expandToolbar);
-                } else if (wtEditorConfig.type === 'all') {
+                }else if (wtEditorConfig.type === 'all') {
                     vm.toolbars = _.union(
                         wtEditorConfig.hToolbars,
                         wtEditorConfig.styleToolBar, [{id:'d1',type: 'dividor'}],
