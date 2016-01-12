@@ -347,8 +347,8 @@ angular.module("wt-editor")
         }
 
         //设置全屏显示
-        this.setFullScreen = function (id, flag, editor) {
-            var _obj = $('#' + id);
+        this.setFullScreen = function (flag, editor) {
+            var _obj = $($scope.vm.element);
             if (flag) {
                 _obj.css({
                     left  : 0,
@@ -868,7 +868,7 @@ angular.module("wt-editor")
                             vm.togglePreview();
                         }
                         wtEditorConfig.isFullscreen = vm.isFullscreen;
-                        controller[0].setFullScreen('wtEditor', vm.isFullscreen, vm.editor);
+                        controller[0].setFullScreen(vm.isFullscreen, vm.editor);
                     }
                 }
                 //插入表情
@@ -918,7 +918,7 @@ angular.module("wt-editor")
                     if (wtEditorConfig.isPreview === true) {
                         $timeout(function(){
                             controller[0].previewHTML();
-                            $('#'+vm.focusId).focus()
+                            //$('#'+vm.focusId).focus()
                         },128);
                     }
                 });
