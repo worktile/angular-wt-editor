@@ -207,18 +207,10 @@ angular.module("wt-editor")
             type     : 'gantt',
             name     : 'gantt'
         }],
-        helpToolbar      : [{
-            id       : 26,
-            title    : '帮助',
-            className: 'fa fa-question-circle',
-            target   : 'help-modal',
-            type     : 'help'
-        }],
         expandToolbar    : [{
             id       : 27,
             title    : '预览',
             className: 'fa fa-columns',
-            target   : 'help-modal',
             type     : 'preview'
         }, {
             id       : 28,
@@ -486,23 +478,6 @@ angular.module("wt-editor")
                     editorHeight    : {},
                     editorContainerCode:{},
                     header_action : false,
-                    linkFlag:false,
-                    linkStyle:{
-                        top:0,
-                        left:0
-                    },
-                    linkText:null,
-                    linkUrl:'',
-                    linkPos:{},
-                    imgFlag:false,
-                    imgStyle:{
-                        top:0,
-                        left:0
-                    },
-                    imgUrl:'',
-                    imgAlt:'',
-                    imgPos:{},
-                    focusId:'',
                     table_action:false,
                     tableMenu:[
                         [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5]],
@@ -764,14 +739,7 @@ angular.module("wt-editor")
                             var aUrl = "["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
                             controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
-                            //controller[0].setFocus(sel.start,sel.start+aUrl.length);
-                            //vm.linkText = _text;
-                            //vm.linkUrl = iUrl;
-                            //vm.linkPos.start = sel.start;
-                            //vm.linkPos.text = aUrl;
-                            //vm.linkPos.end = sel.start+aUrl.length;
 
-                            //showLinkSetting();
                             break;
                         case "image":
                             var _text = "图片描述";
@@ -786,15 +754,6 @@ angular.module("wt-editor")
                             var aUrl = "!["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
                             controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
-                            //controller[0].setFocus(sel.start,sel.start+aUrl.length);
-                            vm.imgAlt = _text;
-                            vm.imgUrl = iUrl;
-
-                            //vm.imgPos.start = sel.start;
-                            //vm.imgPos.text = aUrl;
-                            //vm.imgPos.end = sel.start+aUrl.length;
-
-                            //showImgSetting();
                             break;
                         case "code":
                             if(sel.text.length === 0) {
@@ -920,7 +879,6 @@ angular.module("wt-editor")
                     if (wtEditorConfig.isPreview === true) {
                         $timeout(function(){
                             controller[0].previewHTML();
-                            //$('#'+vm.focusId).focus()
                         },128);
                     }
                 });
@@ -934,96 +892,7 @@ angular.module("wt-editor")
                 vm.setHeaderLi = function(id){
                     vm.header_action = !vm.header_action;
                 }
-                function showLinkSetting(){
-                    vm.linkFlag = true;
-                    var _of = $(vm.editor).caret('offset');
-                    var _editoroff = $(vm.editor).offset();
 
-                    var _left = _of.left;
-                    var _top = _of.top+20;
-
-                    if((_left+210)>(_editoroff.left+$(vm.editor).width())){
-                        _left = _editoroff.left+$(vm.editor).width()-210;
-                    }
-
-                    if((_top-20+67)>(_editoroff.top+$(vm.editor).height())){
-                        _top = _editoroff.top+$(vm.editor).height()-67;
-                    }
-
-
-                    vm.linkStyle = {
-                        left:_left+'px',
-                        top:(_top)+'px'
-                    }
-                    vm.editorContainerCode.overflow="hidden";
-                }
-                //监控link变化
-                vm.setLinkText = function(){
-                    var _url = vm.linkPos.text.split(']')[1];
-                    var aUrl = "["+vm.linkText+"]"+_url;
-                    var leftText = vm.editor.value.substring(0, vm.linkPos.start);
-                    var rightText = vm.editor.value.substring(vm.linkPos.end);
-                    scope.value = leftText + aUrl + rightText;
-                    vm.linkPos.text = aUrl;
-                    vm.linkPos.end = vm.linkPos.start+aUrl.length;
-                    vm.focusId = 'link-text';
-                }
-                //监控link变化
-                vm.setLinkUrl = function(){
-                    var _text = vm.linkPos.text.split('(')[0];
-                    var aUrl = _text+"("+vm.linkUrl+")";
-                    var leftText = vm.editor.value.substring(0, vm.linkPos.start);
-                    var rightText = vm.editor.value.substring(vm.linkPos.end);
-                    scope.value = leftText + aUrl + rightText;
-                    vm.linkPos.text = aUrl;
-                    vm.linkPos.end = vm.linkPos.start+aUrl.length;
-                    vm.focusId = 'link-url';
-                }
-                function showImgSetting(){
-                    vm.focusId = 'img-alt';
-                    vm.imgFlag = true;
-                    var _of = $(vm.editor).caret('offset');
-                    var _editoroff = $(vm.editor).offset();
-
-                    var _left = _of.left;
-                    var _top = _of.top+20;
-
-                    if((_left+210)>(_editoroff.left+$(vm.editor).width())){
-                        _left = _editoroff.left+$(vm.editor).width()-210;
-                    }
-
-                    if((_top-20+67)>(_editoroff.top+$(vm.editor).height())){
-                        _top = _editoroff.top+$(vm.editor).height()-67;
-                    }
-
-                    vm.imgStyle = {
-                        left:_left+'px',
-                        top:_top+'px'
-                    }
-                    vm.editorContainerCode.overflow="hidden";
-                }
-
-                //监控link变化
-                vm.setImgAlt = function(){
-                    var _url = vm.imgPos.text.split(']')[1];
-                    var aUrl = "!["+vm.imgAlt+"]"+_url;
-                    var leftText = vm.editor.value.substring(0, vm.imgPos.start);
-                    var rightText = vm.editor.value.substring(vm.imgPos.end);
-                    scope.value = leftText + aUrl + rightText;
-                    vm.imgPos.text = aUrl;
-                    vm.imgPos.end = vm.imgPos.start+aUrl.length;
-                    vm.focusId = 'img-alt';
-                }
-                vm.setImgUrl = function(){
-                    var _text = vm.imgPos.text.split('(')[0];
-                    var aUrl = _text+"("+vm.imgUrl+")";
-                    var leftText = vm.editor.value.substring(0, vm.imgPos.start);
-                    var rightText = vm.editor.value.substring(vm.imgPos.end);
-                    scope.value = leftText + aUrl + rightText;
-                    vm.imgPos.text = aUrl;
-                    vm.imgPos.end = vm.imgPos.start+aUrl.length;
-                    vm.focusId = 'img-url';
-                }
 
 
                 vm.setTableMemu = function(x,y){
@@ -1073,14 +942,6 @@ angular.module("wt-editor")
                 $(document).click(function(ev){
                     var _obj = $(ev.target);
                     scope.$apply(function(){
-                        if(!_obj.hasClass('fa-link') && _obj.attr('flag') != 'link' && _obj.hasClass('textarea-mask')){
-                            vm.linkFlag = false;
-                            vm.editorContainerCode.overflow="auto";
-                        }
-                        if(!_obj.hasClass('fa-image') && _obj.attr('flag') != 'img' && _obj.hasClass('textarea-mask')){
-                            vm.imgFlag = false;
-                            vm.editorContainerCode.overflow="auto";
-                        }
                         if(!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h'){
                             vm.header_action = false;
                         }
@@ -1097,4 +958,4 @@ angular.module("wt-editor")
             }
         };
     }]);
-angular.module("wt.editor.tpl", []).run(["$templateCache", function($templateCache) {$templateCache.put("wt-editor/editor.html","<div class=\"wt-editor {{vm.className}}\" ng-class=\"{true: \'wt-editor-full-screen\', false: \'\'}[vm.isFullscreen]\">\r    <div class=\"wt-editor-toobar\">\r        <div class=\"noselect\">\r            <ul class=\"wtEditorToolBarUl\">\r                <li class=\"wtEditorToolBarli\" ng-repeat=\"item in vm.toolbars\" ng-class=\"(item.id == 0 && vm.header_action)?\'active\':\'\'\">\r                    <!--自定义toolbar-->\r                    <i ng-if=\"item.type === \'custom\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"item.action($event,vm)\"></i>\r\r                    <i ng-if=\"item.type === \'headingFns\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.setHeaderLi(item.id)\"></i>\r\r                    <div ng-if=\"item.type === \'headingFns\'\" ng-show=\"vm.header_action\" class=\"toolbar-menu\" flag=\"h\">\r                        <ul flag=\"h\">\r                            <li ng-repeat=\"n in vm.headers\" ng-class=\"n.className\" ng-click=\"vm.styleFn(n.name,$event)\" flag=\"h\">\r                                {{n.title}}\r                            </li>\r                        </ul>\r                    </div>\r\r                    <i ng-if=\"item.type === \'styleFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <!--<i ng-if=\"item.type === \'headingFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\">h{{item.level}}</i>-->\r\r                    <i ng-if=\"item.type === \'tableFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"\r                       ng-click=\"vm.styleFn(item.name,$event)\"></i>\r\r\r                    <div ng-if=\"item.type === \'tableFn\'\" ng-show=\"vm.table_action\" class=\"table-menu\" flag=\"table\" ng-mouseleave=\"vm.tableActiveX=1;vm.tableActiveY=1;vm.table_action=false\">\r                        <ul flag=\"table\">\r                            <li flag=\"table\" ng-repeat=\"n in vm.tableMenu\">\r                                <i ng-repeat=\"s in n\" flag=\"table\" ng-click=\"vm.insertTable()\" ng-mouseenter=\"vm.setTableMemu(s[0],s[1])\" ng-mouseleave=\"\" ng-class=\"{true: \'active\', false: \'\'}[s[0]<=vm.tableActiveX && s[1] <= vm.tableActiveY]\"></i>\r                            </li>\r                        </ul>\r                    </div>\r\r\r                    <i ng-if=\"item.type === \'emoji\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r\r                    <i ng-if=\"item.type === \'mathFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-sample=\"E = mc^2\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'flowchart\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"graph LR\rA-->B\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'diagram\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"sequenceDiagram\rA->>B: 你好吗?\rB->>A: 我很好!\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'gantt\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"gantt\rdateFormat YYYY-MM-DD\rsection S1\rT1: 2014-01-01, 9d\rsection S2\rT2: 2014-01-11, 9d\rsection S3\rT3: 2014-01-02, 9d\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'help\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r                    <i ng-if=\"item.type === \'preview\' && vm.isPreviewButton\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.togglePreview()\"></i>\r                    <i ng-if=\"item.type === \'expand\' && vm.isFullButton\" title=\"{{vm.isFullscreen?item.title2:item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-class=\"{true: \'fa-compress\', false: \'fa-expand\'}[vm.isFullscreen]\" ng-click=\"vm.toggleFullScreen()\"></i>\r                    <i ng-if=\"item.type === \'dividor\'\" class=\"dividor\"></i>\r                </li>\r            </ul>\r        </div>\r    </div>\r    <div class=\"wt-editor-container\">\r        <div class=\"wt-editor-container-code\" ng-style=\"vm.editorContainerCode\">\r            <textarea  ng-style=\"vm.editorHeight\" placeholder=\"输入内容...\" class=\"wt-editor-textarea\" ng-model=\"value\"></textarea>\r            <!--modal-->\r            <div ng-if=\"vm.imgFlag || vm.linkFlag\" ng-style=\"vm.editorHeight\" class=\"textarea-mask\"></div>\r        </div>\r        <div class=\"wt-editor-container-preview\" ng-show=\"vm.isPreview\">\r            <article class=\"markdown-body\" data-open-title=\"Hide Preview\" data-closed-title=\"Show Preview\"></article> <!-- 实时预览 -->\r        </div>\r        <!-- emoji-Modal -->\r        <!--<div class=\"modal fade\" id=\"emoji-modal\" tabindex=\"-1\" role=\"dialog\" data-backdrop=\"false\" aria-labelledby=\"emoji-modal-label\">-->\r            <!--<div class=\"modal-dialog\" role=\"document\">-->\r                <!--<div class=\"modal-content\">-->\r                    <!--<div class=\"modal-header\">-->\r                        <!--<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>-->\r                        <!--<h4 class=\"modal-title\" id=\"emoji-modal-label\">插入表情</h4>-->\r                    <!--</div>-->\r                    <!--<div class=\"modal-body\">-->\r                        <!--<h4>请输入 emoji 编码：</h4>-->\r                        <!--<p>例子：\"smile\", \"whale\", \"santa\", \"panda_face\", \"dog\", \"truck\" ...</p>-->\r                        <!--<p>完整列表，请访问 <a href=\"http://www.emoji-cheat-sheet.com/\" target=\"_blank\">Emoji Cheat Sheet</a>。</p>-->\r                        <!--<p><input id=\"emoji-code\" ng-model=\"vm.emojiValue\" placeholder=\"smile\" autofocus/></p>-->\r                    <!--</div>-->\r                    <!--<div class=\"modal-footer\">-->\r                        <!--<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>-->\r                        <!--<button type=\"button\" class=\"btn btn-primary\" id=\"emoji-confirm\"  data-dismiss=\"modal\"  ng-click=\"vm.insertEmoji()\">确定</button>-->\r                    <!--</div>-->\r                <!--</div>-->\r            <!--</div>-->\r        <!--</div>-->\r        <!-- fa-Modal -->\r        <!--<div class=\"modal fade\" id=\"fa-modal\" tabindex=\"-1\" role=\"dialog\" data-backdrop=\"false\" aria-labelledby=\"fa-modal-label\">-->\r            <!--<div class=\"modal-dialog\" role=\"document\">-->\r                <!--<div class=\"modal-content\">-->\r                    <!--<div class=\"modal-header\">-->\r                        <!--<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>-->\r                        <!--<h4 class=\"modal-title\" id=\"fa-modal-label\">插入图标</h4>-->\r                    <!--</div>-->\r                    <!--<div class=\"modal-body\">-->\r\r                        <!--<h4>请输入 Font Awesome 编码：</h4>-->\r                        <!--<p>例子：\"cloud\", \"flag\", \"car\", \"truck\", \"heart\", \"dollar\" ...</p>-->\r                        <!--<p>完整列表，请访问 <a href=\"http://fontawesome.io/icons/\" target=\"_blank\">Font Awesome 官网</a>。</p>-->\r                        <!--<p><input id=\"fa-code\" ng-model=\"vm.faValue\" placeholder=\"heart\" autofocus/></p>-->\r\r                    <!--</div>-->\r                    <!--<div class=\"modal-footer\">-->\r                        <!--<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">取消</button>-->\r                        <!--<button type=\"button\" class=\"btn btn-primary\" id=\"fa-confirm\" data-dismiss=\"modal\" ng-click=\"vm.insertFa()\">确定</button>-->\r                    <!--</div>-->\r                <!--</div>-->\r            <!--</div>-->\r        <!--</div>-->\r        <!--help-modal-->\r        <div class=\"modal fade\" id=\"help-modal\" tabindex=\"-1\" role=\"dialog\" data-backdrop=\"false\" aria-labelledby=\"help-modal-label\">\r            <div class=\"modal-dialog\" role=\"document\">\r                <div class=\"modal-content\">\r                    <div class=\"modal-header\">\r                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r                        <h4 class=\"modal-title\" id=\"help-modal-label\">帮助文档</h4>\r                    </div>\r                    <div class=\"modal-body\">\r\r                        <!--<h3><a href=\"http://mdp.tylingsoft.com/index.zh_CN.html\" target=\"_blank\">一个在线示例</a></h3>-->\r                        <!--<p><a href=\"https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts\" target=\"_blank\">键盘快捷键</a></p>-->\r                        <p><a href=\"https://guides.github.com/features/mastering-markdown/\" target=\"_blank\">Markdown 基础</a></p>\r                        <p><a href=\"https://help.github.com/articles/github-flavored-markdown/\" target=\"_blank\">GitHub Flavored Markdown</a></p>\r                        <p><a href=\"http://www.emoji-cheat-sheet.com/\" target=\"_blank\">Emoji 图标</a></p>\r                        <p><a href=\"http://fontawesome.io/icons/\" target=\"_blank\">Font Awesome 图标</a></p>\r                        <p><a href=\"http://ionicons.com/\" target=\"_blank\">Ionicons 图标</a></p>\r                        <p><a href=\"http://meta.wikimedia.org/wiki/Help:Displaying_a_formula\" target=\"_blank\">数学公式</a></p>\r                        <p><a href=\"http://knsv.github.io/mermaid/flowchart.html\" target=\"_blank\">流程图语法</a></p>\r                        <p><a href=\"http://knsv.github.io/mermaid/sequenceDiagram.html\" target=\"_blank\">顺序图语法</a></p>\r                        <p><a href=\"http://knsv.github.io/mermaid/gantt.html\" target=\"_blank\">甘特图语法</a></p>\r\r                    </div>\r                    <div class=\"modal-footer\">\r                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">关闭</button>\r                    </div>\r                </div>\r            </div>\r        </div>\r\r\r        <!--link-->\r        <div class=\"link-box\" ng-if=\"vm.linkFlag\" ng-style=\"vm.linkStyle\" flag=\"link\">\r            <div class=\"clearfix\" flag=\"link\">\r                <!--<label flag=\"link\">文字</label>-->\r                <input flag=\"link\" type=\"text\" id=\"link-text\" ng-model=\"vm.linkText\" ng-change=\"vm.setLinkText()\" autofocus=\"autofocus\"/>\r            </div>\r            <div class=\"clearfix\" flag=\"link\">\r                <!--<label flag=\"link\">链接</label>-->\r                <input flag=\"link\" type=\"text\" id=\"link-url\" ng-model=\"vm.linkUrl\" ng-change=\"vm.setLinkUrl()\"/>\r            </div>\r        </div>\r\r        <!--lmg-->\r        <div class=\"img-box\" ng-if=\"vm.imgFlag\" ng-style=\"vm.imgStyle\" flag=\"img\">\r            <div class=\"clearfix\" flag=\"img\">\r                <!--<label flag=\"img\">Alt</label>-->\r                <input flag=\"img\" type=\"text\" id=\"img-alt\" ng-model=\"vm.imgAlt\" ng-change=\"vm.setImgAlt()\" autofocus=\"autofocus\"/>\r            </div>\r            <div class=\"clearfix\" flag=\"img\">\r                <!--<label flag=\"img\">Url</label>-->\r                <input flag=\"img\" type=\"text\" id=\"img-url\" ng-model=\"vm.imgUrl\" ng-change=\"vm.setImgUrl()\"/>\r            </div>\r        </div>\r    </div>\r</div>\r");}]);
+angular.module("wt.editor.tpl", []).run(["$templateCache", function($templateCache) {$templateCache.put("wt-editor/editor.html","<div class=\"wt-editor {{vm.className}}\" ng-class=\"{true: \'wt-editor-full-screen\', false: \'\'}[vm.isFullscreen]\">\r    <div class=\"wt-editor-toobar\">\r        <div class=\"noselect\">\r            <ul class=\"wtEditorToolBarUl\">\r                <li class=\"wtEditorToolBarli\" ng-repeat=\"item in vm.toolbars\" ng-class=\"(item.id == 0 && vm.header_action)?\'active\':\'\'\">\r                    <!--自定义toolbar-->\r                    <i ng-if=\"item.type === \'custom\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"item.action($event,vm)\"></i>\r\r                    <i ng-if=\"item.type === \'headingFns\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.setHeaderLi(item.id)\"></i>\r\r                    <div ng-if=\"item.type === \'headingFns\'\" ng-show=\"vm.header_action\" class=\"toolbar-menu\" flag=\"h\">\r                        <ul flag=\"h\">\r                            <li ng-repeat=\"n in vm.headers\" ng-class=\"n.className\" ng-click=\"vm.styleFn(n.name,$event)\" flag=\"h\">\r                                {{n.title}}\r                            </li>\r                        </ul>\r                    </div>\r\r                    <i ng-if=\"item.type === \'styleFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <!--<i ng-if=\"item.type === \'headingFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\">h{{item.level}}</i>-->\r\r                    <i ng-if=\"item.type === \'tableFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"\r                       ng-click=\"vm.styleFn(item.name,$event)\"></i>\r\r\r                    <div ng-if=\"item.type === \'tableFn\'\" ng-show=\"vm.table_action\" class=\"table-menu\" flag=\"table\" ng-mouseleave=\"vm.tableActiveX=1;vm.tableActiveY=1;vm.table_action=false\">\r                        <ul flag=\"table\">\r                            <li flag=\"table\" ng-repeat=\"n in vm.tableMenu\">\r                                <i ng-repeat=\"s in n\" flag=\"table\" ng-click=\"vm.insertTable()\" ng-mouseenter=\"vm.setTableMemu(s[0],s[1])\" ng-mouseleave=\"\" ng-class=\"{true: \'active\', false: \'\'}[s[0]<=vm.tableActiveX && s[1] <= vm.tableActiveY]\"></i>\r                            </li>\r                        </ul>\r                    </div>\r\r\r                    <i ng-if=\"item.type === \'emoji\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r\r                    <i ng-if=\"item.type === \'mathFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-sample=\"E = mc^2\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'flowchart\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"graph LR\rA-->B\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'diagram\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"sequenceDiagram\rA->>B: 你好吗?\rB->>A: 我很好!\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'gantt\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"gantt\rdateFormat YYYY-MM-DD\rsection S1\rT1: 2014-01-01, 9d\rsection S2\rT2: 2014-01-11, 9d\rsection S3\rT3: 2014-01-02, 9d\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'help\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r                    <i ng-if=\"item.type === \'preview\' && vm.isPreviewButton\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.togglePreview()\"></i>\r                    <i ng-if=\"item.type === \'expand\' && vm.isFullButton\" title=\"{{vm.isFullscreen?item.title2:item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-class=\"{true: \'fa-compress\', false: \'fa-expand\'}[vm.isFullscreen]\" ng-click=\"vm.toggleFullScreen()\"></i>\r                    <i ng-if=\"item.type === \'dividor\'\" class=\"dividor\"></i>\r                </li>\r            </ul>\r        </div>\r    </div>\r    <div class=\"wt-editor-container\">\r        <div class=\"wt-editor-container-code\" ng-style=\"vm.editorContainerCode\">\r            <textarea  ng-style=\"vm.editorHeight\" placeholder=\"输入内容...\" class=\"wt-editor-textarea\" ng-model=\"value\"></textarea>\r        </div>\r        <div class=\"wt-editor-container-preview\" ng-show=\"vm.isPreview\">\r            <article class=\"markdown-body\" data-open-title=\"Hide Preview\" data-closed-title=\"Show Preview\"></article> <!-- 实时预览 -->\r        </div>\r    </div>\r</div>\r");}]);

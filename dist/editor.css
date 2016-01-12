@@ -139,7 +139,7 @@
   -ms-flex: 1;
   flex: 1;
   -webkit-flex: 1;
-  overflow: auto;
+  overflow: hidden;
 }
 .wt-editor .wt-editor-container-code .wt-editor-textarea {
   border: 0;
@@ -154,14 +154,6 @@
 .wt-editor .wt-editor-container-code .wt-editor-textarea:focus {
   border: 0;
   outline: none;
-}
-.wt-editor .wt-editor-container-code .textarea-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 200px;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.15);
 }
 .wt-editor .wt-editor-container-code .wt-editor-panel {
   position: absolute;
@@ -186,34 +178,6 @@
   border-left: 1px #eeeeee solid;
   padding: 30px 15px;
   box-sizing: border-box;
-}
-.wt-editor .link-box,
-.wt-editor .img-box {
-  position: absolute;
-  background: #ffffff;
-  border: 1px #e3e6ec solid;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
-  z-index: 100000;
-}
-.wt-editor .link-box div,
-.wt-editor .img-box div {
-  margin: 5px;
-}
-.wt-editor .link-box label,
-.wt-editor .img-box label {
-  float: left;
-  width: 50px;
-  line-height: 25px;
-  vertical-align: middle;
-  text-align: right;
-}
-.wt-editor .link-box input,
-.wt-editor .img-box input {
-  width: 200px;
-  height: 25px;
-  border: 1px #e3e6ec solid;
-  float: left;
-  outline: none;
 }
 .wt-editor .table-menu {
   position: absolute;

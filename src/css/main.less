@@ -127,7 +127,7 @@
     position: relative;
     flex: 1;
     -webkit-flex: 1;
-    overflow: auto;
+    overflow: hidden;
 
     .wt-editor-textarea{
       border: 0;
@@ -143,15 +143,6 @@
         border  : 0;
         outline : none;
       }
-    }
-
-    .textarea-mask{
-      position : absolute;
-      top: 0;
-      left: 0;
-      height: 200px;
-      width: 100%;
-      background: @layout-shadow;
     }
 
     .wt-editor-panel {
@@ -179,30 +170,6 @@
     box-sizing: border-box;
   }
 
-  .link-box,.img-box{
-    position: absolute;
-    background: @layout-bg;
-    border : 1px @layout-boder solid;
-    box-shadow:2px 2px 4px @layout-shadow;
-    z-index: 100000;
-    div{
-      margin: 5px;
-    }
-    label{
-      float: left;
-      width: 50px;
-      line-height: 25px;
-      vertical-align: middle;
-      text-align: right;
-    }
-    input{
-      width: 200px;
-      height: 25px;
-      border: 1px @layout-boder solid;
-      float: left;
-      outline: none;
-    }
-  }
 
   .table-menu{
     position: absolute;

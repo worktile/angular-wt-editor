@@ -205,18 +205,10 @@ angular.module("wt-editor")
             type     : 'gantt',
             name     : 'gantt'
         }],
-        helpToolbar      : [{
-            id       : 26,
-            title    : '帮助',
-            className: 'fa fa-question-circle',
-            target   : 'help-modal',
-            type     : 'help'
-        }],
         expandToolbar    : [{
             id       : 27,
             title    : '预览',
             className: 'fa fa-columns',
-            target   : 'help-modal',
             type     : 'preview'
         }, {
             id       : 28,
@@ -484,23 +476,6 @@ angular.module("wt-editor")
                     editorHeight    : {},
                     editorContainerCode:{},
                     header_action : false,
-                    linkFlag:false,
-                    linkStyle:{
-                        top:0,
-                        left:0
-                    },
-                    linkText:null,
-                    linkUrl:'',
-                    linkPos:{},
-                    imgFlag:false,
-                    imgStyle:{
-                        top:0,
-                        left:0
-                    },
-                    imgUrl:'',
-                    imgAlt:'',
-                    imgPos:{},
-                    focusId:'',
                     table_action:false,
                     tableMenu:[
                         [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5]],
@@ -762,14 +737,7 @@ angular.module("wt-editor")
                             var aUrl = "["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
                             controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
-                            //controller[0].setFocus(sel.start,sel.start+aUrl.length);
-                            //vm.linkText = _text;
-                            //vm.linkUrl = iUrl;
-                            //vm.linkPos.start = sel.start;
-                            //vm.linkPos.text = aUrl;
-                            //vm.linkPos.end = sel.start+aUrl.length;
 
-                            //showLinkSetting();
                             break;
                         case "image":
                             var _text = "图片描述";
@@ -784,15 +752,6 @@ angular.module("wt-editor")
                             var aUrl = "!["+_text+"]("+iUrl+")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
                             controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
-                            //controller[0].setFocus(sel.start,sel.start+aUrl.length);
-                            vm.imgAlt = _text;
-                            vm.imgUrl = iUrl;
-
-                            //vm.imgPos.start = sel.start;
-                            //vm.imgPos.text = aUrl;
-                            //vm.imgPos.end = sel.start+aUrl.length;
-
-                            //showImgSetting();
                             break;
                         case "code":
                             if(sel.text.length === 0) {
@@ -918,7 +877,6 @@ angular.module("wt-editor")
                     if (wtEditorConfig.isPreview === true) {
                         $timeout(function(){
                             controller[0].previewHTML();
-                            //$('#'+vm.focusId).focus()
                         },128);
                     }
                 });
@@ -932,96 +890,7 @@ angular.module("wt-editor")
                 vm.setHeaderLi = function(id){
                     vm.header_action = !vm.header_action;
                 }
-                function showLinkSetting(){
-                    vm.linkFlag = true;
-                    var _of = $(vm.editor).caret('offset');
-                    var _editoroff = $(vm.editor).offset();
 
-                    var _left = _of.left;
-                    var _top = _of.top+20;
-
-                    if((_left+210)>(_editoroff.left+$(vm.editor).width())){
-                        _left = _editoroff.left+$(vm.editor).width()-210;
-                    }
-
-                    if((_top-20+67)>(_editoroff.top+$(vm.editor).height())){
-                        _top = _editoroff.top+$(vm.editor).height()-67;
-                    }
-
-
-                    vm.linkStyle = {
-                        left:_left+'px',
-                        top:(_top)+'px'
-                    }
-                    vm.editorContainerCode.overflow="hidden";
-                }
-                //监控link变化
-                vm.setLinkText = function(){
-                    var _url = vm.linkPos.text.split(']')[1];
-                    var aUrl = "["+vm.linkText+"]"+_url;
-                    var leftText = vm.editor.value.substring(0, vm.linkPos.start);
-                    var rightText = vm.editor.value.substring(vm.linkPos.end);
-                    scope.value = leftText + aUrl + rightText;
-                    vm.linkPos.text = aUrl;
-                    vm.linkPos.end = vm.linkPos.start+aUrl.length;
-                    vm.focusId = 'link-text';
-                }
-                //监控link变化
-                vm.setLinkUrl = function(){
-                    var _text = vm.linkPos.text.split('(')[0];
-                    var aUrl = _text+"("+vm.linkUrl+")";
-                    var leftText = vm.editor.value.substring(0, vm.linkPos.start);
-                    var rightText = vm.editor.value.substring(vm.linkPos.end);
-                    scope.value = leftText + aUrl + rightText;
-                    vm.linkPos.text = aUrl;
-                    vm.linkPos.end = vm.linkPos.start+aUrl.length;
-                    vm.focusId = 'link-url';
-                }
-                function showImgSetting(){
-                    vm.focusId = 'img-alt';
-                    vm.imgFlag = true;
-                    var _of = $(vm.editor).caret('offset');
-                    var _editoroff = $(vm.editor).offset();
-
-                    var _left = _of.left;
-                    var _top = _of.top+20;
-
-                    if((_left+210)>(_editoroff.left+$(vm.editor).width())){
-                        _left = _editoroff.left+$(vm.editor).width()-210;
-                    }
-
-                    if((_top-20+67)>(_editoroff.top+$(vm.editor).height())){
-                        _top = _editoroff.top+$(vm.editor).height()-67;
-                    }
-
-                    vm.imgStyle = {
-                        left:_left+'px',
-                        top:_top+'px'
-                    }
-                    vm.editorContainerCode.overflow="hidden";
-                }
-
-                //监控link变化
-                vm.setImgAlt = function(){
-                    var _url = vm.imgPos.text.split(']')[1];
-                    var aUrl = "!["+vm.imgAlt+"]"+_url;
-                    var leftText = vm.editor.value.substring(0, vm.imgPos.start);
-                    var rightText = vm.editor.value.substring(vm.imgPos.end);
-                    scope.value = leftText + aUrl + rightText;
-                    vm.imgPos.text = aUrl;
-                    vm.imgPos.end = vm.imgPos.start+aUrl.length;
-                    vm.focusId = 'img-alt';
-                }
-                vm.setImgUrl = function(){
-                    var _text = vm.imgPos.text.split('(')[0];
-                    var aUrl = _text+"("+vm.imgUrl+")";
-                    var leftText = vm.editor.value.substring(0, vm.imgPos.start);
-                    var rightText = vm.editor.value.substring(vm.imgPos.end);
-                    scope.value = leftText + aUrl + rightText;
-                    vm.imgPos.text = aUrl;
-                    vm.imgPos.end = vm.imgPos.start+aUrl.length;
-                    vm.focusId = 'img-url';
-                }
 
 
                 vm.setTableMemu = function(x,y){
@@ -1071,14 +940,6 @@ angular.module("wt-editor")
                 $(document).click(function(ev){
                     var _obj = $(ev.target);
                     scope.$apply(function(){
-                        if(!_obj.hasClass('fa-link') && _obj.attr('flag') != 'link' && _obj.hasClass('textarea-mask')){
-                            vm.linkFlag = false;
-                            vm.editorContainerCode.overflow="auto";
-                        }
-                        if(!_obj.hasClass('fa-image') && _obj.attr('flag') != 'img' && _obj.hasClass('textarea-mask')){
-                            vm.imgFlag = false;
-                            vm.editorContainerCode.overflow="auto";
-                        }
                         if(!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h'){
                             vm.header_action = false;
                         }
