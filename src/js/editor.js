@@ -950,6 +950,11 @@ angular.module("wt-editor")
 
                     });
                 });
+                $(window).on('resize', _.throttle(function () {
+                    $timeout(function () {
+                        vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height())+'px';
+                    }, 50);
+                }, 150));
                 $timeout(function(){
                     vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height())+'px';
                 },128);
