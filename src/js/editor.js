@@ -363,7 +363,7 @@ angular.module("wt-editor")
                 });
             }
             $timeout(function () {
-                $scope.vm.editorHeight.height  = $('.wt-editor-container-code').height()+'px';
+                $scope.vm.editorHeight.height  = $($scope.vm.element).find('.wt-editor-container-code').height()+'px';
             });
         }
 
@@ -450,7 +450,7 @@ angular.module("wt-editor")
         this.previewHTML = function () {
             var _value = marked($scope.vm.editor.value);
             _value = emojiFn(_value);
-            $('.markdown-body').empty().append(_value); // realtime preview
+            $($scope.vm.element).find('.markdown-body').empty().append(_value); // realtime preview
             mermaid.init();
             if(wtEditorConfig.onPreview) {
                 wtEditorConfig.onPreview();
@@ -460,61 +460,6 @@ angular.module("wt-editor")
 
         //同步
         this.setPriviewScroll = function(){
-
-            //
-            //
-            //var _codeRowArray = $scope.value.split('\n');
-            //
-            //
-            //var line_markers = $('.wt-editor-container-preview article > [data-line]');
-            //var lines = []; // 逻辑行
-            //line_markers.each(function () {
-            //    lines.push($(this).data('line'));
-            //});
-            //var pLines = []; // 物理行
-            //var pLine = 0;
-            //for (var i = 0; i < lines[lines.length - 1]; i++) {
-            //    if ($.inArray(i + 1, lines) !== -1) {
-            //        pLines.push(pLine);
-            //    }
-            //    pLine += _codeRowArray[i] // 因为有wrap，所以行高未必是1
-            //}
-            //var currentLine = $('#wtEditorObj').scrollTop() / 18; // 当前滚动到的物理行
-            //var lastMarker = false;
-            //var nextMarker = false;
-            //for (var i = 0; i < pLines.length; i++) {
-            //    if (pLines[i] < currentLine) {
-            //        lastMarker = i;
-            //    } else {
-            //        nextMarker = i;
-            //        break;
-            //    }
-            //} // 当前滚动到了哪两个marker中间
-            //var lastLine = 0;
-            //var nextLine = 0 - 1; // 最后一个物理行的顶部，所以 -1
-            //if (lastMarker !== false) {
-            //    lastLine = pLines[lastMarker];
-            //}
-            //if (nextMarker !== false) {
-            //    nextLine = pLines[nextMarker];
-            //} // 前后两个marker的物理行
-            //var percentage = 0;
-            //if (nextLine !== lastLine) { // 行首的情况下可能相等，0 不能作为除数
-            //    percentage = (currentLine - lastLine) / (nextLine - lastLine);
-            //} // 当前位置在两个marker之间所处的百分比
-            //return {lastMarker: lines[lastMarker], nextMarker: lines[nextMarker], percentage: percentage};
-            //// 返回的是前后两个marker对应的逻辑行，以及当前位置在前后两个marker之间所处的百分比
-
-
-
-
-            if(wtEditorConfig.isPreview){
-                var _codeh = $('#wtEditorObj')[0].scrollHeight;
-                var _prev = $('.wt-editor-container-preview')[0].scrollHeight;
-                var _ff = _codeh/_prev;
-                var _ll = $('#wtEditorObj').scrollTop();
-                $('.wt-editor-container-preview').scrollTop(_ll/_ff);
-            }
         }
 
 
@@ -531,6 +476,7 @@ angular.module("wt-editor")
             templateUrl: "wt-editor/editor.html",
             link       : function (scope, element, attrs, controller) {
                 var vm = scope.vm = {
+                    element   : element,
                     value     : scope.value, //默认显示的内容
                     emojiValue: '', //插入表情代码
                     faValue   : '',
@@ -683,7 +629,7 @@ angular.module("wt-editor")
                 vm.isFullButton = wtEditorConfig.isFullButton;
                 vm.isFullscreen = wtEditorConfig.isFullscreen;
 
-                vm.editor = document.getElementById('wtEditorObj');
+                vm.editor = $(element).find('.wt-editor-textarea')[0];// document.getElementById('wtEditorObj');
 
                 //插入方法
                 function insert (flag,title,sel){
@@ -1144,7 +1090,7 @@ angular.module("wt-editor")
                     });
                 });
                 $timeout(function(){
-                    vm.editorHeight.height = ($('.wt-editor-container-code').height())+'px';
+                    vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height())+'px';
                 },128);
             }
         };
