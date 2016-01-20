@@ -491,6 +491,9 @@ angular.module("wt-editor")
                     className : scope.config.className
                 };
                 //继承设置
+                wtEditorConfig.replaceButtons = [];
+                wtEditorConfig.additionalButtons = [];
+                wtEditorConfig.hideButtons = [];
                 angular.extend(wtEditorConfig, scope.config);
                 if (wtEditorConfig.type === 'simple') {
                     vm.toolbars = _.union(
@@ -952,6 +955,11 @@ angular.module("wt-editor")
 
                     });
                 });
+                $(window).on('resize', _.throttle(function () {
+                    $timeout(function () {
+                        vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height())+'px';
+                    }, 50);
+                }, 150));
                 $timeout(function(){
                     vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height())+'px';
                 },128);
