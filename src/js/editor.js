@@ -909,30 +909,32 @@ angular.module("wt-editor")
         function () {
             //初始化甘特图
             this.initGantt = function () {
-                mermaid.parseError = function (err, hash) {
-                    mermaid.error = err;
-                };
-                mermaid.ganttConfig = {
-                    // Configuration for Gantt diagrams
-                    numberSectionStyles: 4,
-                    axisFormatter      : [
-                        ["%I:%M", function (d) { // Within a day
-                            return d.getHours();
-                        }],
-                        ["w. %U", function (d) { // Monday a week
-                            return d.getDay() == 1;
-                        }],
-                        ["%a %d", function (d) { // Day within a week (not monday)
-                            return d.getDay() && d.getDate() != 1;
-                        }],
-                        ["%b %d", function (d) { // within a month
-                            return d.getDate() != 1;
-                        }],
-                        ["%m-%y", function (d) { // Month
-                            return d.getMonth();
-                        }]
-                    ]
-                };
+                if(window.mermaid){
+                    mermaid.parseError = function (err, hash) {
+                        mermaid.error = err;
+                    };
+                    mermaid.ganttConfig = {
+                        // Configuration for Gantt diagrams
+                        numberSectionStyles: 4,
+                        axisFormatter      : [
+                            ["%I:%M", function (d) { // Within a day
+                                return d.getHours();
+                            }],
+                            ["w. %U", function (d) { // Monday a week
+                                return d.getDay() == 1;
+                            }],
+                            ["%a %d", function (d) { // Day within a week (not monday)
+                                return d.getDay() && d.getDate() != 1;
+                            }],
+                            ["%b %d", function (d) { // within a month
+                                return d.getDate() != 1;
+                            }],
+                            ["%m-%y", function (d) { // Month
+                                return d.getMonth();
+                            }]
+                        ]
+                    };
+                }
             };
 
             //初始解析器
@@ -982,10 +984,10 @@ angular.module("wt-editor")
                         if (firstLine === 'sequenceDiagram') {
                             code += '\n'; // 如果末尾没有空行，则语法错误
                         }
-                        if (mermaid.parse(code)) {
+                        if (window.mermaid && mermaid.parse(code)) {
                             return '<div class="mermaid" data-line="' + line_number + '">' + code + '</div>';
                         } else {
-                            if(mermaid.error){
+                            if(window.mermaid && mermaid.error){
                                 return '<pre data-line="' + line_number + '">' + mermaid.error + '</pre>';
                             }
                         }
@@ -1021,7 +1023,9 @@ angular.module("wt-editor")
             };
 
             this.parseMermaid = function(){
-                mermaid.init();
+                if(window.mermaid){
+                    mermaid.init();
+                }
             };
 
         }]);
