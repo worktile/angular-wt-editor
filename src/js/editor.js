@@ -612,7 +612,7 @@ angular.module("wt-editor")
                 //插入方法
                 function insert (flag,title,sel,keepSelection,search,replace){
                     //有序列表和无序列表选择统一添加
-                    if(keepSelection && search && replace){
+                    if(sel.text.indexOf('\n')!=-1 && keepSelection && search && replace){
                         if(sel.text.length>0){
                             sel = controller[0].getSelection();
                         }
@@ -637,8 +637,17 @@ angular.module("wt-editor")
                     switch(param) {
                         case "bold":
                             if (controller[0].hasSelection()) {
-                                controller[0].insertText(" **" + sel.text + "** ", sel.start, sel.end);
-                                controller[0].setFocus(sel.start,sel.start+6+sel.text.length);
+                                if(sel.text.indexOf('\n')!=-1) {
+                                        sel = controller[0].getSelection();
+                                    var replaceStr = sel.text.replace(/([^\n]+)([\n\s]*)/g, "**$1**$2");
+                                    var ss = controller[0].getRowText(sel.start);
+                                    controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
+                                    controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
+                                }else{
+                                    controller[0].insertText(" **" + sel.text + "** ", sel.start, sel.end);
+                                    controller[0].setFocus(sel.start,sel.start+6+sel.text.length);
+                                }
+
                             } else {
                                 var ss = controller[0].getRowText(sel.start);
                                 if(ss.length>0) {
@@ -652,8 +661,16 @@ angular.module("wt-editor")
                             break;
                         case "italic":
                             if (controller[0].hasSelection()) {
-                                controller[0].insertText(" _" + sel.text + "_ ", sel.start, sel.end);
-                                controller[0].setFocus(sel.start,sel.start+4+sel.text.length);
+                                if(sel.text.indexOf('\n')!=-1) {
+                                    sel = controller[0].getSelection();
+                                    var replaceStr = sel.text.replace(/([^\n]+)([\n\s]*)/g, "_$1_$2");
+                                    var ss = controller[0].getRowText(sel.start);
+                                    controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
+                                    controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
+                                }else {
+                                    controller[0].insertText(" _" + sel.text + "_ ", sel.start, sel.end);
+                                    controller[0].setFocus(sel.start, sel.start + 4 + sel.text.length);
+                                }
                             } else {
                                 var ss = controller[0].getRowText(sel.start);
                                 if(ss.length>0) {
@@ -667,8 +684,16 @@ angular.module("wt-editor")
                             break;
                         case "underline":
                             if (controller[0].hasSelection()) {
-                                controller[0].insertText("<u>" + sel.text + "</u>", sel.start, sel.end);
-                                controller[0].setFocus(sel.start,sel.start+7+sel.text.length);
+                                if(sel.text.indexOf('\n')!=-1) {
+                                    sel = controller[0].getSelection();
+                                    var replaceStr = sel.text.replace(/([^\n]+)([\n\s]*)/g, "<u>$1</u>$2");
+                                    var ss = controller[0].getRowText(sel.start);
+                                    controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
+                                    controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
+                                }else {
+                                    controller[0].insertText("<u>" + sel.text + "</u>", sel.start, sel.end);
+                                    controller[0].setFocus(sel.start, sel.start + 7 + sel.text.length);
+                                }
                             } else {
                                 controller[0].insertText("<u></u>",sel.start, sel.end, 3, 4);
                                 controller[0].setFocus(sel.start+3,sel.start+3);
@@ -676,8 +701,16 @@ angular.module("wt-editor")
                             break;
                         case "strikethrough":
                             if (controller[0].hasSelection()) {
-                                controller[0].insertText(" ~~" + sel.text + "~~ ", sel.start, sel.end);
-                                controller[0].setFocus(sel.start,sel.start+6+sel.text.length);
+                                if(sel.text.indexOf('\n')!=-1) {
+                                    sel = controller[0].getSelection();
+                                    var replaceStr = sel.text.replace(/([^\n]+)([\n\s]*)/g, " ~~$1~~ $2");
+                                    var ss = controller[0].getRowText(sel.start);
+                                    controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
+                                    controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
+                                }else {
+                                    controller[0].insertText(" ~~" + sel.text + "~~ ", sel.start, sel.end);
+                                    controller[0].setFocus(sel.start, sel.start + 6 + sel.text.length);
+                                }
                             } else {
                                 var ss = controller[0].getRowText(sel.start);
                                 if(ss.length>0) {
@@ -690,27 +723,27 @@ angular.module("wt-editor")
                             }
                             break;
                         case "h1":
-                            insert("#","标题1",sel);
+                            insert("#","标题1",sel,true,/(.+)([\n]?)/g,"\n# $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h2":
-                            insert("##","标题2",sel);
+                            insert("##","标题2",sel,true,/(.+)([\n]?)/g,"\n## $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h3":
-                            insert("###","标题3",sel);
+                            insert("###","标题3",sel,true,/(.+)([\n]?)/g,"\n### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h4":
-                            insert("####","标题4",sel);
+                            insert("####","标题4",sel,true,/(.+)([\n]?)/g,"\n#### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h5":
-                            insert("#####","标题5",sel);
+                            insert("#####","标题5",sel,true,/(.+)([\n]?)/g,"\n##### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h6":
-                            insert("######","标题6",sel);
+                            insert("######","标题6",sel,true,/(.+)([\n]?)/g,"\n###### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "hr":
@@ -722,7 +755,7 @@ angular.module("wt-editor")
                             controller[0].setFocus(sel.start+5,sel.start+5);
                             break;
                         case "quote":
-                            insert(">","引用",sel);
+                            insert(">","引用",sel,true, /(.+)([\n]?)/g,"\n> $1$2");
                             break;
                         case "list":
                             insert("-","列表",sel,true,/(.+)([\n]?)/g,'\n- $1$2');
@@ -732,10 +765,10 @@ angular.module("wt-editor")
                             break;
 
                         case "square":
-                            insert("- [ ] ","",sel);
+                            insert("- [ ] ","",sel,true,/(.+)([\n]?)/g,"- [ ] $1$2");
                             break;
                         case "check-square":
-                            insert("- [x] ","",sel);
+                            insert("- [x] ","",sel,true,/(.+)([\n]?)/g,"- [x] $1$2");
                             break;
 
                         case "link":
