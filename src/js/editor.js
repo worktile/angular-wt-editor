@@ -384,7 +384,7 @@ angular.module("wt-editor")
 
         //获取选择内容
         this.getSelection = function() {
-            var ta = $scope.vm.editor;;
+            var ta = $scope.vm.editor;
             return {
                 target: ta,
                 start: ta.selectionStart,
@@ -607,17 +607,28 @@ angular.module("wt-editor")
                 vm.isFullButton = wtEditorConfig.isFullButton;
                 vm.isFullscreen = wtEditorConfig.isFullscreen;
 
-                vm.editor = $(element).find('.wt-editor-textarea')[0];// document.getElementById('wtEditorObj');
+                vm.editor = $(element).find('.wt-editor-textarea')[0];
 
                 //插入方法
-                function insert (flag,title,sel){
-                    if(sel.text.length>0){
-                        controller[0].clearSelection();
-                        sel = controller[0].getSelection();
+                function insert (flag,title,sel,keepSelection,search,replace){
+                    //有序列表和无序列表选择统一添加
+                    if(keepSelection && search && replace){
+                        if(sel.text.length>0){
+                            sel = controller[0].getSelection();
+                        }
+                        var replaceStr = sel.text.replace(search, replace);
+                        var ss = controller[0].getRowText(sel.start);
+                        controller[0].insertText(replaceStr,sel.start-ss.length, sel.end);
+                        controller[0].setFocus(sel.start+replaceStr.length,sel.start+replaceStr.length);
+                    }else {
+                        if(sel.text.length>0){
+                            controller[0].clearSelection();
+                            sel = controller[0].getSelection();
+                        }
+                        var ss = controller[0].getRowText(sel.start);
+                        controller[0].insertText(flag+' '+ss,sel.start-ss.length, sel.end);
+                        controller[0].setFocus(sel.start+flag.length+1,sel.start+flag.length+1);
                     }
-                    var ss = controller[0].getRowText(sel.start);
-                    controller[0].insertText(flag+' '+ss,sel.start-ss.length, sel.end);
-                    controller[0].setFocus(sel.start+flag.length+1,sel.start+flag.length+1);
                 }
 
                 //插入markdown
@@ -714,10 +725,10 @@ angular.module("wt-editor")
                             insert(">","引用",sel);
                             break;
                         case "list":
-                            insert("-","列表",sel);
+                            insert("-","列表",sel,true,/(.+)([\n]?)/g,'\n- $1$2');
                             break;
                         case "list-2":
-                            insert("1.","列表",sel);
+                            insert("1.","列表",sel,true,/(.+)([\n]?)/g,"\n1. $1$2");
                             break;
 
                         case "square":
@@ -766,10 +777,6 @@ angular.module("wt-editor")
                             }
                             break;
                         case "table":
-                            //var sample = $($event.target).data('sample');
-                            //var sample = " 列名 1 | 列名 2 \n ---|---\n 第一行第一列 | 第一行第二列\n 第二行第一列 | 第二行第二列";
-
-
                             vm.table_action = true
                             break;
                         case "math":
