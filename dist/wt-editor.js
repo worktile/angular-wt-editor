@@ -188,13 +188,15 @@ angular.module("wt-editor")
             type     : 'mathFn',
             name     : 'math'
         }],
-        mermaidToolbar   : [{
-            id       : 23,
-            title    : '流程图',
-            className: 'fa fa-long-arrow-right',
-            type     : 'flowchart',
-            name     : 'flow'
-        }, {
+        mermaidToolbar   : [
+        //    {
+        //    id       : 23,
+        //    title    : '流程图',
+        //    className: 'fa fa-long-arrow-right',
+        //    type     : 'flowchart',
+        //    name     : 'flow'
+        //},
+            {
             id       : 24,
             title    : '顺序图',
             className: 'fa fa-exchange',
