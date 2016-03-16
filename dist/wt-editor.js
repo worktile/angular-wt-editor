@@ -16,212 +16,235 @@ angular.module("wt-editor")
         height           : '100%',  //高度
         isFullscreen     : false, //默认是否全屏显示
         isFullButton     : true, //是否显示最大化按钮
-        type             : 'simple', //toolbar按钮显示的类型 ［simple:简易, all:全部按钮］
-        hToolbars        : [{
-            id       : 0,
-            title    : '标题',
-            className: 'fa fa-header',
-            type     : 'headingFns'
-        }],
-        styleToolBar     : [{
-            id       : 1,
-            title    : '粗体',
-            className: 'fa fa-bold',
-            modifier : '**',
-            type     : 'styleFn',
-            name     : 'bold'
-        }, {
-            id       : 2,
-            title    : '斜体',
-            className: 'fa fa-italic',
-            modifier : '*',
-            type     : 'styleFn',
-            name     : 'italic'
-        },{
-            id       : 2,
-            title    : '下划线',
-            className: 'fa fa-underline',
-            modifier : 'u',
-            type     : 'styleFn',
-            name     : 'underline'
-        },{
-            id       : 3,
-            title    : '删除线',
-            className: 'fa fa-strikethrough',
-            modifier : '~~',
-            type     : 'styleFn',
-            name     : 'strikethrough'
-        }],
-        hToolbar         : [{
-            id       : 4,
-            title    : '标题 1',
-            className: 'h1',
-            level    : '1',
-            type     : 'headingFn',
-            name     : 'h1'
-        }, {
-            id       : 5,
-            title    : '标题 2',
-            className: 'h2',
-            level    : '2',
-            type     : 'headingFn',
-            name     : 'h2'
-        }, {
-            id       : 6,
-            title    : '标题 3',
-            className: 'h3',
-            level    : '3',
-            type     : 'headingFn',
-            name     : 'h3'
-        }, {
-            id       : 7,
-            title    : '标题 4',
-            className: 'h4',
-            level    : '4',
-            type     : 'headingFn',
-            name     : 'h4'
-        }, {
-            id       : 8,
-            title    : '标题 5',
-            className: 'h5',
-            level    : '5',
-            type     : 'headingFn',
-            name     : 'h5'
-        }, {
-            id       : 9,
-            title    : '标题 6',
-            className: 'h6',
-            level    : '6',
-            type     : 'headingFn',
-            name     : 'h6'
-        }],
-        horizonToolbar   : [{
-            id       : 10,
-            title    : '横线',
-            className: 'fa fa-minus',
-            type     : 'styleFn',
-            name     : 'hr'
-        }],
-        listToolbar      : [{
-            id       : 11,
-            title    : '引用',
-            className: 'fa fa-quote-left',
-            prefix   : '> ',
-            type     : 'styleFn',
-            name     : 'quote'
-        }, {
-            id       : 12,
-            title    : '无序列表',
-            className: 'fa fa-list-ul',
-            prefix   : '- ',
-            type     : 'styleFn',
-            name     : 'list'
-        }, {
-            id       : 13,
-            title    : '有序列表',
-            className: 'fa fa-list-ol',
-            prefix   : '1. ',
-            type     : 'styleFn',
-            name     : 'list-2'
-        }, {
-            id       : 14,
-            title    : '未完成任务列表',
-            className: 'fa fa-square-o',
-            prefix   : '- [ ] ',
-            type     : 'styleFn',
-            name     : 'square'
-        }, {
-            id       : 15,
-            title    : '已完成任务列表',
-            className: 'fa fa-check-square-o',
-            prefix   : '- [x] ',
-            type     : 'styleFn',
-            name     : 'check-square'
-        }],
-        linkToolbar      : [{
-            id       : 16,
-            title    : '链接',
-            className: 'fa fa-link',
-            text     : '链接文字',
-            url      : 'http://example.com',
-            type     : 'styleFn',
-            name     : 'link'
-        }, {
-            id       : 17,
-            title    : '图片描述',
-            className: 'fa fa-image',
-            text     : '图片描述',
-            url      : 'http://example.com/example.png',
-            type     : 'styleFn',
-            name     : 'image'
-        }, {
-            id       : 18,
-            title    : '代码',
-            className: 'fa fa-code',
-            type     : 'styleFn',
-            name     : 'code'
-        }, {
-            id       : 19,
-            title    : '表格',
-            className: 'fa fa-table',
-            type     : 'tableFn',
-            name     : 'table'
-        }],
-        iconToolbar      : [{
-            id       : 20,
-            title    : 'Emoji 图标',
-            className: 'fa fa-smile-o',
-            target   : 'emoji-modal',
-            type     : 'emoji'
-        }, {
-            id       : 21,
-            title    : 'Font Awesome 图标',
-            className: 'fa fa fa-flag-o',
-            target   : 'fa-modal',
-            type     : 'emoji'
-        }],
-        mathToolbar      : [{
-            id       : 22,
-            title    : '数学公式',
-            className: 'fa fa-superscript',
-            sample   : 'E = mc^2',
-            type     : 'mathFn',
-            name     : 'math'
-        }],
-        mermaidToolbar   : [
-        //    {
-        //    id       : 23,
-        //    title    : '流程图',
-        //    className: 'fa fa-long-arrow-right',
-        //    type     : 'flowchart',
-        //    name     : 'flow'
-        //},
-            {
-            id       : 24,
-            title    : '顺序图',
-            className: 'fa fa-exchange',
-            type     : 'diagram',
-            name     : 'diagram'
-        }, {
-            id       : 25,
-            title    : '甘特图',
-            className: 'fa fa-sliders',
-            type     : 'gantt',
-            name     : 'gantt'
-        }],
-        expandToolbar    : [{
-            id       : 27,
-            title    : '预览',
-            className: 'fa fa-columns',
-            type     : 'preview'
-        }, {
-            id       : 28,
-            title    : '最大化',
-            title2    : '还原',
-            className: 'fa fa-expand',
-            type     : 'expand'
-        }],
-        dividorToolbar   : [{type: 'dividor'}],
+        type             : 'all', //toolbar按钮显示的类型 ［simple:简易, all:全部按钮］
+        typeArray      : {
+            hs         : ['h1','h2','h3','h4','h5','h6'],
+            simple     : ['bold','italic','link','divider','hr','quote','list','list-2'],
+            complex    : ['heading','bold','italic','underline','strikethrough','divider','hr','quote','list','list-2','square','check-square','divider','link','image','code','table','divider','math','diagram','gantt','divider','preview'],
+            all        : ['heading','bold','italic','underline','strikethrough','divider','hr','quote','list','list-2','square','check-square','divider','link','image','code','table','divider','math','diagram','gantt','divider','preview','expand']
+        },
+        allButtons       : {
+            "heading":{
+                id       : 0,
+                title    : '标题',
+                className: 'fa fa-header',
+                type     : 'headingFns',
+                name     : 'heading'
+            },
+            "bold"   :{
+                id       : 1,
+                title    : '粗体',
+                className: 'fa fa-bold',
+                modifier : '**',
+                type     : 'styleFn',
+                name     : 'bold'
+            },
+            "italic":{
+                id       : 2,
+                title    : '斜体',
+                className: 'fa fa-italic',
+                modifier : '*',
+                type     : 'styleFn',
+                name     : 'italic'
+            },
+            "underline":{
+                id       : 3,
+                title    : '下划线',
+                className: 'fa fa-underline',
+                modifier : 'u',
+                type     : 'styleFn',
+                name     : 'underline'
+            },
+            "strikethrough":{
+                id       : 4,
+                title    : '删除线',
+                className: 'fa fa-strikethrough',
+                modifier : '~~',
+                type     : 'styleFn',
+                name     : 'strikethrough'
+            },
+            "h1":{
+                id       : 5,
+                title    : '标题 1',
+                className: 'h1',
+                level    : '1',
+                type     : 'headingFn',
+                name     : 'h1'
+            },
+            "h2":{
+                id       : 6,
+                title    : '标题 2',
+                className: 'h2',
+                level    : '2',
+                type     : 'headingFn',
+                name     : 'h2'
+            },
+            "h3":{
+                id       : 7,
+                title    : '标题 3',
+                className: 'h3',
+                level    : '3',
+                type     : 'headingFn',
+                name     : 'h3'
+            },
+            "h4":{
+                id       : 8,
+                title    : '标题 4',
+                className: 'h4',
+                level    : '4',
+                type     : 'headingFn',
+                name     : 'h4'
+            },
+            "h5":{
+                id       : 9,
+                title    : '标题 5',
+                className: 'h5',
+                level    : '5',
+                type     : 'headingFn',
+                name     : 'h5'
+            },
+            "h6":{
+                id       : 10,
+                title    : '标题 6',
+                className: 'h6',
+                level    : '6',
+                type     : 'headingFn',
+                name     : 'h6'
+            },
+            "hr":{
+                id       : 11,
+                title    : '横线',
+                className: 'fa fa-minus',
+                type     : 'styleFn',
+                name     : 'hr'
+            },
+            "quote":{
+                id       : 12,
+                title    : '引用',
+                className: 'fa fa-quote-left',
+                prefix   : '> ',
+                type     : 'styleFn',
+                name     : 'quote'
+            },
+            "list":{
+                id       : 13,
+                title    : '无序列表',
+                className: 'fa fa-list-ul',
+                prefix   : '- ',
+                type     : 'styleFn',
+                name     : 'list'
+            },
+            "list-2":{
+                id       : 14,
+                title    : '有序列表',
+                className: 'fa fa-list-ol',
+                prefix   : '1. ',
+                type     : 'styleFn',
+                name     : 'list-2'
+            },
+            "square":{
+                id       : 15,
+                title    : '未完成任务列表',
+                className: 'fa fa-square-o',
+                prefix   : '- [ ] ',
+                type     : 'styleFn',
+                name     : 'square'
+            },
+            "check-square":{
+                id       : 16,
+                title    : '已完成任务列表',
+                className: 'fa fa-check-square-o',
+                prefix   : '- [x] ',
+                type     : 'styleFn',
+                name     : 'check-square'
+            },
+            "link":{
+                id       : 17,
+                title    : '链接',
+                className: 'fa fa-link',
+                text     : '链接文字',
+                url      : 'http://example.com',
+                type     : 'styleFn',
+                name     : 'link'
+            },
+            "image":{
+                id       : 18,
+                title    : '图片描述',
+                className: 'fa fa-image',
+                text     : '图片描述',
+                url      : 'http://example.com/example.png',
+                type     : 'styleFn',
+                name     : 'image'
+            },
+            "code":{
+                id       : 19,
+                title    : '代码',
+                className: 'fa fa-code',
+                type     : 'styleFn',
+                name     : 'code'
+            },
+            "table":{
+                id       : 20,
+                title    : '表格',
+                className: 'fa fa-table',
+                type     : 'tableFn',
+                name     : 'table'
+            },
+            "emoji":{
+                id       : 21,
+                title    : 'Emoji 图标',
+                className: 'fa fa-smile-o',
+                target   : 'emoji-modal',
+                type     : 'emoji'
+            },
+            "math":{
+                id       : 22,
+                title    : '数学公式',
+                className: 'fa fa-superscript',
+                sample   : 'E = mc^2',
+                type     : 'mathFn',
+                name     : 'math'
+            },
+            "flow":{
+                id       : 23,
+                title    : '流程图',
+                className: 'fa fa-long-arrow-right',
+                type     : 'flowchart',
+                name     : 'flow'
+            },
+            "diagram":{
+                id       : 24,
+                title    : '顺序图',
+                className: 'fa fa-exchange',
+                type     : 'diagram',
+                name     : 'diagram'
+            },
+            "gantt":{
+                id       : 25,
+                title    : '甘特图',
+                className: 'fa fa-sliders',
+                type     : 'gantt',
+                name     : 'gantt'
+            },
+            "preview":{
+                id       : 27,
+                title    : '预览',
+                className: 'fa fa-columns',
+                type     : 'preview'
+            },
+            "expand":{
+                id       : 28,
+                title    : '最大化',
+                title2    : '还原',
+                className: 'fa fa-expand',
+                type     : 'expand'
+            },
+            "divider":{
+                id  :parseInt(Math.random()*1000000),
+                type:'divider'
+            }
+        },
+        extendButtons    : {}, //初始化扩展的图标
         hideButtons      : [],//要不显示的图标[]
         additionalButtons: [],//扩展的图标 {title:'扩展',className:'fa fa-music',type:'custom',action:musicFn,before:2}
         replaceButtons   : [],//替换默认的图标 {title:'插入图片',className:'fa fa-file-image-o',type:'custom',action:imageFn,id:17}
@@ -359,9 +382,20 @@ angular.module("wt-editor")
         this.setPriviewScroll = function(){
         }
 
+        //插入内容
+        this.insertContent = function(content){
+            var sel = this.getSelection();
+            this.insertText(content, sel.start, sel.end);
+            $scope.vm.editor.focus();
+        }
+        //获取内容
+        this.getContent = function(){
+            return $scope.vm.editor.value;
+        }
+
 
     }])
-    .directive("wtEditor", ['wtEditorConfig', '$timeout', function (wtEditorConfig, $timeout) {
+    .directive("wtEditor", ['wtEditorConfig', '$timeout','$compile','$rootScope','$controller', function (wtEditorConfig, $timeout, $compile, $rootScope, $controller) {
         return {
             require    : ["wtEditor", 'ngModel'],
             replace    : true,
@@ -378,6 +412,7 @@ angular.module("wt-editor")
                     emojiValue: '', //插入表情代码
                     faValue   : '',
                     toolbars  : [],
+                    headers   : [],
                     editorHeight    : {},
                     editorContainerCode:{},
                     header_action : false,
@@ -398,78 +433,21 @@ angular.module("wt-editor")
                 wtEditorConfig.additionalButtons = [];
                 wtEditorConfig.hideButtons = [];
                 angular.extend(wtEditorConfig, scope.config);
-                if (wtEditorConfig.type === 'simple') {
-                    vm.toolbars = _.union(
-                        [{
-                            id       : 1,
-                            title    : '粗体',
-                            className: 'fa fa-bold',
-                            modifier : '**',
-                            type     : 'styleFn',
-                            name     : 'bold'
-                        }, {
-                            id       : 2,
-                            title    : '斜体',
-                            className: 'fa fa-italic',
-                            modifier : '*',
-                            type     : 'styleFn',
-                            name     : 'italic'
-                        }],[{
-                            id       : 16,
-                            title    : '链接',
-                            className: 'fa fa-link',
-                            text     : '链接文字',
-                            url      : 'http://example.com',
-                            type     : 'styleFn',
-                            name     : 'link'
-                        }], [{id:'d1',type: 'dividor'}],
-                        wtEditorConfig.horizonToolbar,
-                        [{
-                            id       : 11,
-                            title    : '引用',
-                            className: 'fa fa-quote-left',
-                            prefix   : '> ',
-                            type     : 'styleFn',
-                            name     : 'quote'
-                        }, {
-                            id       : 12,
-                            title    : '无序列表',
-                            className: 'fa fa-list-ul',
-                            prefix   : '- ',
-                            type     : 'styleFn',
-                            name     : 'list'
-                        }, {
-                            id       : 13,
-                            title    : '有序列表',
-                            className: 'fa fa-list-ol',
-                            prefix   : '1. ',
-                            type     : 'styleFn',
-                            name     : 'list-2'
-                        }]);
-                }else if(wtEditorConfig.type === 'complex'){
-                    vm.toolbars = _.union(
-                        wtEditorConfig.hToolbars,
-                        wtEditorConfig.styleToolBar, [{id:'d1',type: 'dividor'}],
-                        //wtEditorConfig.hToolbar, [{id:'d2',type: 'dividor'}],
-                        wtEditorConfig.horizonToolbar,
-                        wtEditorConfig.listToolbar, [{id:'d3',type: 'dividor'}],
-                        wtEditorConfig.linkToolbar, [{id:'d4',type: 'dividor'}],
-                        wtEditorConfig.expandToolbar);
-                }else if (wtEditorConfig.type === 'all') {
-                    vm.toolbars = _.union(
-                        wtEditorConfig.hToolbars,
-                        wtEditorConfig.styleToolBar, [{id:'d1',type: 'dividor'}],
-                        //wtEditorConfig.hToolbar, [{id:'d2',type: 'dividor'}],
-                        wtEditorConfig.horizonToolbar,
-                        wtEditorConfig.listToolbar, [{id:'d3',type: 'dividor'}],
-                        wtEditorConfig.linkToolbar, [{id:'d4',type: 'dividor'}],
-                        //wtEditorConfig.iconToolbar, [{id:'d5',type: 'dividor'}],
-                        wtEditorConfig.mathToolbar,
-                        wtEditorConfig.mermaidToolbar, [{id:'d6',type: 'dividor'}],
-                        wtEditorConfig.expandToolbar);
-                }
 
-                vm.headers = wtEditorConfig.hToolbar;
+                $(wtEditorConfig.typeArray[wtEditorConfig.type]).each(function (index,value) {
+                    var _tempBtn = wtEditorConfig.allButtons[value];
+                    if(!_tempBtn){
+                        _tempBtn = wtEditorConfig.extendButtons[value];
+                    }
+                    if(_tempBtn){
+                        vm.toolbars[vm.toolbars.length] = _tempBtn;
+                    }
+                });
+
+                _(wtEditorConfig.typeArray['hs']).forEach(function(value) {
+                    var _temph = wtEditorConfig.allButtons[value];
+                    vm.headers[vm.headers.length] = _temph;
+                });
 
                 //隐藏个性化按钮
                 _.remove(vm.toolbars, function (n) {
@@ -806,16 +784,6 @@ angular.module("wt-editor")
                         vm.faValue = '';
                     }
                 }
-                //插入内容
-                vm.insertContent = function(content){
-                    var sel = controller[0].getSelection();
-                    controller[0].insertText(content, sel.start, sel.end);
-                    vm.editor.focus();
-                }
-                //获取内容
-                vm.getContent = function(){
-                    return vm.editor.value;
-                }
                 //监控modal变化
                 scope.$watch('value', function(newValue, oldValue) {
                     var __value = vm.editor.value;
@@ -833,6 +801,8 @@ angular.module("wt-editor")
                 if(wtEditorConfig.onShow){
                     wtEditorConfig.onShow();
                 }
+
+
 
                 //设置header bg
                 vm.setHeaderLi = function(id){
@@ -904,13 +874,28 @@ angular.module("wt-editor")
                     }, 50);
                 }, 150));
                 $timeout(function(){
+                    _.forEach(wtEditorConfig.extendButtons, function(obj, key) {
+                        var _dom = $(element).find("[name="+obj.name+"]");
+                        if(_dom.size()>0){
+                            //_dom.html(obj.template);
+                            var _scope = _dom.scope().$new();
+                            if (obj.controller) {
+                                var ctrlLocals = {};
+                                ctrlLocals.$scope = _scope;
+                                ctrlLocals.editorInstance = controller[0];
+                                $controller(obj.controller, ctrlLocals);
+                                _dom.html($compile(obj.template)(_scope));
+
+                            }
+                        }
+                    });
                     vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height())+'px';
                 },128);
             }
         };
     }])
-    .service("wtEditorService", [
-        function () {
+    .service("wtEditorService", ["wtEditorConfig",
+        function (wtEditorConfig) {
             //初始化甘特图
             this.initGantt = function () {
                 if(window.mermaid){
@@ -1031,6 +1016,28 @@ angular.module("wt-editor")
                     mermaid.init();
                 }
             };
+            /**
+             * param:json array
+             *[{
+                    "template":{
+                        type:'template',
+                        template:'<div>ww</div>',
+                        controller:[function(){
+                        }]
+                    }
+                }];
+             * **/
+            this.setEditorExtendButtons = function(json){
+                if(json){
+                    wtEditorConfig.extendButtons = json;
+                }
+            };
+
+            this.setEditorTypes = function(json){
+                if(json){
+                    angular.extend(wtEditorConfig.typeArray, json);
+                }
+            };
 
         }]);
-angular.module("wt.editor.tpl", []).run(["$templateCache", function($templateCache) {$templateCache.put("wt-editor/editor.html","<div class=\"wt-editor {{vm.className}}\" ng-class=\"{true: \'wt-editor-full-screen\', false: \'\'}[vm.isFullscreen]\">\r    <div class=\"wt-editor-toobar\">\r        <div class=\"noselect\">\r            <ul class=\"wtEditorToolBarUl\">\r                <li class=\"wtEditorToolBarli\" ng-repeat=\"item in vm.toolbars\" ng-class=\"(item.id == 0 && vm.header_action)?\'active\':\'\'\">\r                    <!--自定义toolbar-->\r                    <i ng-if=\"item.type === \'custom\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"item.action($event,vm)\"></i>\r\r                    <i ng-if=\"item.type === \'headingFns\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.setHeaderLi(item.id)\"></i>\r\r                    <div ng-if=\"item.type === \'headingFns\'\" ng-show=\"vm.header_action\" class=\"toolbar-menu\" flag=\"h\">\r                        <ul flag=\"h\">\r                            <li ng-repeat=\"n in vm.headers\" ng-class=\"n.className\" ng-click=\"vm.styleFn(n.name,$event)\" flag=\"h\">\r                                {{n.title}}\r                            </li>\r                        </ul>\r                    </div>\r\r                    <i ng-if=\"item.type === \'styleFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <!--<i ng-if=\"item.type === \'headingFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\">h{{item.level}}</i>-->\r\r                    <i ng-if=\"item.type === \'tableFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"\r                       ng-click=\"vm.styleFn(item.name,$event)\"></i>\r\r\r                    <div ng-if=\"item.type === \'tableFn\'\" ng-show=\"vm.table_action\" class=\"table-menu\" flag=\"table\" ng-mouseleave=\"vm.tableActiveX=1;vm.tableActiveY=1;vm.table_action=false\">\r                        <ul flag=\"table\">\r                            <li flag=\"table\" ng-repeat=\"n in vm.tableMenu\">\r                                <i ng-repeat=\"s in n\" flag=\"table\" ng-click=\"vm.insertTable()\" ng-mouseenter=\"vm.setTableMemu(s[0],s[1])\" ng-mouseleave=\"\" ng-class=\"{true: \'active\', false: \'\'}[s[0]<=vm.tableActiveX && s[1] <= vm.tableActiveY]\"></i>\r                            </li>\r                        </ul>\r                    </div>\r\r\r                    <i ng-if=\"item.type === \'emoji\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r\r                    <i ng-if=\"item.type === \'mathFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-sample=\"E = mc^2\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'flowchart\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"graph LR\rA-->B\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'diagram\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"sequenceDiagram\rA->>B: 你好吗?\rB->>A: 我很好!\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'gantt\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"gantt\rdateFormat YYYY-MM-DD\rsection S1\rT1: 2014-01-01, 9d\rsection S2\rT2: 2014-01-11, 9d\rsection S3\rT3: 2014-01-02, 9d\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'help\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r                    <i ng-if=\"item.type === \'preview\' && vm.isPreviewButton\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.togglePreview()\"></i>\r                    <i ng-if=\"item.type === \'expand\' && vm.isFullButton\" title=\"{{vm.isFullscreen?item.title2:item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-class=\"{true: \'fa-compress\', false: \'fa-expand\'}[vm.isFullscreen]\" ng-click=\"vm.toggleFullScreen()\"></i>\r                    <i ng-if=\"item.type === \'dividor\'\" class=\"dividor\"></i>\r                </li>\r            </ul>\r        </div>\r    </div>\r    <div class=\"wt-editor-container\">\r        <div class=\"wt-editor-container-code\" ng-style=\"vm.editorContainerCode\">\r            <textarea  ng-style=\"vm.editorHeight\" placeholder=\"输入内容...\" class=\"wt-editor-textarea\" ng-model=\"value\"></textarea>\r        </div>\r        <div class=\"wt-editor-container-preview\" ng-show=\"vm.isPreview\">\r            <article class=\"markdown-body\" data-open-title=\"Hide Preview\" data-closed-title=\"Show Preview\"></article> <!-- 实时预览 -->\r        </div>\r    </div>\r</div>\r");}]);
+angular.module("wt.editor.tpl", []).run(["$templateCache", function($templateCache) {$templateCache.put("wt-editor/editor.html","<div class=\"wt-editor {{vm.className}}\" ng-class=\"{true: \'wt-editor-full-screen\', false: \'\'}[vm.isFullscreen]\">\r    <div class=\"wt-editor-toobar\">\r        <div class=\"noselect\">\r            <ul class=\"wtEditorToolBarUl\">\r                <li class=\"wtEditorToolBarli\" ng-repeat=\"item in vm.toolbars track by $index\" name=\"{{item.name}}\" ng-class=\"(item.id == 0 && vm.header_action)?\'active\':\'\'\">\r                    <!--自定义toolbar-->\r                    <i ng-if=\"item.type === \'custom\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"item.action($event,vm)\"></i>\r\r                    <i ng-if=\"item.type === \'headingFns\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.setHeaderLi(item.id)\"></i>\r\r                    <div ng-if=\"item.type === \'headingFns\'\" ng-show=\"vm.header_action\" class=\"toolbar-menu\" flag=\"h\">\r                        <ul flag=\"h\">\r                            <li ng-repeat=\"n in vm.headers\" ng-class=\"n.className\" ng-click=\"vm.styleFn(n.name,$event)\" flag=\"h\">\r                                {{n.title}}\r                            </li>\r                        </ul>\r                    </div>\r\r                    <i ng-if=\"item.type === \'styleFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <!--<i ng-if=\"item.type === \'headingFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\">h{{item.level}}</i>-->\r\r                    <i ng-if=\"item.type === \'tableFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"\r                       ng-click=\"vm.styleFn(item.name,$event)\"></i>\r\r\r                    <div ng-if=\"item.type === \'tableFn\'\" ng-show=\"vm.table_action\" class=\"table-menu\" flag=\"table\" ng-mouseleave=\"vm.tableActiveX=1;vm.tableActiveY=1;vm.table_action=false\">\r                        <ul flag=\"table\">\r                            <li flag=\"table\" ng-repeat=\"n in vm.tableMenu\">\r                                <i ng-repeat=\"s in n\" flag=\"table\" ng-click=\"vm.insertTable()\" ng-mouseenter=\"vm.setTableMemu(s[0],s[1])\" ng-mouseleave=\"\" ng-class=\"{true: \'active\', false: \'\'}[s[0]<=vm.tableActiveX && s[1] <= vm.tableActiveY]\"></i>\r                            </li>\r                        </ul>\r                    </div>\r\r\r                    <i ng-if=\"item.type === \'emoji\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r\r                    <i ng-if=\"item.type === \'mathFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-sample=\"E = mc^2\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'flowchart\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"graph LR\rA-->B\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'diagram\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"sequenceDiagram\rA->>B: 你好吗?\rB->>A: 我很好!\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'gantt\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-sample=\"gantt\rdateFormat YYYY-MM-DD\rsection S1\rT1: 2014-01-01, 9d\rsection S2\rT2: 2014-01-11, 9d\rsection S3\rT3: 2014-01-02, 9d\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'help\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r                    <i ng-if=\"item.type === \'preview\' && vm.isPreviewButton\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.togglePreview()\"></i>\r                    <i ng-if=\"item.type === \'expand\' && vm.isFullButton\" title=\"{{vm.isFullscreen?item.title2:item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-class=\"{true: \'fa-compress\', false: \'fa-expand\'}[vm.isFullscreen]\" ng-click=\"vm.toggleFullScreen()\"></i>\r                    <i ng-if=\"item.type === \'divider\'\" class=\"divider\"></i>\r                </li>\r            </ul>\r        </div>\r    </div>\r    <div class=\"wt-editor-container\">\r        <div class=\"wt-editor-container-code\" ng-style=\"vm.editorContainerCode\">\r            <textarea  ng-style=\"vm.editorHeight\" placeholder=\"输入内容...\" class=\"wt-editor-textarea\" ng-model=\"value\"></textarea>\r        </div>\r        <div class=\"wt-editor-container-preview\" ng-show=\"vm.isPreview\">\r            <article class=\"markdown-body\" data-open-title=\"Hide Preview\" data-closed-title=\"Show Preview\"></article> <!-- 实时预览 -->\r        </div>\r    </div>\r</div>\r");}]);
