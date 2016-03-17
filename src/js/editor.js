@@ -19,7 +19,7 @@ angular.module("wt-editor")
             hs     : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
             simple : ['bold', 'italic', 'link', 'divider', 'hr', 'quote', 'list', 'list-2'],
             complex: ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview'],
-            all    : ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview', 'expand']
+            all    : ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview', 'expand','flow']
         },
         allButtons       : {
             "heading"      : {
@@ -167,7 +167,7 @@ angular.module("wt-editor")
             },
             "image"        : {
                 id       : 18,
-                title    : '图片描述',
+                title    : '图片',
                 className: 'fa fa-image',
                 text     : '图片描述',
                 url      : 'http://example.com/example.png',
@@ -246,7 +246,117 @@ angular.module("wt-editor")
         hideButtons      : [],//要不显示的图标[]
         additionalButtons: [],//扩展的图标 {title:'扩展',className:'fa fa-music',type:'custom',action:musicFn,before:2}
         replaceButtons   : [],//替换默认的图标 {title:'插入图片',className:'fa fa-file-image-o',type:'custom',action:imageFn,id:17}
-        language         : [],//国际化设置[未]
+        locale           : 'en-us',//国际化设置[未]
+        language         : {
+            'en-us': {
+                'heading'      : 'H1',
+                'bold'         : 'Bold',
+                'italic'       : 'Italic',
+                'underline'    : 'Underline',
+                'strikethrough': 'Strike through',
+                'h1'           : 'H1',
+                'h2'           : 'H2',
+                'h3'           : 'H3',
+                'h4'           : 'H4',
+                'h5'           : 'H5',
+                'h6'           : 'H6',
+                'hr'           : 'Hr',
+                'quote'        : 'Quote',
+                'list'         : 'Ul',
+                'list-2'       : 'Ol',
+                'square'       : 'Unfinished',
+                'check-square' : 'Completed',
+                'link'         : 'Link',
+                'link-text'    : 'Link',
+                'image'        : 'Image',
+                'image-text'   : 'Description',
+                'code'         : 'Code',
+                'table'        : 'Table',
+                'emoji'        : 'Emoji',
+                'math'         : 'Math',
+                'flow'         : 'Flow',
+                'diagram'      : 'Flowchart',
+                'gantt'        : 'Gantt',
+                'preview'      : 'Preview',
+                'max'          : 'Max',
+                'original'     : 'Reduction',
+                'col'          : 'col',
+                'row'          : 'row',
+                'diagram'      : 'sequenceDiagram\nA->>B: How are you?\nB->>A: I am fine!'
+            },
+            'zh-cn': {
+                'heading'      : '标题',
+                'bold'         : '粗体',
+                'italic'       : '斜体',
+                'underline'    : '下划线',
+                'strikethrough': '删除线',
+                'h1'           : '标题 1',
+                'h2'           : '标题 2',
+                'h3'           : '标题 3',
+                'h4'           : '标题 4',
+                'h5'           : '标题 5',
+                'h6'           : '标题 6',
+                'hr'           : '横线',
+                'quote'        : '引用',
+                'list'         : '无序列表',
+                'list-2'       : '有序列表',
+                'square'       : '未完成任务列表',
+                'check-square' : '已完成任务列表',
+                'link'         : '链接',
+                'link-text'    : '链接文字',
+                'image'        : '图片',
+                'image-text'   : '图片描述',
+                'code'         : '代码',
+                'table'        : '表格',
+                'emoji'        : 'Emoji 图标',
+                'math'         : '数学公式',
+                'flow'         : '流程图',
+                'diagram'      : '顺序图',
+                'gantt'        : '甘特图',
+                'preview'      : '预览',
+                'max'          : '最大化',
+                'original'     : '还原',
+                'col'          : '列',
+                'row'          : '行',
+                'diagram'      : 'sequenceDiagram\nA->>B: 你好吗?\nB->>A: 我很好3!'
+            },
+            'zh-tw': {
+                'heading'      : '標題',
+                'bold'         : '粗體',
+                'italic'       : '斜體',
+                'underline'    : '下劃線',
+                'strikethrough': '刪除線',
+                'h1'           : '標題 1',
+                'h2'           : '標題 2',
+                'h3'           : '標題 3',
+                'h4'           : '標題 4',
+                'h5'           : '標題 5',
+                'h6'           : '標題 6',
+                'hr'           : '橫線',
+                'quote'        : '引用',
+                'list'         : '無序列表',
+                'list-2'       : '有序列表',
+                'square'       : '未完成任務列表',
+                'check-square' : '已完成任務列表',
+                'link'         : '鏈接',
+                'link-text'    : '鏈接文字',
+                'image'        : '圖片',
+                'image-text'   : '圖片描述',
+                'code'         : '代碼',
+                'table'        : '表格',
+                'emoji'        : 'Emoji 圖標',
+                'math'         : '數學公式',
+                'flow'         : '流程圖',
+                'diagram'      : '順序圖',
+                'gantt'        : '甘特圖',
+                'preview'      : '預覽',
+                'max'          : '最大化',
+                'original'     : '還原',
+                'col'          : '列',
+                'row'          : '行',
+                'diagram'      : 'sequenceDiagram\nA->>B: 你好嗎?\nB->>A: 我很好!'
+            }
+        },
         onShow           : null,//显示编辑器的时候调用
         onPreview        : null,//渲染的时候调用
         onChange         : null,//内容变化时调用
@@ -390,6 +500,21 @@ angular.module("wt-editor")
         this.getContent = function () {
             return $scope.vm.editor.value;
         }
+        //获取国际化文字
+        this.getLocaleText = function(key){
+            var _locale = wtEditorConfig.language[wtEditorConfig.locale];
+            if(_locale){
+                var _text = _locale[key];
+                if(_text){
+                    return _text;
+                }else{
+                    alert('text '+key+' none!');
+                }
+            }else{
+                alert('locale '+wtEditorConfig.locale+' none!');
+            }
+
+        }
 
 
     }])
@@ -442,9 +567,11 @@ angular.module("wt-editor")
                     }
                 });
 
-                _(wtEditorConfig.typeArray['hs']).forEach(function (value) {
-                    var _temph = wtEditorConfig.allButtons[value];
-                    vm.headers[vm.headers.length] = _temph;
+                $(wtEditorConfig.typeArray['hs']).each(function (index, value) {
+                    var _tempBtn = wtEditorConfig.allButtons[value];
+                    if (_tempBtn) {
+                        vm.headers[vm.headers.length] = _tempBtn;
+                    }
                 });
 
                 //隐藏个性化按钮
@@ -604,27 +731,27 @@ angular.module("wt-editor")
                             }
                             break;
                         case "h1":
-                            insert("#", "标题1", sel, true, /(.+)([\n]?)/g, "\n# $1$2\n");
+                            insert("#", "", sel, true, /(.+)([\n]?)/g, "\n# $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h2":
-                            insert("##", "标题2", sel, true, /(.+)([\n]?)/g, "\n## $1$2\n");
+                            insert("##", "", sel, true, /(.+)([\n]?)/g, "\n## $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h3":
-                            insert("###", "标题3", sel, true, /(.+)([\n]?)/g, "\n### $1$2\n");
+                            insert("###", "", sel, true, /(.+)([\n]?)/g, "\n### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h4":
-                            insert("####", "标题4", sel, true, /(.+)([\n]?)/g, "\n#### $1$2\n");
+                            insert("####", "", sel, true, /(.+)([\n]?)/g, "\n#### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h5":
-                            insert("#####", "标题5", sel, true, /(.+)([\n]?)/g, "\n##### $1$2\n");
+                            insert("#####", "", sel, true, /(.+)([\n]?)/g, "\n##### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h6":
-                            insert("######", "标题6", sel, true, /(.+)([\n]?)/g, "\n###### $1$2\n");
+                            insert("######", "", sel, true, /(.+)([\n]?)/g, "\n###### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "hr":
@@ -636,13 +763,13 @@ angular.module("wt-editor")
                             controller[0].setFocus(sel.start + 5, sel.start + 5);
                             break;
                         case "quote":
-                            insert(">", "引用", sel, true, /(.+)([\n]?)/g, "\n> $1$2");
+                            insert(">", "", sel, true, /(.+)([\n]?)/g, "\n> $1$2");
                             break;
                         case "list":
-                            insert("-", "列表", sel, true, /(.+)([\n]?)/g, '\n- $1$2');
+                            insert("-", "", sel, true, /(.+)([\n]?)/g, '\n- $1$2');
                             break;
                         case "list-2":
-                            insert("1.", "列表", sel, true, /(.+)([\n]?)/g, "\n1. $1$2");
+                            insert("1.", "", sel, true, /(.+)([\n]?)/g, "\n1. $1$2");
                             break;
 
                         case "square":
@@ -654,7 +781,7 @@ angular.module("wt-editor")
 
                         case "link":
                             var iUrl = "http://xxx.com";
-                            var _text = "链接文字";
+                            var _text = controller[0].getLocaleText('link-text');//链接文字
                             if (sel.text.length > 0) {
                                 if (sel.text.indexOf('http') != -1) {
                                     iUrl = sel.text;
@@ -668,7 +795,7 @@ angular.module("wt-editor")
 
                             break;
                         case "image":
-                            var _text = "图片描述";
+                            var _text = controller[0].getLocaleText('image-text');//"图片描述";
                             var iUrl = "http://lesschat.com/x.png";
                             if (sel.text.length > 0) {
                                 if (sel.text.indexOf('http') != -1) {
@@ -696,7 +823,7 @@ angular.module("wt-editor")
                         case "math":
                             var text = sel.text;
                             if (text.length == 0) {
-                                text = $($event.target).data('sample');
+                                text = 'E = mc^2';
                             }
                             controller[0].insertText('\n```math\n' + text + '\n```\n', sel.start, sel.end);
                             controller[0].setFocus(sel.start + text.length + 14, sel.start + text.length + 14);
@@ -704,7 +831,7 @@ angular.module("wt-editor")
                         case "flow":
                             var text = sel.text;
                             if (text.length == 0) {
-                                text = $($event.target).data('sample');
+                                text = 'graph LR\nA-->B';
                             }
                             controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
                             controller[0].setFocus(sel.start + text.length + 10, sel.start + text.length + 10);
@@ -712,7 +839,8 @@ angular.module("wt-editor")
                         case "diagram":
                             var text = sel.text;
                             if (text.length == 0) {
-                                text = $($event.target).data('sample');
+                                //text = 'sequenceDiagram\nA->>B: 你好吗?\nB->>A: 我很好3!';
+                                text = controller[0].getLocaleText('diagram');
                             }
                             controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
                             controller[0].setFocus(sel.start + text.length + 10, sel.start + text.length + 10);
@@ -720,7 +848,15 @@ angular.module("wt-editor")
                         case "gantt":
                             var text = sel.text;
                             if (text.length == 0) {
-                                text = $($event.target).data('sample');
+                                //text = $($event.target).data('sample');
+                                text  = 'gantt\n';
+                                text += 'dateFormat YYYY-MM-DD\n';
+                                text += 'section S1\n';
+                                text += 'T1: 2014-01-01, 9d\n';
+                                text += 'section S2\n';
+                                text += 'T2: 2014-01-11, 9d';
+                                text += 'section S3\n';
+                                text += 'T3: 2014-01-02, 9d'
                             }
                             controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
                             controller[0].setFocus(sel.start + text.length + 10, sel.start + text.length + 10);
@@ -815,14 +951,14 @@ angular.module("wt-editor")
                 vm.insertTable = function () {
                     var cols = vm.tableActiveY;
                     var rows = vm.tableActiveX + 1;
-                    var _header = "列";
+                    var _header = controller[0].getLocaleText('col');
                     var _header_hr = "---";
-                    var _row = "行";
+                    var _row = controller[0].getLocaleText('row');
 
                     for (var i = 0; i < cols; i++) {
-                        _header += "| 列 ";
+                        _header += "| "+controller[0].getLocaleText('col')+" ";
                         _header_hr += "| --- ";
-                        _row += "| 行 ";
+                        _row += "| "+controller[0].getLocaleText('row')+" ";
                     }
                     var _str = "";
                     for (var i = 0; i < rows; i++) {
@@ -1034,5 +1170,31 @@ angular.module("wt-editor")
                     angular.extend(wtEditorConfig.typeArray, json);
                 }
             };
+            this.setLocale = function(_locale){
+                if(!_locale){return};
+                wtEditorConfig.locale = _locale;
+                if(_locale != 'zh-cn'){
+                    _.forEach(wtEditorConfig.allButtons, function(value, key) {
+                        var _language = wtEditorConfig.language[wtEditorConfig.locale];
+                        if(_language){
+                            var _valLang = _language[key];
+                            if(_valLang){
+                                value.title = _valLang;
+                            }
+                            if(value.text){
+                                var _valText = _language[key+'-text'];
+                                if(_valText){
+                                    value.text = _valText;
+                                }
+                            }
+                        }
+                    });
+                }
+            };
+            this.addLocale = function(json){
+                if (json) {
+                    angular.extend(wtEditorConfig.language, json);
+                }
+            }
 
         }]);
