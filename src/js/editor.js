@@ -15,21 +15,21 @@ angular.module("wt-editor")
         isFullscreen     : false, //默认是否全屏显示
         isFullButton     : true, //是否显示最大化按钮
         type             : 'all', //toolbar按钮显示的类型 ［simple:简易, all:全部按钮］
-        typeArray      : {
-            hs         : ['h1','h2','h3','h4','h5','h6'],
-            simple     : ['bold','italic','link','divider','hr','quote','list','list-2'],
-            complex    : ['heading','bold','italic','underline','strikethrough','divider','hr','quote','list','list-2','square','check-square','divider','link','image','code','table','divider','math','diagram','gantt','divider','preview'],
-            all        : ['heading','bold','italic','underline','strikethrough','divider','hr','quote','list','list-2','square','check-square','divider','link','image','code','table','divider','math','diagram','gantt','divider','preview','expand']
+        typeArray        : {
+            hs     : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+            simple : ['bold', 'italic', 'link', 'divider', 'hr', 'quote', 'list', 'list-2'],
+            complex: ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview'],
+            all    : ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview', 'expand']
         },
         allButtons       : {
-            "heading":{
+            "heading"      : {
                 id       : 0,
                 title    : '标题',
                 className: 'fa fa-header',
                 type     : 'headingFns',
                 name     : 'heading'
             },
-            "bold"   :{
+            "bold"         : {
                 id       : 1,
                 title    : '粗体',
                 className: 'fa fa-bold',
@@ -37,7 +37,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'bold'
             },
-            "italic":{
+            "italic"       : {
                 id       : 2,
                 title    : '斜体',
                 className: 'fa fa-italic',
@@ -45,7 +45,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'italic'
             },
-            "underline":{
+            "underline"    : {
                 id       : 3,
                 title    : '下划线',
                 className: 'fa fa-underline',
@@ -53,7 +53,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'underline'
             },
-            "strikethrough":{
+            "strikethrough": {
                 id       : 4,
                 title    : '删除线',
                 className: 'fa fa-strikethrough',
@@ -61,7 +61,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'strikethrough'
             },
-            "h1":{
+            "h1"           : {
                 id       : 5,
                 title    : '标题 1',
                 className: 'h1',
@@ -69,7 +69,7 @@ angular.module("wt-editor")
                 type     : 'headingFn',
                 name     : 'h1'
             },
-            "h2":{
+            "h2"           : {
                 id       : 6,
                 title    : '标题 2',
                 className: 'h2',
@@ -77,7 +77,7 @@ angular.module("wt-editor")
                 type     : 'headingFn',
                 name     : 'h2'
             },
-            "h3":{
+            "h3"           : {
                 id       : 7,
                 title    : '标题 3',
                 className: 'h3',
@@ -85,7 +85,7 @@ angular.module("wt-editor")
                 type     : 'headingFn',
                 name     : 'h3'
             },
-            "h4":{
+            "h4"           : {
                 id       : 8,
                 title    : '标题 4',
                 className: 'h4',
@@ -93,7 +93,7 @@ angular.module("wt-editor")
                 type     : 'headingFn',
                 name     : 'h4'
             },
-            "h5":{
+            "h5"           : {
                 id       : 9,
                 title    : '标题 5',
                 className: 'h5',
@@ -101,7 +101,7 @@ angular.module("wt-editor")
                 type     : 'headingFn',
                 name     : 'h5'
             },
-            "h6":{
+            "h6"           : {
                 id       : 10,
                 title    : '标题 6',
                 className: 'h6',
@@ -109,14 +109,14 @@ angular.module("wt-editor")
                 type     : 'headingFn',
                 name     : 'h6'
             },
-            "hr":{
+            "hr"           : {
                 id       : 11,
                 title    : '横线',
                 className: 'fa fa-minus',
                 type     : 'styleFn',
                 name     : 'hr'
             },
-            "quote":{
+            "quote"        : {
                 id       : 12,
                 title    : '引用',
                 className: 'fa fa-quote-left',
@@ -124,7 +124,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'quote'
             },
-            "list":{
+            "list"         : {
                 id       : 13,
                 title    : '无序列表',
                 className: 'fa fa-list-ul',
@@ -132,7 +132,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'list'
             },
-            "list-2":{
+            "list-2"       : {
                 id       : 14,
                 title    : '有序列表',
                 className: 'fa fa-list-ol',
@@ -140,7 +140,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'list-2'
             },
-            "square":{
+            "square"       : {
                 id       : 15,
                 title    : '未完成任务列表',
                 className: 'fa fa-square-o',
@@ -148,7 +148,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'square'
             },
-            "check-square":{
+            "check-square" : {
                 id       : 16,
                 title    : '已完成任务列表',
                 className: 'fa fa-check-square-o',
@@ -156,7 +156,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'check-square'
             },
-            "link":{
+            "link"         : {
                 id       : 17,
                 title    : '链接',
                 className: 'fa fa-link',
@@ -165,7 +165,7 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'link'
             },
-            "image":{
+            "image"        : {
                 id       : 18,
                 title    : '图片描述',
                 className: 'fa fa-image',
@@ -174,28 +174,28 @@ angular.module("wt-editor")
                 type     : 'styleFn',
                 name     : 'image'
             },
-            "code":{
+            "code"         : {
                 id       : 19,
                 title    : '代码',
                 className: 'fa fa-code',
                 type     : 'styleFn',
                 name     : 'code'
             },
-            "table":{
+            "table"        : {
                 id       : 20,
                 title    : '表格',
                 className: 'fa fa-table',
                 type     : 'tableFn',
                 name     : 'table'
             },
-            "emoji":{
+            "emoji"        : {
                 id       : 21,
                 title    : 'Emoji 图标',
                 className: 'fa fa-smile-o',
                 target   : 'emoji-modal',
                 type     : 'emoji'
             },
-            "math":{
+            "math"         : {
                 id       : 22,
                 title    : '数学公式',
                 className: 'fa fa-superscript',
@@ -203,43 +203,43 @@ angular.module("wt-editor")
                 type     : 'mathFn',
                 name     : 'math'
             },
-            "flow":{
+            "flow"         : {
                 id       : 23,
                 title    : '流程图',
                 className: 'fa fa-long-arrow-right',
                 type     : 'flowchart',
                 name     : 'flow'
             },
-            "diagram":{
+            "diagram"      : {
                 id       : 24,
                 title    : '顺序图',
                 className: 'fa fa-exchange',
                 type     : 'diagram',
                 name     : 'diagram'
             },
-            "gantt":{
+            "gantt"        : {
                 id       : 25,
                 title    : '甘特图',
                 className: 'fa fa-sliders',
                 type     : 'gantt',
                 name     : 'gantt'
             },
-            "preview":{
+            "preview"      : {
                 id       : 27,
                 title    : '预览',
                 className: 'fa fa-columns',
                 type     : 'preview'
             },
-            "expand":{
+            "expand"       : {
                 id       : 28,
                 title    : '最大化',
-                title2    : '还原',
+                title2   : '还原',
                 className: 'fa fa-expand',
                 type     : 'expand'
             },
-            "divider":{
-                id  :parseInt(Math.random()*1000000),
-                type:'divider'
+            "divider"      : {
+                id  : parseInt(Math.random() * 1000000),
+                type: 'divider'
             }
         },
         extendButtons    : {}, //初始化扩展的图标
@@ -253,7 +253,7 @@ angular.module("wt-editor")
         emojis           : [":blush:", ":scream:", ":smirk:", ":smiley:", ":stuck_out_tongue_closed_eyes:", ":stuck_out_tongue_winking_eye:", ":rage:", ":disappointed:", ":sob:", ":kissing_heart:", ":wink:", ":pensive:", ":confounded:", ":flushed:", ":relaxed:", ":mask:", ":heart:", ":broken_heart:", ":sunny:", ":umbrella:", ":cloud:", ":snowflake:", ":snowman:", ":zap:", ":cyclone:", ":foggy:", ":ocean:", ":cat:", ":dog:", ":mouse:", ":hamster:", ":rabbit:", ":wolf:", ":frog:", ":tiger:", ":koala:", ":bear:", ":pig:", ":pig_nose:", ":cow:", ":boar:", ":monkey_face:", ":monkey:", ":horse:", ":racehorse:", ":camel:", ":sheep:", ":elephant:", ":panda_face:", ":snake:", ":bird:", ":baby_chick:", ":hatched_chick:", ":hatching_chick:", ":chicken:", ":penguin:", ":turtle:", ":bug:", ":honeybee:", ":ant:", ":beetle:", ":snail:", ":octopus:", ":tropical_fish:", ":fish:", ":whale:", ":whale2:", ":dolphin:", ":cow2:", ":ram:", ":rat:", ":water_buffalo:", ":tiger2:", ":rabbit2:", ":dragon:", ":goat:", ":rooster:", ":dog2:", ":pig2:", ":mouse2:", ":ox:", ":dragon_face:", ":blowfish:", ":crocodile:", ":dromedary_camel:", ":leopard:", ":cat2:", ":poodle:", ":paw_prints:", ":bouquet:", ":cherry_blossom:", ":tulip:", ":four_leaf_clover:", ":rose:", ":sunflower:", ":hibiscus:", ":maple_leaf:", ":leaves:", ":fallen_leaf:", ":herb:", ":mushroom:", ":cactus:", ":palm_tree:", ":evergreen_tree:", ":deciduous_tree:", ":chestnut:", ":seedling:", ":blossom:", ":ear_of_rice:", ":shell:", ":globe_with_meridians:", ":sun_with_face:", ":full_moon_with_face:", ":new_moon_with_face:", ":new_moon:", ":waxing_crescent_moon:", ":first_quarter_moon:", ":waxing_gibbous_moon:", ":full_moon:", ":waning_gibbous_moon:", ":last_quarter_moon:", ":waning_crescent_moon:", ":last_quarter_moon_with_face:", ":first_quarter_moon_with_face:", ":moon:", ":earth_africa:", ":earth_americas:", ":earth_asia:", ":volcano:", ":milky_way:", ":partly_sunny:", ":octocat:", ":squirrel:", ":bamboo:", ":gift_heart:", ":dolls:", ":school_satchel:", ":mortar_board:", ":flags:", ":fireworks:", ":sparkler:", ":wind_chime:", ":rice_scene:", ":jack_o_lantern:", ":ghost:", ":santa:", ":christmas_tree:", ":gift:", ":bell:", ":no_bell:", ":tanabata_tree:", ":tada:", ":confetti_ball:", ":balloon:", ":crystal_ball:", ":cd:", ":dvd:", ":floppy_disk:", ":camera:", ":video_camera:", ":movie_camera:", ":computer:", ":tv:", ":iphone:", ":phone:", ":telephone:", ":telephone_receiver:", ":pager:", ":fax:", ":minidisc:", ":vhs:", ":sound:", ":speaker:", ":mute:", ":loudspeaker:", ":mega:", ":hourglass:", ":hourglass_flowing_sand:", ":alarm_clock:", ":watch:", ":radio:", ":satellite:", ":loop:", ":mag:", ":mag_right:", ":unlock:", ":lock:", ":lock_with_ink_pen:", ":closed_lock_with_key:", ":key:", ":bulb:", ":flashlight:", ":high_brightness:", ":low_brightness:", ":electric_plug:", ":battery:", ":calling:", ":email:", ":mailbox:", ":postbox:", ":bath:", ":bathtub:", ":shower:", ":toilet:", ":wrench:", ":nut_and_bolt:", ":hammer:", ":seat:", ":moneybag:", ":yen:", ":dollar:", ":pound:", ":euro:", ":credit_card:", ":money_with_wings:", ":e-mail:", ":inbox_tray:", ":outbox_tray:", ":envelope:", ":incoming_envelope:", ":postal_horn:", ":mailbox_closed:", ":mailbox_with_mail:", ":mailbox_with_no_mail:", ":door:", ":smoking:", ":bomb:", ":gun:", ":hocho:", ":pill:", ":syringe:", ":page_facing_up:", ":page_with_curl:", ":bookmark_tabs:", ":bar_chart:", ":chart_with_upwards_trend:", ":chart_with_downwards_trend:", ":scroll:", ":clipboard:", ":calendar:", ":date:", ":card_index:", ":file_folder:", ":open_file_folder:", ":scissors:", ":pushpin:", ":paperclip:", ":black_nib:", ":pencil2:", ":straight_ruler:", ":triangular_ruler:", ":closed_book:", ":green_book:", ":blue_book:", ":orange_book:", ":notebook:", ":notebook_with_decorative_cover:", ":ledger:", ":books:", ":bookmark:", ":name_badge:", ":microscope:", ":telescope:", ":newspaper:", ":football:", ":basketball:", ":soccer:", ":baseball:", ":tennis:", ":8ball:", ":rugby_football:", ":bowling:", ":golf:", ":mountain_bicyclist:", ":bicyclist:", ":horse_racing:", ":snowboarder:", ":swimmer:", ":surfer:", ":ski:", ":spades:", ":hearts:", ":clubs:", ":diamonds:", ":gem:", ":ring:", ":trophy:", ":musical_score:", ":musical_keyboard:", ":violin:", ":space_invader:", ":video_game:", ":black_joker:", ":flower_playing_cards:", ":game_die:", ":dart:", ":mahjong:", ":clapper:", ":memo:", ":pencil:", ":book:", ":art:", ":microphone:", ":headphones:", ":trumpet:", ":saxophone:", ":guitar:", ":shoe:", ":sandal:", ":high_heel:", ":lipstick:", ":boot:", ":shirt:", ":tshirt:", ":necktie:", ":womans_clothes:", ":dress:", ":running_shirt_with_sash:", ":jeans:", ":kimono:", ":bikini:", ":ribbon:", ":tophat:", ":crown:", ":womans_hat:", ":mans_shoe:", ":closed_umbrella:", ":briefcase:", ":handbag:", ":pouch:", ":purse:", ":eyeglasses:", ":fishing_pole_and_fish:", ":coffee:", ":tea:", ":sake:", ":baby_bottle:", ":beer:", ":beers:", ":cocktail:", ":tropical_drink:", ":wine_glass:", ":fork_and_knife:", ":pizza:", ":hamburger:", ":fries:", ":poultry_leg:", ":meat_on_bone:", ":spaghetti:", ":curry:", ":fried_shrimp:", ":bento:", ":sushi:", ":fish_cake:", ":rice_ball:", ":rice_cracker:", ":rice:", ":ramen:", ":stew:", ":oden:", ":dango:", ":egg:", ":bread:", ":doughnut:", ":custard:", ":icecream:", ":ice_cream:", ":shaved_ice:", ":birthday:", ":cake:", ":cookie:", ":chocolate_bar:", ":candy:", ":lollipop:", ":honey_pot:", ":apple:", ":green_apple:", ":tangerine:", ":lemon:", ":cherries:", ":grapes:", ":watermelon:", ":strawberry:", ":peach:", ":melon:", ":banana:", ":pear:", ":pineapple:", ":sweet_potato:", ":eggplant:", ":tomato:", ":corn:", ":alien:", ":angel:", ":anger:", ":angry:", ":anguished:", ":astonished:", ":baby:", ":blue_heart:", ":blush:", ":boom:", ":bow:", ":bowtie:", ":boy:", ":bride_with_veil:", ":broken_heart:", ":bust_in_silhouette:", ":busts_in_silhouette:", ":clap:", ":cold_sweat:", ":collision:", ":confounded:", ":confused:", ":construction_worker:", ":cop:", ":couple_with_heart:", ":couple:", ":couplekiss:", ":cry:", ":crying_cat_face:", ":cupid:", ":dancer:", ":dancers:", ":dash:", ":disappointed:", ":dizzy_face:", ":dizzy:", ":droplet:", ":ear:", ":exclamation:", ":expressionless:", ":eyes:", ":facepunch:", ":family:", ":fearful:", ":feelsgood:", ":feet:", ":finnadie:", ":fire:", ":fist:", ":flushed:", ":frowning:", ":girl:", ":goberserk:", ":godmode:", ":green_heart:", ":grey_exclamation:", ":grey_question:", ":grimacing:", ":grin:", ":grinning:", ":guardsman:", ":haircut:", ":hand:", ":hankey:", ":hear_no_evil:", ":heart_eyes_cat:", ":heart_eyes:", ":heart:", ":heartbeat:", ":heartpulse:", ":hurtrealbad:", ":hushed:", ":imp:", ":information_desk_person:", ":innocent:", ":japanese_goblin:", ":japanese_ogre:", ":joy_cat:", ":joy:", ":kiss:", ":kissing_cat:", ":kissing_closed_eyes:", ":kissing_heart:", ":kissing_smiling_eyes:", ":kissing:", ":laughing:", ":lips:", ":love_letter:", ":man_with_gua_pi_mao:", ":man_with_turban:", ":man:", ":mask:", ":massage:", ":metal:", ":muscle:", ":musical_note:", ":nail_care:", ":neckbeard:", ":neutral_face:", ":no_good:", ":no_mouth:", ":nose:", ":notes:", ":ok_hand:", ":ok_woman:", ":older_man:", ":older_woman:", ":open_hands:", ":open_mouth:", ":pensive:", ":persevere:", ":person_frowning:", ":person_with_blond_hair:", ":person_with_pouting_face:", ":point_down:", ":point_left:", ":point_right:", ":point_up_2:", ":point_up:", ":poop:", ":pouting_cat:", ":pray:", ":princess:", ":punch:", ":purple_heart:", ":question:", ":rage:", ":rage1:", ":rage2:", ":rage3:", ":rage4:", ":raised_hand:", ":raised_hands:", ":relaxed:", ":relieved:", ":revolving_hearts:", ":runner:", ":running:", ":satisfied:", ":scream_cat:", ":scream:", ":see_no_evil:", ":shit:", ":skull:", ":sleeping:", ":sleepy:", ":smile_cat:", ":smile:", ":smiley_cat:", ":smiley:", ":smiling_imp:", ":smirk_cat:", ":smirk:", ":sob:", ":sparkling_heart:", ":sparkles:", ":speak_no_evil:", ":speech_balloon:", ":star:", ":star2:", ":stuck_out_tongue_closed_eyes:", ":stuck_out_tongue_winking_eye:", ":stuck_out_tongue:", ":sunglasses:", ":suspect:", ":sweat_drops:", ":sweat_smile:", ":sweat:", ":thought_balloon:", ":-1:", ":thumbsdown:", ":thumbsup:", ":+1:", ":tired_face:", ":tongue:", ":triumph:", ":trollface:", ":two_hearts:", ":two_men_holding_hands:", ":two_women_holding_hands:", ":unamused:", ":v:", ":walking:", ":wave:", ":weary:", ":wink2:", ":wink:", ":woman:", ":worried:", ":yellow_heart:", ":yum:", ":zzz:", ":109:", ":house:", ":house_with_garden:", ":school:", ":office:", ":post_office:", ":hospital:", ":bank:", ":convenience_store:", ":love_hotel:", ":hotel:", ":wedding:", ":church:", ":department_store:", ":european_post_office:", ":city_sunrise:", ":city_sunset:", ":japanese_castle:", ":european_castle:", ":tent:", ":factory:", ":tokyo_tower:", ":japan:", ":mount_fuji:", ":sunrise_over_mountains:", ":sunrise:", ":stars:", ":statue_of_liberty:", ":bridge_at_night:", ":carousel_horse:", ":rainbow:", ":ferris_wheel:", ":fountain:", ":roller_coaster:", ":ship:", ":speedboat:", ":boat:", ":sailboat:", ":rowboat:", ":anchor:", ":rocket:", ":airplane:", ":helicopter:", ":steam_locomotive:", ":tram:", ":mountain_railway:", ":bike:", ":aerial_tramway:", ":suspension_railway:", ":mountain_cableway:", ":tractor:", ":blue_car:", ":oncoming_automobile:", ":car:", ":red_car:", ":taxi:", ":oncoming_taxi:", ":articulated_lorry:", ":bus:", ":oncoming_bus:", ":rotating_light:", ":police_car:", ":oncoming_police_car:", ":fire_engine:", ":ambulance:", ":minibus:", ":truck:", ":train:", ":station:", ":train2:", ":bullettrain_front:", ":bullettrain_side:", ":light_rail:", ":monorail:", ":railway_car:", ":trolleybus:", ":ticket:", ":fuelpump:", ":vertical_traffic_light:", ":traffic_light:", ":warning:", ":construction:", ":beginner:", ":atm:", ":slot_machine:", ":busstop:", ":barber:", ":hotsprings:", ":checkered_flag:", ":crossed_flags:", ":izakaya_lantern:", ":moyai:", ":circus_tent:", ":performing_arts:", ":round_pushpin:", ":triangular_flag_on_post:", ":jp:", ":kr:", ":cn:", ":us:", ":fr:", ":es:", ":it:", ":ru:", ":gb:", ":uk:", ":de:", ":100:", ":1234:", ":one:", ":two:", ":three:", ":four:", ":five:", ":six:", ":seven:", ":eight:", ":nine:", ":keycap_ten:", ":zero:", ":hash:", ":symbols:", ":arrow_backward:", ":arrow_down:", ":arrow_forward:", ":arrow_left:", ":capital_abcd:", ":abcd:", ":abc:", ":arrow_lower_left:", ":arrow_lower_right:", ":arrow_right:", ":arrow_up:", ":arrow_upper_left:", ":arrow_upper_right:", ":arrow_double_down:", ":arrow_double_up:", ":arrow_down_small:", ":arrow_heading_down:", ":arrow_heading_up:", ":leftwards_arrow_with_hook:", ":arrow_right_hook:", ":left_right_arrow:", ":arrow_up_down:", ":arrow_up_small:", ":arrows_clockwise:", ":arrows_counterclockwise:", ":rewind:", ":fast_forward:", ":information_source:", ":ok:", ":twisted_rightwards_arrows:", ":repeat:", ":repeat_one:", ":new:", ":top:", ":up:", ":cool:", ":free:", ":ng:", ":cinema:", ":koko:", ":signal_strength:", ":u5272:", ":u5408:", ":u55b6:", ":u6307:", ":u6708:", ":u6709:", ":u6e80:", ":u7121:", ":u7533:", ":u7a7a:", ":u7981:", ":sa:", ":restroom:", ":mens:", ":womens:", ":baby_symbol:", ":no_smoking:", ":parking:", ":wheelchair:", ":metro:", ":baggage_claim:", ":accept:", ":wc:", ":potable_water:", ":put_litter_in_its_place:", ":secret:", ":congratulations:", ":m:", ":passport_control:", ":left_luggage:", ":customs:", ":ideograph_advantage:", ":cl:", ":sos:", ":id:", ":no_entry_sign:", ":underage:", ":no_mobile_phones:", ":do_not_litter:", ":non-potable_water:", ":no_bicycles:", ":no_pedestrians:", ":children_crossing:", ":no_entry:", ":eight_spoked_asterisk:", ":eight_pointed_black_star:", ":heart_decoration:", ":vs:", ":vibration_mode:", ":mobile_phone_off:", ":chart:", ":currency_exchange:", ":aries:", ":taurus:", ":gemini:", ":cancer:", ":leo:", ":virgo:", ":libra:", ":scorpius:", ":sagittarius:", ":capricorn:", ":aquarius:", ":pisces:", ":ophiuchus:", ":six_pointed_star:", ":negative_squared_cross_mark:", ":a:", ":b:", ":ab:", ":o2:", ":diamond_shape_with_a_dot_inside:", ":recycle:", ":end:", ":on:", ":soon:", ":clock1:", ":clock130:", ":clock10:", ":clock1030:", ":clock11:", ":clock1130:", ":clock12:", ":clock1230:", ":clock2:", ":clock230:", ":clock3:", ":clock330:", ":clock4:", ":clock430:", ":clock5:", ":clock530:", ":clock6:", ":clock630:", ":clock7:", ":clock730:", ":clock8:", ":clock830:", ":clock9:", ":clock930:", ":heavy_dollar_sign:", ":copyright:", ":registered:", ":tm:", ":x:", ":heavy_exclamation_mark:", ":bangbang:", ":interrobang:", ":o:", ":heavy_multiplication_x:", ":heavy_plus_sign:", ":heavy_minus_sign:", ":heavy_division_sign:", ":white_flower:", ":heavy_check_mark:", ":ballot_box_with_check:", ":radio_button:", ":link:", ":curly_loop:", ":wavy_dash:", ":part_alternation_mark:", ":trident:", ":black_square:", ":white_square:", ":white_check_mark:", ":black_square_button:", ":white_square_button:", ":black_circle:", ":white_circle:", ":red_circle:", ":large_blue_circle:", ":large_blue_diamond:", ":large_orange_diamond:", ":small_blue_diamond:", ":small_orange_diamond:", ":small_red_triangle:", ":small_red_triangle_down:", ":shipit:"],
         emojRegx         : /\:[a-z0-9_\-\+]+\:/g
     })
-    .controller('wtEditorCtrl', ['$scope','$timeout', 'wtEditorConfig','wtEditorService', function ($scope,$timeout, wtEditorConfig,wtEditorService) {
+    .controller('wtEditorCtrl', ['$scope', '$timeout', 'wtEditorConfig', 'wtEditorService', function ($scope, $timeout, wtEditorConfig, wtEditorService) {
         //初始化甘特图
         this.initGantt = function () {
             wtEditorService.initGantt();
@@ -281,7 +281,7 @@ angular.module("wt-editor")
                 });
             }
             $timeout(function () {
-                $scope.vm.editorHeight.height  = $($scope.vm.element).find('.wt-editor-container-code').height()+'px';
+                $scope.vm.editorHeight.height = $($scope.vm.element).find('.wt-editor-container-code').height() + 'px';
             });
         }
 
@@ -298,29 +298,29 @@ angular.module("wt-editor")
         }
 
         //是否有选择内容
-        this.hasSelection = function() {
+        this.hasSelection = function () {
             var ta = $scope.vm.editor;
 
             if (ta.selectionStart === ta.selectionEnd) {
                 return false
-            }else{
+            } else {
                 return true;
             }
         };
 
         //获取选择内容
-        this.getSelection = function() {
+        this.getSelection = function () {
             var ta = $scope.vm.editor;
             return {
                 target: ta,
-                start: ta.selectionStart,
-                end: ta.selectionEnd,
-                text: ta.value.substring(ta.selectionStart, ta.selectionEnd)
+                start : ta.selectionStart,
+                end   : ta.selectionEnd,
+                text  : ta.value.substring(ta.selectionStart, ta.selectionEnd)
             };
         };
 
         //插入加工后的选择文字
-        this.insertText = function(text, start, end) {
+        this.insertText = function (text, start, end) {
             var ta = $scope.vm.editor;
             ta.focus();
             var leftText = ta.value.substring(0, start);
@@ -329,38 +329,38 @@ angular.module("wt-editor")
             $scope.value = leftText + text + rightText;
         };
 
-        this.clearSelection = function(){
+        this.clearSelection = function () {
             $scope.vm.editor.selectionStart = $scope.vm.editor.selectionEnd
         }
 
         //定位光标
-        this.setFocus = function(star,end){
-            $timeout(function(){
+        this.setFocus = function (star, end) {
+            $timeout(function () {
                 $scope.vm.editor.selectionStart = star;
                 $scope.vm.editor.selectionEnd = end;
             });
         }
 
         //是否是行首
-        this.isRowFirst = function(start){
+        this.isRowFirst = function (start) {
             var ta = $scope.vm.editor;
             //获取光标前的内容，index是光标的位置
-            var val=ta.value.substr(0,start);
+            var val = ta.value.substr(0, start);
             //获取光标所在行的信息
-            var _text=val.substr(val.lastIndexOf("\n")+1);
-            if(_text.length === 0){
+            var _text = val.substr(val.lastIndexOf("\n") + 1);
+            if (_text.length === 0) {
                 return true;
             }
             return false;
         }
 
         //获取光标所在行信息
-        this.getRowText = function(start){
+        this.getRowText = function (start) {
             var ta = $scope.vm.editor;
             //获取光标前的内容，index是光标的位置
-            var val=ta.value.substr(0,start);
+            var val = ta.value.substr(0, start);
             //获取光标所在行的信息
-            var _text=val.substr(val.lastIndexOf("\n")+1);
+            var _text = val.substr(val.lastIndexOf("\n") + 1);
             return _text;
         }
 
@@ -370,30 +370,30 @@ angular.module("wt-editor")
             _value = emojiFn(_value);
             $($scope.vm.element).find('.markdown-body').empty().append(_value); // realtime preview
             wtEditorService.parseMermaid();
-            if(wtEditorConfig.onPreview) {
+            if (wtEditorConfig.onPreview) {
                 wtEditorConfig.onPreview();
             }
             $scope.vm.editor.focus();
         }
 
         //同步
-        this.setPriviewScroll = function(){
+        this.setPriviewScroll = function () {
         }
 
         //插入内容
-        this.insertContent = function(content){
+        this.insertContent = function (content) {
             var sel = this.getSelection();
             this.insertText(content, sel.start, sel.end);
             $scope.vm.editor.focus();
         }
         //获取内容
-        this.getContent = function(){
+        this.getContent = function () {
             return $scope.vm.editor.value;
         }
 
 
     }])
-    .directive("wtEditor", ['wtEditorConfig', '$timeout','$compile','$rootScope','$controller', function (wtEditorConfig, $timeout, $compile, $rootScope, $controller) {
+    .directive("wtEditor", ['wtEditorConfig', '$timeout', '$compile', '$rootScope', '$controller', function (wtEditorConfig, $timeout, $compile, $rootScope, $controller) {
         return {
             require    : ["wtEditor", 'ngModel'],
             replace    : true,
@@ -405,26 +405,26 @@ angular.module("wt-editor")
             templateUrl: "wt-editor/editor.html",
             link       : function (scope, element, attrs, controller) {
                 var vm = scope.vm = {
-                    element   : element,
-                    value     : scope.value, //默认显示的内容
-                    emojiValue: '', //插入表情代码
-                    faValue   : '',
-                    toolbars  : [],
-                    headers   : [],
-                    editorHeight    : {},
-                    editorContainerCode:{},
-                    header_action : false,
-                    table_action:false,
-                    tableMenu:[
-                        [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5]],
-                        [[1,0],[1,1],[1,2],[1,3],[1,4],[1,5]],
-                        [[2,0],[2,1],[2,2],[2,3],[2,4],[2,5]],
-                        [[3,0],[3,1],[3,2],[3,3],[3,4],[3,5]],
-                        [[4,0],[4,1],[4,2],[4,3],[4,4],[4,5]]
+                    element            : element,
+                    value              : scope.value, //默认显示的内容
+                    emojiValue         : '', //插入表情代码
+                    faValue            : '',
+                    toolbars           : [],
+                    headers            : [],
+                    editorHeight       : {},
+                    editorContainerCode: {},
+                    header_action      : false,
+                    table_action       : false,
+                    tableMenu          : [
+                        [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5]],
+                        [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5]],
+                        [[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5]],
+                        [[3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]],
+                        [[4, 0], [4, 1], [4, 2], [4, 3], [4, 4], [4, 5]]
                     ],
-                    tableActiveX:1,
-                    tableActiveY:1,
-                    className : scope.config.className
+                    tableActiveX       : 1,
+                    tableActiveY       : 1,
+                    className          : scope.config.className
                 };
                 //继承设置
                 wtEditorConfig.replaceButtons = [];
@@ -432,17 +432,17 @@ angular.module("wt-editor")
                 wtEditorConfig.hideButtons = [];
                 angular.extend(wtEditorConfig, scope.config);
 
-                $(wtEditorConfig.typeArray[wtEditorConfig.type]).each(function (index,value) {
+                $(wtEditorConfig.typeArray[wtEditorConfig.type]).each(function (index, value) {
                     var _tempBtn = wtEditorConfig.allButtons[value];
-                    if(!_tempBtn){
+                    if (!_tempBtn) {
                         _tempBtn = wtEditorConfig.extendButtons[value];
                     }
-                    if(_tempBtn){
+                    if (_tempBtn) {
                         vm.toolbars[vm.toolbars.length] = _tempBtn;
                     }
                 });
 
-                _(wtEditorConfig.typeArray['hs']).forEach(function(value) {
+                _(wtEditorConfig.typeArray['hs']).forEach(function (value) {
                     var _temph = wtEditorConfig.allButtons[value];
                     vm.headers[vm.headers.length] = _temph;
                 });
@@ -455,7 +455,7 @@ angular.module("wt-editor")
                 });
 
                 //替换图标
-                if(wtEditorConfig.replaceButtons.length>0){
+                if (wtEditorConfig.replaceButtons.length > 0) {
                     $(wtEditorConfig.replaceButtons).each(function (n) {
                         var _temp = wtEditorConfig.replaceButtons[n];
                         if (_temp.id) {
@@ -491,203 +491,203 @@ angular.module("wt-editor")
                 vm.editor = $(element).find('.wt-editor-textarea')[0];
 
                 //插入方法
-                function insert (flag,title,sel,keepSelection,search,replace){
+                function insert(flag, title, sel, keepSelection, search, replace) {
                     //有序列表和无序列表选择统一添加
-                    if(sel.text.indexOf('\n')!=-1 && keepSelection && search && replace){
-                        if(sel.text.length>0){
+                    if (sel.text.indexOf('\n') != -1 && keepSelection && search && replace) {
+                        if (sel.text.length > 0) {
                             sel = controller[0].getSelection();
                         }
                         var replaceStr = sel.text.replace(search, replace);
                         var ss = controller[0].getRowText(sel.start);
-                        controller[0].insertText(replaceStr,sel.start-ss.length, sel.end);
-                        controller[0].setFocus(sel.start+replaceStr.length,sel.start+replaceStr.length);
-                    }else {
-                        if(sel.text.length>0){
+                        controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
+                        controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
+                    } else {
+                        if (sel.text.length > 0) {
                             controller[0].clearSelection();
                             sel = controller[0].getSelection();
                         }
                         var ss = controller[0].getRowText(sel.start);
-                        controller[0].insertText(flag+' '+ss,sel.start-ss.length, sel.end);
-                        controller[0].setFocus(sel.start+flag.length+1,sel.start+flag.length+1);
+                        controller[0].insertText(flag + ' ' + ss, sel.start - ss.length, sel.end);
+                        controller[0].setFocus(sel.start + flag.length + 1, sel.start + flag.length + 1);
                     }
                 }
 
                 //插入markdown
-                vm.styleFn = function(param,$event) {
+                vm.styleFn = function (param, $event) {
                     var sel = controller[0].getSelection();
-                    switch(param) {
+                    switch (param) {
                         case "bold":
                             if (controller[0].hasSelection()) {
-                                if(sel.text.indexOf('\n')!=-1) {
-                                        sel = controller[0].getSelection();
+                                if (sel.text.indexOf('\n') != -1) {
+                                    sel = controller[0].getSelection();
                                     var replaceStr = sel.text.replace(/([^\n]+)([\n\s]*)/g, "**$1**$2");
                                     var ss = controller[0].getRowText(sel.start);
                                     controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
                                     controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
-                                }else{
+                                } else {
                                     controller[0].insertText(" **" + sel.text + "** ", sel.start, sel.end);
-                                    controller[0].setFocus(sel.start,sel.start+6+sel.text.length);
+                                    controller[0].setFocus(sel.start, sel.start + 6 + sel.text.length);
                                 }
 
                             } else {
                                 var ss = controller[0].getRowText(sel.start);
-                                if(ss.length>0) {
+                                if (ss.length > 0) {
                                     controller[0].insertText(" **** ", sel.start, sel.end);
-                                    controller[0].setFocus(sel.start+3,sel.start+3);
-                                }else{
+                                    controller[0].setFocus(sel.start + 3, sel.start + 3);
+                                } else {
                                     controller[0].insertText("****", sel.start, sel.end);
-                                    controller[0].setFocus(sel.start+2,sel.start+2);
+                                    controller[0].setFocus(sel.start + 2, sel.start + 2);
                                 }
                             }
                             break;
                         case "italic":
                             if (controller[0].hasSelection()) {
-                                if(sel.text.indexOf('\n')!=-1) {
+                                if (sel.text.indexOf('\n') != -1) {
                                     sel = controller[0].getSelection();
                                     var replaceStr = sel.text.replace(/([^\n]+)([\n\s]*)/g, "_$1_$2");
                                     var ss = controller[0].getRowText(sel.start);
                                     controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
                                     controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
-                                }else {
+                                } else {
                                     controller[0].insertText(" _" + sel.text + "_ ", sel.start, sel.end);
                                     controller[0].setFocus(sel.start, sel.start + 4 + sel.text.length);
                                 }
                             } else {
                                 var ss = controller[0].getRowText(sel.start);
-                                if(ss.length>0) {
+                                if (ss.length > 0) {
                                     controller[0].insertText(" __ ", sel.start, sel.end, 2, 2);
-                                    controller[0].setFocus(sel.start+2,sel.start+2);
-                                }else{
+                                    controller[0].setFocus(sel.start + 2, sel.start + 2);
+                                } else {
                                     controller[0].insertText("__", sel.start, sel.end, 1, 1);
-                                    controller[0].setFocus(sel.start+1,sel.start+1);
+                                    controller[0].setFocus(sel.start + 1, sel.start + 1);
                                 }
                             }
                             break;
                         case "underline":
                             if (controller[0].hasSelection()) {
-                                if(sel.text.indexOf('\n')!=-1) {
+                                if (sel.text.indexOf('\n') != -1) {
                                     sel = controller[0].getSelection();
                                     var replaceStr = sel.text.replace(/([^\n]+)([\n\s]*)/g, "<u>$1</u>$2");
                                     var ss = controller[0].getRowText(sel.start);
                                     controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
                                     controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
-                                }else {
+                                } else {
                                     controller[0].insertText("<u>" + sel.text + "</u>", sel.start, sel.end);
                                     controller[0].setFocus(sel.start, sel.start + 7 + sel.text.length);
                                 }
                             } else {
-                                controller[0].insertText("<u></u>",sel.start, sel.end, 3, 4);
-                                controller[0].setFocus(sel.start+3,sel.start+3);
+                                controller[0].insertText("<u></u>", sel.start, sel.end, 3, 4);
+                                controller[0].setFocus(sel.start + 3, sel.start + 3);
                             }
                             break;
                         case "strikethrough":
                             if (controller[0].hasSelection()) {
-                                if(sel.text.indexOf('\n')!=-1) {
+                                if (sel.text.indexOf('\n') != -1) {
                                     sel = controller[0].getSelection();
                                     var replaceStr = sel.text.replace(/([^\n]+)([\n\s]*)/g, " ~~$1~~ $2");
                                     var ss = controller[0].getRowText(sel.start);
                                     controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
                                     controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
-                                }else {
+                                } else {
                                     controller[0].insertText(" ~~" + sel.text + "~~ ", sel.start, sel.end);
                                     controller[0].setFocus(sel.start, sel.start + 6 + sel.text.length);
                                 }
                             } else {
                                 var ss = controller[0].getRowText(sel.start);
-                                if(ss.length>0) {
+                                if (ss.length > 0) {
                                     controller[0].insertText(" ~~~~ ", sel.start, sel.end);
-                                    controller[0].setFocus(sel.start+3,sel.start+3);
-                                }else{
+                                    controller[0].setFocus(sel.start + 3, sel.start + 3);
+                                } else {
                                     controller[0].insertText("~~~~", sel.start, sel.end);
-                                    controller[0].setFocus(sel.start+2,sel.start+2);
+                                    controller[0].setFocus(sel.start + 2, sel.start + 2);
                                 }
                             }
                             break;
                         case "h1":
-                            insert("#","标题1",sel,true,/(.+)([\n]?)/g,"\n# $1$2\n");
+                            insert("#", "标题1", sel, true, /(.+)([\n]?)/g, "\n# $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h2":
-                            insert("##","标题2",sel,true,/(.+)([\n]?)/g,"\n## $1$2\n");
+                            insert("##", "标题2", sel, true, /(.+)([\n]?)/g, "\n## $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h3":
-                            insert("###","标题3",sel,true,/(.+)([\n]?)/g,"\n### $1$2\n");
+                            insert("###", "标题3", sel, true, /(.+)([\n]?)/g, "\n### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h4":
-                            insert("####","标题4",sel,true,/(.+)([\n]?)/g,"\n#### $1$2\n");
+                            insert("####", "标题4", sel, true, /(.+)([\n]?)/g, "\n#### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h5":
-                            insert("#####","标题5",sel,true,/(.+)([\n]?)/g,"\n##### $1$2\n");
+                            insert("#####", "标题5", sel, true, /(.+)([\n]?)/g, "\n##### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "h6":
-                            insert("######","标题6",sel,true,/(.+)([\n]?)/g,"\n###### $1$2\n");
+                            insert("######", "标题6", sel, true, /(.+)([\n]?)/g, "\n###### $1$2\n");
                             vm.header_action = false;
                             break;
                         case "hr":
-                            if(sel.text.length>0){
+                            if (sel.text.length > 0) {
                                 controller[0].clearSelection();
                                 sel = controller[0].getSelection();
                             }
                             controller[0].insertText("\n---\n", sel.start, sel.end);
-                            controller[0].setFocus(sel.start+5,sel.start+5);
+                            controller[0].setFocus(sel.start + 5, sel.start + 5);
                             break;
                         case "quote":
-                            insert(">","引用",sel,true, /(.+)([\n]?)/g,"\n> $1$2");
+                            insert(">", "引用", sel, true, /(.+)([\n]?)/g, "\n> $1$2");
                             break;
                         case "list":
-                            insert("-","列表",sel,true,/(.+)([\n]?)/g,'\n- $1$2');
+                            insert("-", "列表", sel, true, /(.+)([\n]?)/g, '\n- $1$2');
                             break;
                         case "list-2":
-                            insert("1.","列表",sel,true,/(.+)([\n]?)/g,"\n1. $1$2");
+                            insert("1.", "列表", sel, true, /(.+)([\n]?)/g, "\n1. $1$2");
                             break;
 
                         case "square":
-                            insert("- [ ] ","",sel,true,/(.+)([\n]?)/g,"- [ ] $1$2");
+                            insert("- [ ] ", "", sel, true, /(.+)([\n]?)/g, "- [ ] $1$2");
                             break;
                         case "check-square":
-                            insert("- [x] ","",sel,true,/(.+)([\n]?)/g,"- [x] $1$2");
+                            insert("- [x] ", "", sel, true, /(.+)([\n]?)/g, "- [x] $1$2");
                             break;
 
                         case "link":
                             var iUrl = "http://xxx.com";
                             var _text = "链接文字";
-                            if(sel.text.length > 0) {
-                                if(sel.text.indexOf('http')!=-1){
+                            if (sel.text.length > 0) {
+                                if (sel.text.indexOf('http') != -1) {
                                     iUrl = sel.text;
-                                }else{
+                                } else {
                                     _text = sel.text;
                                 }
                             }
-                            var aUrl = "["+_text+"]("+iUrl+")";
+                            var aUrl = "[" + _text + "](" + iUrl + ")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
-                            controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
+                            controller[0].setFocus(sel.start + aUrl.length, sel.start + aUrl.length);
 
                             break;
                         case "image":
                             var _text = "图片描述";
                             var iUrl = "http://lesschat.com/x.png";
-                            if(sel.text.length > 0) {
-                                if(sel.text.indexOf('http')!=-1){
+                            if (sel.text.length > 0) {
+                                if (sel.text.indexOf('http') != -1) {
                                     iUrl = sel.text;
-                                }else{
+                                } else {
                                     _text = sel.text;
                                 }
                             }
-                            var aUrl = "!["+_text+"]("+iUrl+")";
+                            var aUrl = "![" + _text + "](" + iUrl + ")";
                             controller[0].insertText(aUrl, sel.start, sel.end);
-                            controller[0].setFocus(sel.start+aUrl.length,sel.start+aUrl.length);
+                            controller[0].setFocus(sel.start + aUrl.length, sel.start + aUrl.length);
                             break;
                         case "code":
-                            if(sel.text.length === 0) {
+                            if (sel.text.length === 0) {
                                 controller[0].insertText("\n```\n  \n```\n", sel.start, sel.end);
-                                controller[0].setFocus(sel.start+6,sel.start+6);
-                            }else{
+                                controller[0].setFocus(sel.start + 6, sel.start + 6);
+                            } else {
                                 controller[0].insertText("`" + sel.text + "`", sel.start, sel.end);
-                                controller[0].setFocus(sel.start+2+sel.text.length,sel.start+2+sel.text.length);
+                                controller[0].setFocus(sel.start + 2 + sel.text.length, sel.start + 2 + sel.text.length);
                             }
                             break;
                         case "table":
@@ -699,7 +699,7 @@ angular.module("wt-editor")
                                 text = $($event.target).data('sample');
                             }
                             controller[0].insertText('\n```math\n' + text + '\n```\n', sel.start, sel.end);
-                            controller[0].setFocus(sel.start+text.length+14,sel.start+text.length+14);
+                            controller[0].setFocus(sel.start + text.length + 14, sel.start + text.length + 14);
                             break;
                         case "flow":
                             var text = sel.text;
@@ -707,7 +707,7 @@ angular.module("wt-editor")
                                 text = $($event.target).data('sample');
                             }
                             controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
-                            controller[0].setFocus(sel.start+text.length+10,sel.start+text.length+10);
+                            controller[0].setFocus(sel.start + text.length + 10, sel.start + text.length + 10);
                             break;
                         case "diagram":
                             var text = sel.text;
@@ -715,7 +715,7 @@ angular.module("wt-editor")
                                 text = $($event.target).data('sample');
                             }
                             controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
-                            controller[0].setFocus(sel.start+text.length+10,sel.start+text.length+10);
+                            controller[0].setFocus(sel.start + text.length + 10, sel.start + text.length + 10);
                             break;
                         case "gantt":
                             var text = sel.text;
@@ -723,7 +723,7 @@ angular.module("wt-editor")
                                 text = $($event.target).data('sample');
                             }
                             controller[0].insertText('\n```\n' + text + '\n```\n', sel.start, sel.end);
-                            controller[0].setFocus(sel.start+text.length+10,sel.start+text.length+10);
+                            controller[0].setFocus(sel.start + text.length + 10, sel.start + text.length + 10);
                             break;
                     }
                 };
@@ -783,66 +783,64 @@ angular.module("wt-editor")
                     }
                 }
                 //监控modal变化
-                scope.$watch('value', function(newValue, oldValue) {
+                scope.$watch('value', function (newValue, oldValue) {
                     var __value = vm.editor.value;
-                    if(wtEditorConfig.onChange) {
+                    if (wtEditorConfig.onChange) {
                         wtEditorConfig.onChange(__value);
                     }
                     if (wtEditorConfig.isPreview === true) {
-                        $timeout(function(){
+                        $timeout(function () {
                             controller[0].previewHTML();
-                        },128);
+                        }, 128);
                     }
                 });
 
                 //初始化完调用显示函数
-                if(wtEditorConfig.onShow){
+                if (wtEditorConfig.onShow) {
                     wtEditorConfig.onShow();
                 }
 
 
-
                 //设置header bg
-                vm.setHeaderLi = function(id){
+                vm.setHeaderLi = function (id) {
                     vm.header_action = !vm.header_action;
                 }
 
 
-
-                vm.setTableMemu = function(x,y){
+                vm.setTableMemu = function (x, y) {
                     vm.tableActiveX = x
-                    vm.tableActiveY = y==0?1:y
+                    vm.tableActiveY = y == 0 ? 1 : y
                 }
 
-                vm.insertTable = function(){
+                vm.insertTable = function () {
                     var cols = vm.tableActiveY;
-                    var rows = vm.tableActiveX+1;
-                    var _header =  "列";
+                    var rows = vm.tableActiveX + 1;
+                    var _header = "列";
                     var _header_hr = "---";
                     var _row = "行";
 
-                    for(var i = 0;i<cols;i++){
+                    for (var i = 0; i < cols; i++) {
                         _header += "| 列 ";
-                        _header_hr+= "| --- ";
+                        _header_hr += "| --- ";
                         _row += "| 行 ";
                     }
                     var _str = "";
-                    for(var i = 0;i<rows;i++){
-                        _str+=_row+"\n";
+                    for (var i = 0; i < rows; i++) {
+                        _str += _row + "\n";
                     }
 
-                    var sample = _header+"\n"+_header_hr+"\n"+_str;
+                    var sample = _header + "\n" + _header_hr + "\n" + _str;
                     var sel = controller[0].getSelection();
-                    if(sel.text.length>0){
+                    if (sel.text.length > 0) {
                         controller[0].clearSelection();
                         sel = controller[0].getSelection();
                     }
                     if (controller[0].isRowFirst(sel.start)) {
-                        controller[0].insertText('\n' + sample + '\n\n',sel.start, sel.end);
-                        controller[0].setFocus(sel.start+sample.length+2,sel.start+sample.length+2);
+                        controller[0].insertText('\n' + sample + '\n\n', sel.start, sel.end);
+                        controller[0].setFocus(sel.start + sample.length + 2, sel.start + sample.length + 2);
                     } else {
-                        controller[0].insertText('\n\n' + sample + '\n\n',sel.start, sel.end);
-                        controller[0].setFocus(sel.start+sample.length+4,sel.start+sample.length+4);
+                        controller[0].insertText('\n\n' + sample + '\n\n', sel.start, sel.end);
+                        controller[0].setFocus(sel.start + sample.length + 4, sel.start + sample.length + 4);
                     }
 
                     vm.table_action = false;
@@ -853,13 +851,13 @@ angular.module("wt-editor")
                 //    controller[0].setPriviewScroll()
                 //});
 
-                $(document).click(function(ev){
+                $(document).click(function (ev) {
                     var _obj = $(ev.target);
-                    scope.$apply(function(){
-                        if(!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h'){
+                    scope.$apply(function () {
+                        if (!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h') {
                             vm.header_action = false;
                         }
-                        if(!_obj.hasClass('fa-table') && _obj.attr('flag') != 'table'){
+                        if (!_obj.hasClass('fa-table') && _obj.attr('flag') != 'table') {
                             vm.table_action = false;
                         }
 
@@ -868,13 +866,13 @@ angular.module("wt-editor")
                 });
                 $(window).on('resize', _.throttle(function () {
                     $timeout(function () {
-                        vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height())+'px';
+                        vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height()) + 'px';
                     }, 50);
                 }, 150));
-                $timeout(function(){
-                    _.forEach(wtEditorConfig.extendButtons, function(obj, key) {
-                        var _dom = $(element).find("[name="+obj.name+"]");
-                        if(_dom.size()>0){
+                $timeout(function () {
+                    _.forEach(wtEditorConfig.extendButtons, function (obj, key) {
+                        var _dom = $(element).find("[name=" + obj.name + "]");
+                        if (_dom.size() > 0) {
                             //_dom.html(obj.template);
                             var _scope = _dom.scope().$new();
                             if (obj.controller) {
@@ -887,8 +885,8 @@ angular.module("wt-editor")
                             }
                         }
                     });
-                    vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height())+'px';
-                },128);
+                    vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height()) + 'px';
+                }, 128);
             }
         };
     }])
@@ -896,7 +894,7 @@ angular.module("wt-editor")
         function (wtEditorConfig) {
             //初始化甘特图
             this.initGantt = function () {
-                if(window.mermaid){
+                if (window.mermaid) {
                     mermaid.parseError = function (err, hash) {
                         mermaid.error = err;
                     };
@@ -974,7 +972,7 @@ angular.module("wt-editor")
                         if (window.mermaid && mermaid.parse(code)) {
                             return '<div class="mermaid" data-line="' + line_number + '">' + code + '</div>';
                         } else {
-                            if(window.mermaid && mermaid.error){
+                            if (window.mermaid && mermaid.error) {
                                 return '<pre data-line="' + line_number + '">' + mermaid.error + '</pre>';
                             }
                         }
@@ -1005,12 +1003,12 @@ angular.module("wt-editor")
                 });
             };
 
-            this.parseMarked = function(value){
+            this.parseMarked = function (value) {
                 return marked(value);
             };
 
-            this.parseMermaid = function(){
-                if(window.mermaid){
+            this.parseMermaid = function () {
+                if (window.mermaid) {
                     mermaid.init();
                 }
             };
@@ -1025,14 +1023,14 @@ angular.module("wt-editor")
                     }
                 }];
              * **/
-            this.setEditorExtendButtons = function(json){
-                if(json){
+            this.setEditorExtendButtons = function (json) {
+                if (json) {
                     wtEditorConfig.extendButtons = json;
                 }
             };
 
-            this.setEditorTypes = function(json){
-                if(json){
+            this.setEditorTypes = function (json) {
+                if (json) {
                     angular.extend(wtEditorConfig.typeArray, json);
                 }
             };
