@@ -940,6 +940,12 @@ angular.module("wt-editor")
                     }
                 });
 
+                scope.$watch('config.autofocus', function (newValue, oldValue) {
+                    if(newValue){
+                        vm.editor.focus();
+                    }
+                });
+
                 //初始化完调用显示函数
                 if (wtEditorConfig.onShow) {
                     wtEditorConfig.onShow();
