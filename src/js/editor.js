@@ -7,19 +7,15 @@ angular.module("wt-editor")
         fontSize         : '16px',
         theme            : 'kuroir',
         className        : '',
-        isPreview        : false,//是否显示预览
-        isPreviewButton  : true,//是否显示预览按钮
         autofocus        : true, //默认聚焦
         width            : '100%', //宽度
         height           : '100%',  //高度
-        isFullscreen     : false, //默认是否全屏显示
-        isFullButton     : true, //是否显示最大化按钮
         type             : 'all', //toolbar按钮显示的类型 ［simple:简易, all:全部按钮］
         typeArray        : {
             hs     : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
             simple : ['bold', 'italic', 'link', 'divider', 'hr', 'quote', 'list', 'list-2'],
             complex: ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview'],
-            all    : ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview', 'expand','flow']
+            all    : ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview', 'expand']
         },
         allButtons       : {
             "heading"      : {
@@ -612,11 +608,6 @@ angular.module("wt-editor")
                     });
                 }
 
-                //是否显示预览
-                vm.isPreview = wtEditorConfig.isPreview;
-                vm.isPreviewButton = wtEditorConfig.isPreviewButton;
-                vm.isFullButton = wtEditorConfig.isFullButton;
-                vm.isFullscreen = wtEditorConfig.isFullscreen;
 
                 vm.editor = $(element).find('.wt-editor-textarea')[0];
                 try{
@@ -879,7 +870,6 @@ angular.module("wt-editor")
                 //preview
                 vm.togglePreview = function () {
                     vm.isPreview = !vm.isPreview;
-                    wtEditorConfig.isPreview = vm.isPreview;
                     if (vm.isPreview === true) {
                         $timeout(function () {
                             controller[0].previewHTML();
@@ -888,14 +878,11 @@ angular.module("wt-editor")
                 }
                 //full screen
                 vm.toggleFullScreen = function () {
-                    if (vm.isFullButton) {
-                        vm.isFullscreen = !vm.isFullscreen;
-                        if (vm.isPreview === true) {
-                            vm.togglePreview();
-                        }
-                        wtEditorConfig.isFullscreen = vm.isFullscreen;
-                        controller[0].setFullScreen(vm.isFullscreen, vm.editor);
+                    vm.isFullscreen = !vm.isFullscreen;
+                    if (vm.isPreview === true) {
+                        vm.togglePreview();
                     }
+                    controller[0].setFullScreen(vm.isFullscreen, vm.editor);
                 }
                 //插入表情
                 vm.insertEmoji = function () {
@@ -931,7 +918,7 @@ angular.module("wt-editor")
                     if (wtEditorConfig.onChange) {
                         wtEditorConfig.onChange(__value);
                     }
-                    if (wtEditorConfig.isPreview === true) {
+                    if (vm.isPreview === true) {
                         $timeout(function () {
                             controller[0].previewHTML();
                         }, 128);

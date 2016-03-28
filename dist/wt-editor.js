@@ -9,19 +9,15 @@ angular.module("wt-editor")
         fontSize         : '16px',
         theme            : 'kuroir',
         className        : '',
-        isPreview        : false,//是否显示预览
-        isPreviewButton  : true,//是否显示预览按钮
         autofocus        : true, //默认聚焦
         width            : '100%', //宽度
         height           : '100%',  //高度
-        isFullscreen     : false, //默认是否全屏显示
-        isFullButton     : true, //是否显示最大化按钮
         type             : 'all', //toolbar按钮显示的类型 ［simple:简易, all:全部按钮］
         typeArray        : {
             hs     : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
             simple : ['bold', 'italic', 'link', 'divider', 'hr', 'quote', 'list', 'list-2'],
             complex: ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview'],
-            all    : ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview', 'expand','flow']
+            all    : ['heading', 'bold', 'italic', 'underline', 'strikethrough', 'divider', 'hr', 'quote', 'list', 'list-2', 'square', 'check-square', 'divider', 'link', 'image', 'code', 'table', 'divider', 'math', 'diagram', 'gantt', 'divider', 'preview', 'expand']
         },
         allButtons       : {
             "heading"      : {
@@ -614,11 +610,6 @@ angular.module("wt-editor")
                     });
                 }
 
-                //是否显示预览
-                vm.isPreview = wtEditorConfig.isPreview;
-                vm.isPreviewButton = wtEditorConfig.isPreviewButton;
-                vm.isFullButton = wtEditorConfig.isFullButton;
-                vm.isFullscreen = wtEditorConfig.isFullscreen;
 
                 vm.editor = $(element).find('.wt-editor-textarea')[0];
                 try{
@@ -881,7 +872,6 @@ angular.module("wt-editor")
                 //preview
                 vm.togglePreview = function () {
                     vm.isPreview = !vm.isPreview;
-                    wtEditorConfig.isPreview = vm.isPreview;
                     if (vm.isPreview === true) {
                         $timeout(function () {
                             controller[0].previewHTML();
@@ -890,14 +880,11 @@ angular.module("wt-editor")
                 }
                 //full screen
                 vm.toggleFullScreen = function () {
-                    if (vm.isFullButton) {
-                        vm.isFullscreen = !vm.isFullscreen;
-                        if (vm.isPreview === true) {
-                            vm.togglePreview();
-                        }
-                        wtEditorConfig.isFullscreen = vm.isFullscreen;
-                        controller[0].setFullScreen(vm.isFullscreen, vm.editor);
+                    vm.isFullscreen = !vm.isFullscreen;
+                    if (vm.isPreview === true) {
+                        vm.togglePreview();
                     }
+                    controller[0].setFullScreen(vm.isFullscreen, vm.editor);
                 }
                 //插入表情
                 vm.insertEmoji = function () {
@@ -933,7 +920,7 @@ angular.module("wt-editor")
                     if (wtEditorConfig.onChange) {
                         wtEditorConfig.onChange(__value);
                     }
-                    if (wtEditorConfig.isPreview === true) {
+                    if (vm.isPreview === true) {
                         $timeout(function () {
                             controller[0].previewHTML();
                         }, 128);
@@ -1213,4 +1200,4 @@ angular.module("wt-editor")
             }
 
         }]);
-angular.module("wt.editor.tpl", []).run(["$templateCache", function($templateCache) {$templateCache.put("wt-editor/editor.html","<div class=\"wt-editor {{vm.className}}\" ng-class=\"{true: \'wt-editor-full-screen\', false: \'\'}[vm.isFullscreen]\">\r    <div class=\"wt-editor-toobar\">\r        <div class=\"noselect\">\r            <ul class=\"wtEditorToolBarUl\">\r                <li class=\"wtEditorToolBarli\" ng-repeat=\"item in vm.toolbars track by $index\" name=\"{{item.name}}\" ng-class=\"(item.id == 0 && vm.header_action)?\'active\':\'\'\">\r                    <!--自定义toolbar-->\r                    <i ng-if=\"item.type === \'custom\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"item.action($event,vm)\"></i>\r\r                    <i ng-if=\"item.type === \'headingFns\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.setHeaderLi(item.id)\"></i>\r\r                    <div ng-if=\"item.type === \'headingFns\'\" ng-show=\"vm.header_action\" class=\"toolbar-menu\" flag=\"h\">\r                        <ul flag=\"h\">\r                            <li ng-repeat=\"n in vm.headers\" ng-class=\"n.className\" ng-click=\"vm.styleFn(n.name,$event)\" flag=\"h\">\r                                {{n.title}}\r                            </li>\r                        </ul>\r                    </div>\r\r                    <i ng-if=\"item.type === \'styleFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <!--<i ng-if=\"item.type === \'headingFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\">h{{item.level}}</i>-->\r\r                    <i ng-if=\"item.type === \'tableFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"\r                       ng-click=\"vm.styleFn(item.name,$event)\"></i>\r\r\r                    <div ng-if=\"item.type === \'tableFn\'\" ng-show=\"vm.table_action\" class=\"table-menu\" flag=\"table\" ng-mouseleave=\"vm.tableActiveX=1;vm.tableActiveY=1;vm.table_action=false\">\r                        <ul flag=\"table\">\r                            <li flag=\"table\" ng-repeat=\"n in vm.tableMenu\">\r                                <i ng-repeat=\"s in n\" flag=\"table\" ng-click=\"vm.insertTable()\" ng-mouseenter=\"vm.setTableMemu(s[0],s[1])\" ng-mouseleave=\"\" ng-class=\"{true: \'active\', false: \'\'}[s[0]<=vm.tableActiveX && s[1] <= vm.tableActiveY]\"></i>\r                            </li>\r                        </ul>\r                    </div>\r\r\r                    <i ng-if=\"item.type === \'emoji\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r\r                    <i ng-if=\"item.type === \'mathFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'flowchart\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'diagram\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'gantt\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'help\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r                    <i ng-if=\"item.type === \'preview\' && vm.isPreviewButton\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.togglePreview()\"></i>\r                    <i ng-if=\"item.type === \'expand\' && vm.isFullButton\" title=\"{{vm.isFullscreen?item.title2:item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-class=\"{true: \'fa-compress\', false: \'fa-expand\'}[vm.isFullscreen]\" ng-click=\"vm.toggleFullScreen()\"></i>\r                    <i ng-if=\"item.type === \'divider\'\" class=\"divider\"></i>\r                </li>\r            </ul>\r        </div>\r    </div>\r    <div class=\"wt-editor-container\">\r        <div class=\"wt-editor-container-code\" ng-style=\"vm.editorContainerCode\">\r            <textarea  ng-style=\"vm.editorHeight\" class=\"wt-editor-textarea\" ng-model=\"value\"></textarea>\r        </div>\r        <div class=\"wt-editor-container-preview\" ng-show=\"vm.isPreview\">\r            <article class=\"markdown-body\" data-open-title=\"Hide Preview\" data-closed-title=\"Show Preview\"></article> <!-- 实时预览 -->\r        </div>\r    </div>\r</div>\r");}]);
+angular.module("wt.editor.tpl", []).run(["$templateCache", function($templateCache) {$templateCache.put("wt-editor/editor.html","<div class=\"wt-editor {{vm.className}}\" ng-class=\"{true: \'wt-editor-full-screen\', false: \'\'}[vm.isFullscreen]\">\r    <div class=\"wt-editor-toobar\">\r        <div class=\"noselect\">\r            <ul class=\"wtEditorToolBarUl\">\r                <li class=\"wtEditorToolBarli\" ng-repeat=\"item in vm.toolbars track by $index\" name=\"{{item.name}}\" ng-class=\"(item.id == 0 && vm.header_action)?\'active\':\'\'\">\r                    <!--自定义toolbar-->\r                    <i ng-if=\"item.type === \'custom\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"item.action($event,vm)\"></i>\r\r                    <i ng-if=\"item.type === \'headingFns\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.setHeaderLi(item.id)\"></i>\r\r                    <div ng-if=\"item.type === \'headingFns\'\" ng-show=\"vm.header_action\" class=\"toolbar-menu\" flag=\"h\">\r                        <ul flag=\"h\">\r                            <li ng-repeat=\"n in vm.headers\" ng-class=\"n.className\" ng-click=\"vm.styleFn(n.name,$event)\" flag=\"h\">\r                                {{n.title}}\r                            </li>\r                        </ul>\r                    </div>\r\r                    <i ng-if=\"item.type === \'styleFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <!--<i ng-if=\"item.type === \'headingFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  ng-click=\"vm.styleFn(item.name,$event)\">h{{item.level}}</i>-->\r\r                    <i ng-if=\"item.type === \'tableFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"\r                       ng-click=\"vm.styleFn(item.name,$event)\"></i>\r\r\r                    <div ng-if=\"item.type === \'tableFn\'\" ng-show=\"vm.table_action\" class=\"table-menu\" flag=\"table\" ng-mouseleave=\"vm.tableActiveX=1;vm.tableActiveY=1;vm.table_action=false\">\r                        <ul flag=\"table\">\r                            <li flag=\"table\" ng-repeat=\"n in vm.tableMenu\">\r                                <i ng-repeat=\"s in n\" flag=\"table\" ng-click=\"vm.insertTable()\" ng-mouseenter=\"vm.setTableMemu(s[0],s[1])\" ng-mouseleave=\"\" ng-class=\"{true: \'active\', false: \'\'}[s[0]<=vm.tableActiveX && s[1] <= vm.tableActiveY]\"></i>\r                            </li>\r                        </ul>\r                    </div>\r\r\r                    <i ng-if=\"item.type === \'emoji\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\"  data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r\r                    <i ng-if=\"item.type === \'mathFn\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'flowchart\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'diagram\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'gantt\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.styleFn(item.name,$event)\"></i>\r                    <i ng-if=\"item.type === \'help\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" data-toggle=\"modal\" data-target=\"#{{item.target}}\"></i>\r                    <i ng-if=\"item.type === \'preview\'\" title=\"{{item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-click=\"vm.togglePreview()\"></i>\r                    <i ng-if=\"item.type === \'expand\'\" title=\"{{vm.isFullscreen?item.title2:item.title}}\" class=\"{{item.className}} toolbar-icon\" ng-class=\"{true: \'fa-compress\', false: \'fa-expand\'}[vm.isFullscreen]\" ng-click=\"vm.toggleFullScreen()\"></i>\r                    <i ng-if=\"item.type === \'divider\'\" class=\"divider\"></i>\r                </li>\r            </ul>\r        </div>\r    </div>\r    <div class=\"wt-editor-container\">\r        <div class=\"wt-editor-container-code\" ng-style=\"vm.editorContainerCode\">\r            <textarea  ng-style=\"vm.editorHeight\" class=\"wt-editor-textarea\" ng-model=\"value\"></textarea>\r        </div>\r        <div class=\"wt-editor-container-preview\" ng-style=\"vm.editorHeight\" ng-show=\"vm.isPreview\">\r            <article class=\"markdown-body\" data-open-title=\"Hide Preview\" data-closed-title=\"Show Preview\"></article> <!-- 实时预览 -->\r        </div>\r    </div>\r</div>\r");}]);
