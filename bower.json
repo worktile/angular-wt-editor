@@ -1,6 +1,6 @@
 {
   "name": "angular-wt-editor",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "homepage": "https://github.com/WorktileTech/angular-wt-editor",
   "authors": [
     "YCTech"
@@ -24,13 +24,14 @@
     "src"
   ],
   "dependencies": {
-    "angular": "~1.4.4",
-    "angular-bootstrap": "~0.10.0",
-    "bootstrap": "~3.1.1",
+    "angular": ">=1.4.4",
+    "angular-bootstrap": ">=0.10.0",
+    "bootstrap": ">=3.1.1",
     "fontawesome": "latest",
     "lodash": null,
     "katex-build": null,
     "mermaid-min": null,
-    "Caret.js"   : null
+    "Caret.js"   : null,
+    "angular-elastic": ">=2.4.2"
   }
 }

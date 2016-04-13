@@ -8,8 +8,8 @@ angular.module("wt-editor")
         theme            : 'kuroir',
         className        : '',
         autofocus        : true, //默认聚焦
-        width            : '100%', //宽度
-        height           : '100%',  //高度
+        //width            : '100%', //宽度
+        //height           : '100%',  //高度
         type             : 'all', //toolbar按钮显示的类型 ［simple:简易, all:全部按钮］
         typeArray        : {
             hs     : ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
@@ -477,6 +477,7 @@ angular.module("wt-editor")
         this.previewHTML = function () {
             var _value = wtEditorService.parseMarked($scope.vm.editor.value);
             _value = emojiFn(_value);
+            this.setHeight();
             $($scope.vm.element).find('.markdown-body').empty().append(_value); // realtime preview
             wtEditorService.parseMermaid();
             if (wtEditorConfig.onPreview) {
@@ -515,6 +516,12 @@ angular.module("wt-editor")
 
         }
 
+        this.setHeight = function(){
+            if($scope.vm.autoHeight){
+                $scope.vm.editorHeight.height = ($($scope.vm.element).find('.wt-editor-container-code').height()) + 'px';
+            }
+        }
+
 
     }])
     .directive("wtEditor", ['wtEditorConfig', '$timeout', '$compile', '$rootScope', '$controller', function (wtEditorConfig, $timeout, $compile, $rootScope, $controller) {
@@ -536,7 +543,9 @@ angular.module("wt-editor")
                     toolbars           : [],
                     headers            : [],
                     editorHeight       : {},
-                    editorContainerCode: {},
+                    editorContainerStyle: {
+                        overflow:scope.config.autoHeight===true?'hidden':'auto'
+                    },
                     header_action      : false,
                     table_action       : false,
                     tableMenu          : [
@@ -548,6 +557,7 @@ angular.module("wt-editor")
                     ],
                     tableActiveX       : 1,
                     tableActiveY       : 1,
+                    autoHeight         : scope.config.autoHeight || false,
                     className          : scope.config.className
                 };
                 //继承设置
@@ -1022,6 +1032,9 @@ angular.module("wt-editor")
                         }
                     });
                     vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height()) + 'px';
+                    if(!vm.autoHeight){
+                        vm.editorContainerStyle.height = vm.editorHeight.height;
+                    }
                 }, 128);
             }
         };
