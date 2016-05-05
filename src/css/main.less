@@ -122,13 +122,15 @@
     display: flex;
     display: -webkit-flex;
     flex-direction: row;
+    &.height-auto{
+      flex: inherit!important;
+    }
   }
   .wt-editor-container-code{
     position: relative;
     flex: 1;
     -webkit-flex: 1;
     overflow: hidden;
-
     .wt-editor-textarea{
       border: 0;
       display: block;

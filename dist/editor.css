@@ -134,6 +134,11 @@
   -ms-flex-direction: row;
   flex-direction: row;
 }
+.wt-editor .wt-editor-container.height-auto {
+  -webkit-flex: inherit!important;
+  -ms-flex: inherit!important;
+  flex: inherit!important;
+}
 .wt-editor .wt-editor-container-code {
   position: relative;
   -ms-flex: 1;
