@@ -547,10 +547,17 @@ angular.module("wt-editor")
                 if(_text){
                     return _text;
                 }else{
-                    alert('text '+key+' none!');
+                    console.log('text '+key+' none!');
                 }
             }else{
-                alert('locale '+wtEditorConfig.locale+' none!');
+                console.log('locale '+wtEditorConfig.locale+' none!');
+                _locale = wtEditorConfig.language['zh-cn'];
+                var _text = _locale[key];
+                if(_text){
+                    return _text;
+                }else{
+                    console.log('text '+key+' none!');
+                }
             }
 
         }
