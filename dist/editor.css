@@ -12,20 +12,19 @@
 .wt-editor {
   width: 100%;
   height: 100%;
-  border: 1px #e3e6ec solid;
+  border: 1px #E3E6EC solid;
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
-  background: #ffffff;
+  background: #fff;
   margin: auto;
   display: -ms-flexbox;
   display: flex;
   display: -webkit-flex;
-  -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
 }
 .wt-editor .wt-editor-toobar {
-  background: #ffffff;
-  border-bottom: 1px #eeeeee solid;
+  background: #fff;
+  border-bottom: 1px #eee solid;
   position: relative;
 }
 .wt-editor .wt-editor-toobar .noselect {
@@ -93,7 +92,7 @@
 .wt-editor .wt-editor-toobar .con-icon {
   padding: 10px;
   border: 1px solid transparent;
-  color: #333333;
+  color: #333;
   opacity: 0.5;
   font-size: 16px;
 }
@@ -124,18 +123,15 @@
   vertical-align: top;
 }
 .wt-editor .wt-editor-container {
-  -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
   display: -ms-flexbox;
   display: flex;
   display: -webkit-flex;
-  -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
 }
 .wt-editor .wt-editor-container.height-auto {
-  -webkit-flex: inherit!important;
   -ms-flex: inherit!important;
   flex: inherit!important;
 }
@@ -166,21 +162,21 @@
   height: 100%;
 }
 .wt-editor .wt-editor-container-code .wt-editor-panel .ace_content {
-  background: #ffffff;
-  box-shadow: inset 0 0 2px #eeeeee;
+  background: #fff;
+  box-shadow: inset 0 0 2px #eee;
 }
 .wt-editor .wt-editor-container-code .wt-editor-panel .ace_gutter-layer {
   background: #fcfcfc;
 }
 .wt-editor .wt-editor-container-code .wt-editor-panel .ace_gutter-layer .ace_gutter-cell {
-  color: #dddddd;
+  color: #ddd;
 }
 .wt-editor .wt-editor-container-preview {
   -ms-flex: 1;
   flex: 1;
   -webkit-flex: 1;
   overflow: auto;
-  border-left: 1px #eeeeee solid;
+  border-left: 1px #eee solid;
   padding: 30px 15px;
   box-sizing: border-box;
 }
@@ -188,8 +184,8 @@
   position: absolute;
   z-index: 100;
   top: 38px;
-  background: #ffffff;
-  border: 1px #e3e6ec solid;
+  background: #fff;
+  border: 1px #E3E6EC solid;
 }
 .wt-editor .table-menu ul {
   padding: 0;
@@ -592,7 +588,7 @@
   border: solid 1px #ccc;
   border-bottom-color: #bbb;
   border-radius: 3px;
-  box-shadow: inset 0 -1px 0 #bbbbbb;
+  box-shadow: inset 0 -1px 0 #bbb;
 }
 .markdown-body .pl-c {
   color: #969896;
