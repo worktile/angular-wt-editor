@@ -588,7 +588,7 @@ angular.module("wt-editor")
                     headers            : [],
                     editorHeight       : {},
                     editorContainerStyle: {
-                        overflow:scope.config.autoHeight===true?'hidden':'auto'
+                        //overflow:scope.config.autoHeight===true?'hidden':'auto'
                     },
                     header_action      : false,
                     table_action       : false,
