@@ -1078,6 +1078,7 @@ angular.module("wt-editor")
                     vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height()) + 'px';
                     if(!vm.autoHeight){
                         vm.editorContainerStyle.height = vm.editorHeight.height;
+                        vm.editorContainerStyle.overflow = 'auto';
                     }
                 }, 128);
             }
