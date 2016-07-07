@@ -144,7 +144,8 @@
   -ms-flex: 1;
   flex: 1;
   -webkit-flex: 1;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .wt-editor .wt-editor-container-code .wt-editor-textarea {
   border: 0;
