@@ -139,11 +139,6 @@
   -ms-flex: inherit!important;
   flex: inherit!important;
 }
-.wt-editor .wt-editor-container.height-auto .wt-editor-container-code {
-  overflow-x: hidden;
-  overflow-y: auto;
-  max-height: 600px;
-}
 .wt-editor .wt-editor-container-code {
   position: relative;
   -ms-flex: 1;

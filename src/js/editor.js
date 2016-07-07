@@ -587,9 +587,9 @@ angular.module("wt-editor")
                     toolbars           : [],
                     headers            : [],
                     editorHeight       : {},
-                    editorContainerStyle: {
-                        //overflow:scope.config.autoHeight===true?'hidden':'auto'
-                    },
+                    //editorContainerStyle: {
+                    //    //overflow:scope.config.autoHeight===true?'hidden':'auto'
+                    //},
                     header_action      : false,
                     table_action       : false,
                     tableMenu          : [
@@ -1059,6 +1059,7 @@ angular.module("wt-editor")
                         vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height()) + 'px';
                     }, 50);
                 }, 150));
+
                 $timeout(function () {
                     _.forEach(wtEditorConfig.extendButtons, function (obj, key) {
                         var _dom = $(element).find("[name=" + obj.name + "]");
@@ -1075,10 +1076,11 @@ angular.module("wt-editor")
                             }
                         }
                     });
-                    vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height()) + 'px';
+                    vm.editorHeight.height = $(element).find('.wt-editor-container-code').height()+'px';
                     if(!vm.autoHeight){
-                        vm.editorContainerStyle.height = vm.editorHeight.height;
-                        vm.editorContainerStyle.overflow = 'auto';
+                        vm.maxHeight = parseInt(vm.editorHeight.height)>30?(parseInt(vm.editorHeight.height)-30):null;
+                    }else{
+                        vm.maxHeight = 600;
                     }
                 }, 128);
             }
