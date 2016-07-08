@@ -16,12 +16,12 @@
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
   background: #ffffff;
   margin: auto;
-  display: -ms-flexbox;
   display: flex;
+  display: -ms-flexbox;
   display: -webkit-flex;
-  -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-flex-direction: column;
 }
 .wt-editor .wt-editor-toobar {
   background: #ffffff;
@@ -124,15 +124,15 @@
   vertical-align: top;
 }
 .wt-editor .wt-editor-container {
-  -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  display: -ms-flexbox;
+  -webkit-flex: 1;
   display: flex;
+  display: -ms-flexbox;
   display: -webkit-flex;
-  -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-flex-direction: row;
 }
 .wt-editor .wt-editor-container.height-auto {
   -webkit-flex: inherit!important;

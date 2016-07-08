@@ -33,9 +33,15 @@
   box-shadow:0 3px 20px @layout-shadow;
   background: @layout-bg;
   margin: auto;
+  display: -webkit-box;
   display: flex;
+  display: -ms-flexbox;
   display: -webkit-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-flex-direction: column;
   .wt-editor-toobar{
     //padding: 5px 10px;
     background: @layout-toolbar-bg;
@@ -118,16 +124,27 @@
     }
   }
   .wt-editor-container{
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
+    -webkit-flex: 1;
+    display: -webkit-box;
     display: flex;
+    display: -ms-flexbox;
     display: -webkit-flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-flex-direction: row;
     &.height-auto{
       flex: inherit!important;
     }
   }
   .wt-editor-container-code{
     position: relative;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     -webkit-flex: 1;
     overflow-x: hidden;
@@ -166,6 +183,8 @@
     }
   }
   .wt-editor-container-preview{
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
     flex: 1;
     -webkit-flex: 1;
     overflow: auto;

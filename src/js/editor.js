@@ -6,6 +6,7 @@ angular.module("wt-editor")
     .constant('wtEditorConfig', {
         fontSize         : '16px',
         theme            : 'kuroir',
+        maxHeight        : 600,
         className        : '',
         autofocus        : true, //默认聚焦
         //width            : '100%', //宽度
@@ -579,6 +580,7 @@ angular.module("wt-editor")
             controller : 'wtEditorCtrl',
             templateUrl: "wt-editor/editor.html",
             link       : function (scope, element, attrs, controller) {
+                scope.maxHeight = wtEditorConfig.maxHeight;
                 var vm = scope.vm = {
                     element            : element,
                     value              : scope.value, //默认显示的内容
@@ -587,9 +589,6 @@ angular.module("wt-editor")
                     toolbars           : [],
                     headers            : [],
                     editorHeight       : {},
-                    //editorContainerStyle: {
-                    //    //overflow:scope.config.autoHeight===true?'hidden':'auto'
-                    //},
                     header_action      : false,
                     table_action       : false,
                     tableMenu          : [
@@ -667,7 +666,6 @@ angular.module("wt-editor")
                 try{
                     vm.editor.setAttribute('placeholder',controller[0].getLocaleText('placeholder'));
                 }catch(e){}
-
 
                 //插入方法
                 function insert(flag, title, sel, keepSelection, search, replace) {
@@ -968,6 +966,9 @@ angular.module("wt-editor")
                 }
                 //监控modal变化
                 scope.$watch('value', function (newValue, oldValue) {
+                    if(!vm.editor){
+                        return;
+                    }
                     var __value = vm.editor.value;
                     if (wtEditorConfig.onChange) {
                         wtEditorConfig.onChange(__value);
@@ -1078,9 +1079,9 @@ angular.module("wt-editor")
                     });
                     vm.editorHeight.height = $(element).find('.wt-editor-container-code').height()+'px';
                     if(!vm.autoHeight){
-                        vm.maxHeight = parseInt(vm.editorHeight.height)>30?(parseInt(vm.editorHeight.height)-30):null;
+                        scope.maxHeight = parseInt(vm.editorHeight.height)>30?(parseInt(vm.editorHeight.height)-30):null;
                     }else{
-                        vm.maxHeight = 600;
+                        scope.maxHeight = wtEditorConfig.maxHeight;
                     }
                 }, 128);
             }
@@ -1255,6 +1256,10 @@ angular.module("wt-editor")
                 if (json) {
                     angular.extend(wtEditorConfig.language, json);
                 }
+            },
+            this.setMaxHeight = function(_max){
+                if(!_max){return};
+                wtEditorConfig.maxHeight = _max;
             }
 
         }]);
