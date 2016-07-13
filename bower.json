@@ -32,6 +32,6 @@
     "katex-build": null,
     "mermaid-min": null,
     "Caret.js"   : null,
-    "angular-elastic": "https://github.com/WorktileTech/angular-elastic.git#master"
+    "angular-elastic": "https://github.com/WorktileTech/angular-elastic.git#~2.5.11"
   }
 }
