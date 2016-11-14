@@ -242,6 +242,7 @@ angular.module("wt-editor")
             }
         },
         extendButtons    : {}, //初始化扩展的图标
+        quickSearch      : {},
         hideButtons      : [],//要不显示的图标[]
         additionalButtons: [],//扩展的图标 {title:'扩展',className:'fa fa-music',type:'custom',action:musicFn,before:2}
         replaceButtons   : [],//替换默认的图标 {title:'插入图片',className:'fa fa-file-image-o',type:'custom',action:imageFn,id:17}
@@ -535,7 +536,14 @@ angular.module("wt-editor")
             var sel = this.getSelection();
             this.insertText(content, sel.start, sel.end);
             $scope.vm.editor.focus();
-        }
+        };
+        //插入内容
+        this.insertQuickSearch = function (content,qs) {
+            var sel = this.getSelection();
+            this.insertText(content, (sel.start-qs.length), sel.end);
+            //$scope.vm.editor.focus();
+            this.setFocus(sel.start-qs.length+content.length,sel.start-qs.length+content.length);
+        };
         //获取内容
         this.getContent = function () {
             return $scope.vm.editor.value;
@@ -968,7 +976,7 @@ angular.module("wt-editor")
                 }
                 //监控modal变化
                 scope.$watch('value', function (newValue, oldValue) {
-                    if(!vm.editor){
+                    if(!vm.editor || !newValue){
                         return;
                     }
                     var __value = vm.editor.value;
@@ -979,6 +987,12 @@ angular.module("wt-editor")
                         $timeout(function () {
                             controller[0].previewHTML();
                         }, 128);
+                    }
+
+                    var val = newValue.substr(vm.editor.selectionStart-wtEditorConfig.quickSearch.length,wtEditorConfig.quickSearch.length);
+                    var _obj = _.find(wtEditorConfig.quickSearch.options,{"action":val});
+                    if(_obj){
+                        _obj.controller(controller[0]);
                     }
                 });
 
@@ -1225,6 +1239,11 @@ angular.module("wt-editor")
             this.setEditorExtendButtons = function (json) {
                 if (json) {
                     wtEditorConfig.extendButtons = json;
+                }
+            };
+            this.setEditorQuickSearch = function (json) {
+                if (json) {
+                    wtEditorConfig.quickSearch = json;
                 }
             };
 
