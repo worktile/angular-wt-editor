@@ -981,6 +981,8 @@ angular.module("wt-editor")
                     var _obj = _.find(wtEditorConfig.quickSearch.options,{"action":val});
                     if(_obj){
                         _obj.controller(controller[0],event);
+                    }else{
+                        wtEditorConfig.quickSearch.noMathAction(controller[0],event);
                     }
                 }
                 //监控modal变化
