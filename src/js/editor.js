@@ -972,6 +972,17 @@ angular.module("wt-editor")
                         vm.faValue = '';
                     }
                 }
+                vm.keyUpFn = function(event){
+                    if(!vm.editor){
+                        return;
+                    }
+                    var __value = vm.editor.value;
+                    var val = __value.substr(vm.editor.selectionStart-wtEditorConfig.quickSearch.length,wtEditorConfig.quickSearch.length);
+                    var _obj = _.find(wtEditorConfig.quickSearch.options,{"action":val});
+                    if(_obj){
+                        _obj.controller(controller[0],event);
+                    }
+                }
                 //监控modal变化
                 scope.$watch('value', function (newValue, oldValue) {
                     if(!vm.editor || !newValue){
@@ -985,12 +996,6 @@ angular.module("wt-editor")
                         $timeout(function () {
                             controller[0].previewHTML();
                         }, 128);
-                    }
-
-                    var val = newValue.substr(vm.editor.selectionStart-wtEditorConfig.quickSearch.length,wtEditorConfig.quickSearch.length);
-                    var _obj = _.find(wtEditorConfig.quickSearch.options,{"action":val});
-                    if(_obj){
-                        _obj.controller(controller[0]);
                     }
                 });
 
@@ -1249,6 +1254,9 @@ angular.module("wt-editor")
                 if (json) {
                     angular.extend(wtEditorConfig.typeArray, json);
                 }
+            };
+            this.getEditorType = function(){
+                return wtEditorConfig.type;
             };
             this.setLocale = function(_locale){
                 if(!_locale){return};
