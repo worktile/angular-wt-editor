@@ -972,27 +972,44 @@ angular.module("wt-editor")
                         vm.faValue = '';
                     }
                 }
-                vm.keyUpFn = function(event){
+
+                vm.keyUpFn = _.debounce(function(event){
                     if(!vm.editor){
                         return;
                     }
                     var __value = vm.editor.value;
-                    var val = __value.substr(vm.editor.selectionStart-wtEditorConfig.quickSearch.length,wtEditorConfig.quickSearch.length);
-                    var _obj = _.find(wtEditorConfig.quickSearch.options,{"action":val});
-                    if(_obj){
-                        _obj.controller(controller[0],event);
-                    }else{
-                        if(wtEditorConfig.quickSearch.noMathAction){
-                            wtEditorConfig.quickSearch.noMathAction(controller[0],event);
+                    if(wtEditorConfig.quickSearch && wtEditorConfig.quickSearch.regs){
+                        if(event.keyCode === 38 || event.keyCode === 40){
+                            return;
                         }
+                        _.forEach(wtEditorConfig.quickSearch.regs,function(n){
+                            (function(tag,_value,_editor,_quickSearch,_controller){
+                                var cap = n.reg.exec(_value);
+                                if(cap){
+                                    var _obj = _.find(_quickSearch.options,{"action":n.action});
+                                    if(_obj){
+                                        _obj.controller(_controller,{
+                                            target:_editor
+                                        },cap);
+                                    }else{
+                                        if(_quickSearch.noMathAction){
+                                            _quickSearch.noMathAction(_controller,{
+                                                target:_editor
+                                            });
+                                        }
+                                    }
+                                }else{
+                                    if(_quickSearch.noMathAction){
+                                        _quickSearch.noMathAction(_controller,{
+                                            target:_editor
+                                        });
+                                    }
+                                }
+                            })(n,__value,vm.editor,wtEditorConfig.quickSearch,controller[0]);
+                        });
                     }
-                }
-                //监控modal变化
-                scope.$watch('value', function (newValue, oldValue) {
-                    if(!vm.editor || !newValue){
-                        return;
-                    }
-                    var __value = vm.editor.value;
+
+
                     if (wtEditorConfig.onChange) {
                         wtEditorConfig.onChange(__value);
                     }
@@ -1001,7 +1018,37 @@ angular.module("wt-editor")
                             controller[0].previewHTML();
                         }, 128);
                     }
+
+                },300,{
+                    trailing:true
                 });
+                //vm.keyUpFn = function(event){
+                //    var __value = vm.editor.value;
+                //    var val = __value.substr(vm.editor.selectionStart-wtEditorConfig.quickSearch.length,wtEditorConfig.quickSearch.length);
+                //    var _obj = _.find(wtEditorConfig.quickSearch.options,{"action":val});
+                //    if(_obj){
+                //        _obj.controller(controller[0],event);
+                //    }else{
+                //        if(wtEditorConfig.quickSearch.noMathAction){
+                //            wtEditorConfig.quickSearch.noMathAction(controller[0],event);
+                //        }
+                //    }
+                //}
+                //监控modal变化
+                //scope.$watch('value', function (newValue, oldValue) {
+                //    if(!vm.editor || !newValue){
+                //        return;
+                //    }
+                //    var __value = vm.editor.value;
+                //    if (wtEditorConfig.onChange) {
+                //        wtEditorConfig.onChange(__value);
+                //    }
+                //    if (vm.isPreview === true) {
+                //        $timeout(function () {
+                //            controller[0].previewHTML();
+                //        }, 128);
+                //    }
+                //});
 
                 scope.$watch('config.autofocus', function (newValue, oldValue) {
                     if(newValue){
