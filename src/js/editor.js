@@ -1121,6 +1121,26 @@ angular.module("wt-editor")
                     }, 50);
                 }, 150));
 
+                $(vm.editor).on("paste", function (e) {
+                    var $files = [];
+                    var theClipboardData = e.originalEvent.clipboardData;
+                    if (!theClipboardData.items) {
+                        return
+                    }
+                    for (var i = 0; i < theClipboardData.items.length; i++) {
+                        if (theClipboardData.items[i].kind == "file" && theClipboardData.items[i].type == "image/png") {
+                            // get the blob
+                            var imageFile = theClipboardData.items[i].getAsFile();
+                            imageFile.name = "[" + $rootScope.global.me.display_name + "] " +"upload"+ " - " + moment().format("YYYY-MM-DD HH:mm ss") + ".png";
+                            $files.push(imageFile);
+                            e.preventDefault();
+                            break;
+                        }
+                    }
+                    if(wtEditorConfig.parseImgUpload){
+                        wtEditorConfig.parseImgUpload($files,controller[0]);
+                    }
+                });
                 $timeout(function () {
                     _.forEach(wtEditorConfig.extendButtons, function (obj, key) {
                         var _dom = $(element).find("[name=" + obj.name + "]");
@@ -1295,7 +1315,11 @@ angular.module("wt-editor")
                     wtEditorConfig.quickSearch = json;
                 }
             };
-
+            this.setEditorParseImgUpload = function(fn){
+                if(fn){
+                    wtEditorConfig.parseImgUpload = fn;
+                }
+            };
             this.setEditorTypes = function (json) {
                 if (json) {
                     angular.extend(wtEditorConfig.typeArray, json);
