@@ -1122,6 +1122,7 @@ angular.module("wt-editor")
                 }, 150));
 
                 $(vm.editor).on("paste", function (e) {
+                    e.stopPropagation();
                     var $files = [];
                     var theClipboardData = e.originalEvent.clipboardData;
                     if (!theClipboardData.items) {
