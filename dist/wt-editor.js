@@ -532,6 +532,11 @@ angular.module("wt-editor")
         }
 
         //插入内容
+        this.replaceContent = function (content,sel) {
+            this.insertText(content, sel.start, sel.end);
+            $scope.vm.editor.focus();
+        };
+        //插入内容
         this.insertContent = function (content) {
             var sel = this.getSelection();
             this.insertText(content, sel.start, sel.end);
