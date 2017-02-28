@@ -1137,10 +1137,12 @@ angular.module("wt-editor")
                         if (theClipboardData.items[i].kind == "file" && theClipboardData.items[i].type == "image/png") {
                             // get the blob
                             var imageFile = theClipboardData.items[i].getAsFile();
-                            imageFile.name = "[" + $rootScope.global.me.display_name + "] " +"upload"+ " - " + moment().format("YYYY-MM-DD HH:mm ss") + ".png";
-                            $files.push(imageFile);
-                            e.preventDefault();
-                            break;
+                            if(imageFile){
+                                imageFile.name = "[" + $rootScope.global.me.display_name + "] " +"upload"+ " - " + moment().format("YYYY-MM-DD HH:mm ss") + ".png";
+                                $files.push(imageFile);
+                                e.preventDefault();
+                                break;
+                            }
                         }
                     }
                     if(wtEditorConfig.parseImgUpload){
