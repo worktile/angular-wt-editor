@@ -1361,10 +1361,17 @@ angular.module("wt-editor")
                 if (json) {
                     angular.extend(wtEditorConfig.language, json);
                 }
-            },
+            };
             this.setMaxHeight = function(_max){
                 if(!_max){return};
                 wtEditorConfig.maxHeight = _max;
-            }
-
+            };
+            this.initManyMarkdowns = function(ev,items){
+                var _obj = $(ev.target);
+                if (!_obj.hasClass('wt-editor-textarea') && !_obj.hasClass('toolbar-icon')) {
+                    _.forEach(items, function (n) {
+                        n.showEditor = false;
+                    });
+                }
+            };
         }]);
