@@ -1369,6 +1369,10 @@ angular.module("wt-editor")
                 wtEditorConfig.maxHeight = _max;
             };
             this.initManyMarkdowns = function(ev,items){
+                if(!ev || !items){
+                    return;
+                }
+                ev.stopPropagation();
                 var _obj = $(ev.target);
                 if (!_obj.hasClass('wt-editor-textarea') && !_obj.hasClass('toolbar-icon')) {
                     _.forEach(items, function (n) {
