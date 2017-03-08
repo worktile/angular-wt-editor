@@ -679,7 +679,7 @@ angular.module("wt-editor")
 
                 vm.editor = $(element).find('.wt-editor-textarea')[0];
                 try{
-                    vm.editor.setAttribute('placeholder',controller[0].getLocaleText('placeholder'));
+                    vm.editor.setAttribute('placeholder',wtEditorConfig.placeholder?wtEditorConfig.placeholder:controller[0].getLocaleText('placeholder'));
                 }catch(e){}
 
                 //插入方法
