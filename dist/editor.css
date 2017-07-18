@@ -12,9 +12,9 @@
 .wt-editor {
   width: 100%;
   height: 100%;
-  border: 1px #e3e6ec solid;
+  border: 1px #E3E6EC solid;
   box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
-  background: #ffffff;
+  background: #fff;
   margin: auto;
   display: flex;
   display: -ms-flexbox;
@@ -24,8 +24,8 @@
   -webkit-flex-direction: column;
 }
 .wt-editor .wt-editor-toobar {
-  background: #ffffff;
-  border-bottom: 1px #eeeeee solid;
+  background: #fff;
+  border-bottom: 1px #eee solid;
   position: relative;
 }
 .wt-editor .wt-editor-toobar .noselect {
@@ -93,7 +93,7 @@
 .wt-editor .wt-editor-toobar .con-icon {
   padding: 10px;
   border: 1px solid transparent;
-  color: #333333;
+  color: #333;
   opacity: 0.5;
   font-size: 16px;
 }
@@ -135,7 +135,6 @@
   -webkit-flex-direction: row;
 }
 .wt-editor .wt-editor-container.height-auto {
-  -webkit-flex: inherit!important;
   -ms-flex: inherit!important;
   flex: inherit!important;
 }
@@ -167,21 +166,21 @@
   height: 100%;
 }
 .wt-editor .wt-editor-container-code .wt-editor-panel .ace_content {
-  background: #ffffff;
-  box-shadow: inset 0 0 2px #eeeeee;
+  background: #fff;
+  box-shadow: inset 0 0 2px #eee;
 }
 .wt-editor .wt-editor-container-code .wt-editor-panel .ace_gutter-layer {
   background: #fcfcfc;
 }
 .wt-editor .wt-editor-container-code .wt-editor-panel .ace_gutter-layer .ace_gutter-cell {
-  color: #dddddd;
+  color: #ddd;
 }
 .wt-editor .wt-editor-container-preview {
   -ms-flex: 1;
   flex: 1;
   -webkit-flex: 1;
   overflow: auto;
-  border-left: 1px #eeeeee solid;
+  border-left: 1px #eee solid;
   padding: 30px 15px;
   box-sizing: border-box;
 }
@@ -189,8 +188,8 @@
   position: absolute;
   z-index: 100;
   top: 38px;
-  background: #ffffff;
-  border: 1px #e3e6ec solid;
+  background: #fff;
+  border: 1px #E3E6EC solid;
 }
 .wt-editor .table-menu ul {
   padding: 0;
@@ -228,12 +227,28 @@
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  color: #333;
+  color: #666;
   overflow: hidden;
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   word-wrap: break-word;
+  /* Flowchart variables */
+  /* Sequence Diagram variables */
+  /* Gantt chart variables */
+  /** Section styling */
+  /* Grid and axis */
+  /* Today line */
+  /* Task styling */
+  /* Default task */
+  /* Specific task settings for the sections*/
+  /* Active task */
+  /* Completed task */
+  /* Tasks on the critical line */
+  /*
+
+
+  */
 }
 .markdown-body * {
   box-sizing: border-box;
@@ -250,7 +265,7 @@
   border-color: #4078c0;
 }
 .markdown-body a {
-  color: #4078c0;
+  color: #22d7bb;
   text-decoration: none;
   background-color: transparent;
 }
@@ -283,7 +298,7 @@
   height: 1px;
   padding: 0;
   margin: 16px 0;
-  background-color: #e7e7e7;
+  background-color: #ddd;
   border: 0 none;
 }
 .markdown-body hr:before {
@@ -330,19 +345,23 @@
   word-break: keep-all;
 }
 .markdown-body table th {
-  font-weight: bold;
-}
-.markdown-body table td,
-.markdown-body table th {
-  padding: 6px 13px;
+  background: #f3f3f3;
+  border: none;
+  text-align: center;
+  font-weight: normal;
+  color: #666;
+  padding: 10px 20px;
   border: 1px solid #ddd;
+}
+.markdown-body table td {
+  border: 1px solid #ddd;
+  vertical-align: middle;
+  padding: 8px 20px;
+  color: #888;
 }
 .markdown-body table tr {
   background-color: #fff;
-  border-top: 1px solid #ccc;
-}
-.markdown-body table tr:nth-child(2n) {
-  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
 }
 .markdown-body h1,
 .markdown-body h2,
@@ -355,6 +374,7 @@
   margin-bottom: 16px;
   font-weight: bold;
   line-height: 1.4;
+  color: #333;
 }
 .markdown-body h1 .octicon-link,
 .markdown-body h2 .octicon-link,
@@ -423,7 +443,6 @@
 }
 .markdown-body h6 {
   font-size: 1em;
-  color: #777;
 }
 .markdown-body h6 .anchor {
   line-height: 1.1;
@@ -488,7 +507,7 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #f7f7f7;
+  background-color: #f3f3f3;
   border-radius: 3px;
   word-wrap: normal;
 }
@@ -560,8 +579,8 @@
 }
 .markdown-body blockquote {
   padding: 0 15px;
-  color: #777;
-  border-left: 4px solid #ddd;
+  color: #666;
+  border-left: 3px solid #22d7bb;
 }
 .markdown-body blockquote > :first-child {
   margin-top: 0;
@@ -577,7 +596,7 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #f7f7f7;
+  background-color: #f3f3f3;
   border-radius: 3px;
   margin-bottom: 0;
   word-break: normal;
@@ -589,11 +608,11 @@
   line-height: 10px;
   color: #555;
   vertical-align: middle;
-  background-color: #fcfcfc;
+  background-color: #f3f3f3;
   border: solid 1px #ccc;
   border-bottom-color: #bbb;
   border-radius: 3px;
-  box-shadow: inset 0 -1px 0 #bbbbbb;
+  box-shadow: inset 0 -1px 0 #bbb;
 }
 .markdown-body .pl-c {
   color: #969896;
@@ -687,4 +706,248 @@
 .markdown-body .task-list-item input {
   margin: 0 0.35em 0.25em -1.6em;
   vertical-align: middle;
+}
+.markdown-body .katex-display {
+  color: #333;
+}
+.markdown-body .mermaid .label {
+  color: #333333;
+}
+.markdown-body .node rect,
+.markdown-body .node circle,
+.markdown-body .node polygon {
+  fill: #7076fa;
+  stroke: #7076fa;
+  stroke-width: 1px;
+}
+.markdown-body .edgePath .path {
+  stroke: #333333;
+}
+.markdown-body .cluster rect {
+  fill: #ffffde;
+  rx: 40;
+  stroke: #aaaa33;
+  stroke-width: 1px;
+}
+.markdown-body .cluster text {
+  fill: #333333;
+}
+.markdown-body .actor {
+  stroke: #22d7bb;
+  fill: #22d7bb;
+}
+.markdown-body text.actor {
+  fill: #fff;
+  stroke: none;
+  font-size: 18px;
+}
+.markdown-body .actor-line {
+  stroke: grey;
+}
+.markdown-body .messageLine0 {
+  stroke-width: 1.5;
+  stroke-dasharray: "2 2";
+  marker-end: "url(#arrowhead)";
+  stroke: #333333;
+}
+.markdown-body .messageLine1 {
+  stroke-width: 1.5;
+  stroke-dasharray: "2 2";
+  stroke: #333333;
+}
+.markdown-body #arrowhead {
+  fill: #333333;
+}
+.markdown-body #crosshead path {
+  fill: #333333 !important;
+  stroke: #333333 !important;
+}
+.markdown-body .messageText {
+  fill: #333333;
+  stroke: none;
+}
+.markdown-body .labelBox {
+  stroke: #7076fa;
+  fill: #7076fa;
+}
+.markdown-body .labelText {
+  fill: black;
+  stroke: none;
+}
+.markdown-body .loopText {
+  fill: black;
+  stroke: none;
+}
+.markdown-body .loopLine {
+  stroke-width: 2;
+  stroke-dasharray: "2 2";
+  marker-end: "url(#arrowhead)";
+  stroke: #7076fa;
+}
+.markdown-body .note {
+  stroke: #fff5ad;
+  fill: #fff5ad;
+}
+.markdown-body .noteText {
+  fill: black;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 14px;
+}
+.markdown-body .section {
+  stroke: none;
+  opacity: 0.2;
+}
+.markdown-body .section0 {
+  fill: rgba(34, 215, 187, 0.3);
+}
+.markdown-body .section2 {
+  fill: #ffd234;
+}
+.markdown-body .section1,
+.markdown-body .section3 {
+  fill: white;
+  opacity: 0.2;
+}
+.markdown-body .sectionTitle0 {
+  fill: #333333;
+}
+.markdown-body .sectionTitle1 {
+  fill: #333333;
+}
+.markdown-body .sectionTitle2 {
+  fill: #333333;
+}
+.markdown-body .sectionTitle3 {
+  fill: #333333;
+}
+.markdown-body .sectionTitle {
+  text-anchor: start;
+  font-size: 11px;
+  text-height: 14px;
+}
+.markdown-body .grid .tick {
+  stroke: lightgrey;
+  opacity: 0.3;
+  shape-rendering: crispEdges;
+}
+.markdown-body .grid path {
+  stroke-width: 0;
+}
+.markdown-body .today {
+  fill: none;
+  stroke: #fc807e;
+  stroke-width: 2px;
+}
+.markdown-body .task {
+  stroke-width: 2;
+}
+.markdown-body .taskText {
+  text-anchor: middle;
+  font-size: 11px;
+}
+.markdown-body .taskTextOutsideRight {
+  fill: black;
+  text-anchor: start;
+  font-size: 11px;
+}
+.markdown-body .taskTextOutsideLeft {
+  fill: black;
+  text-anchor: end;
+  font-size: 11px;
+}
+.markdown-body .taskText0,
+.markdown-body .taskText1,
+.markdown-body .taskText2,
+.markdown-body .taskText3 {
+  fill: white;
+}
+.markdown-body .task0,
+.markdown-body .task1,
+.markdown-body .task2,
+.markdown-body .task3 {
+  fill: #22d7bb;
+  stroke: #22d7bb;
+}
+.markdown-body .taskTextOutside0,
+.markdown-body .taskTextOutside2 {
+  fill: black;
+}
+.markdown-body .taskTextOutside1,
+.markdown-body .taskTextOutside3 {
+  fill: black;
+}
+.markdown-body .active0,
+.markdown-body .active1,
+.markdown-body .active2,
+.markdown-body .active3 {
+  fill: #4e8af9;
+  stroke: #4e8af9;
+}
+.markdown-body .activeText0,
+.markdown-body .activeText1,
+.markdown-body .activeText2,
+.markdown-body .activeText3 {
+  fill: black !important;
+}
+.markdown-body .done0,
+.markdown-body .done1,
+.markdown-body .done2,
+.markdown-body .done3 {
+  stroke: grey;
+  fill: lightgrey;
+  stroke-width: 2;
+}
+.markdown-body .doneText0,
+.markdown-body .doneText1,
+.markdown-body .doneText2,
+.markdown-body .doneText3 {
+  fill: black !important;
+}
+.markdown-body .crit0,
+.markdown-body .crit1,
+.markdown-body .crit2,
+.markdown-body .crit3 {
+  stroke: #fc807e;
+  fill: #fc807e;
+  stroke-width: 2;
+}
+.markdown-body .activeCrit0,
+.markdown-body .activeCrit1,
+.markdown-body .activeCrit2,
+.markdown-body .activeCrit3 {
+  stroke: #fc807e;
+  fill: #bfc7ff;
+  stroke-width: 2;
+}
+.markdown-body .doneCrit0,
+.markdown-body .doneCrit1,
+.markdown-body .doneCrit2,
+.markdown-body .doneCrit3 {
+  stroke: #fc807e;
+  fill: lightgrey;
+  stroke-width: 2;
+  cursor: pointer;
+  shape-rendering: crispEdges;
+}
+.markdown-body .doneCritText0,
+.markdown-body .doneCritText1,
+.markdown-body .doneCritText2,
+.markdown-body .doneCritText3 {
+  fill: black !important;
+}
+.markdown-body .activeCritText0,
+.markdown-body .activeCritText1,
+.markdown-body .activeCritText2,
+.markdown-body .activeCritText3 {
+  fill: black !important;
+}
+.markdown-body .titleText {
+  text-anchor: middle;
+  font-size: 18px;
+  fill: black;
+}
+.markdown-body text {
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 14px;
 }
