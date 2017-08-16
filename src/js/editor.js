@@ -1145,7 +1145,7 @@ angular.module("wt-editor")
                             }
                         }
                     }
-                    if(wtEditorConfig.parseImgUpload){
+                    if(wtEditorConfig.parseImgUpload && $files.length > 0){
                         wtEditorConfig.parseImgUpload($files,controller[0]);
                     }
                 });
