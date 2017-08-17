@@ -1135,20 +1135,18 @@ angular.module("wt-editor")
                     if (!theClipboardData.items) {
                         return
                     }
-                    for (var i = 0; i < theClipboardData.items.length; i++) {
-                        if (theClipboardData.items[i].kind == "file" && theClipboardData.items[i].type == "image/png") {
-                            // get the blob
-                            var imageFile = theClipboardData.items[i].getAsFile();
+                    if(theClipboardData.items.length === 1){
+                        var _temp = theClipboardData.items[0];
+                        if(_temp.kind == "file" && _temp.type == "image/png"){
+                            var imageFile = _temp.getAsFile();
                             if(imageFile){
                                 imageFile.name = "[" + $rootScope.global.me.display_name + "] " +"upload"+ " - " + moment().format("YYYY-MM-DD HH:mm ss") + ".png";
                                 $files.push(imageFile);
-                                e.preventDefault();
-                                break;
                             }
                         }
-                    }
-                    if(wtEditorConfig.parseImgUpload){
-                        wtEditorConfig.parseImgUpload($files,controller[0]);
+                        if(wtEditorConfig.parseImgUpload && $files.length > 0){
+                            wtEditorConfig.parseImgUpload($files,controller[0]);
+                        }
                     }
                 });
                 $timeout(function () {
