@@ -1127,7 +1127,24 @@ angular.module("wt-editor")
                         vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height()) + 'px';
                     }, 50);
                 }, 150));
-
+                var parseImg = function(theClipboardData,e){
+                    var $files = [];
+                    for (var i = 0; i < theClipboardData.items.length; i++) {
+                        if (theClipboardData.items[i].kind == "file" && theClipboardData.items[i].type == "image/png") {
+                            // get the blob
+                            var imageFile = theClipboardData.items[i].getAsFile();
+                            if(imageFile){
+                                imageFile.name = "[" + $rootScope.global.me.display_name + "] " +"upload"+ " - " + moment().format("YYYY-MM-DD HH:mm ss") + ".png";
+                                $files.push(imageFile);
+                                e.preventDefault();
+                                break;
+                            }
+                        }
+                    }
+                    if(wtEditorConfig.parseImgUpload && $files.length > 0){
+                        wtEditorConfig.parseImgUpload($files,controller[0]);
+                    }
+                }
                 $(vm.editor).on("paste", function (e) {
                     e.stopPropagation();
                     var $files = [];
@@ -1135,18 +1152,9 @@ angular.module("wt-editor")
                     if (!theClipboardData.items) {
                         return
                     }
-                    if(theClipboardData.items.length === 1){
-                        var _temp = theClipboardData.items[0];
-                        if(_temp.kind == "file" && _temp.type == "image/png"){
-                            var imageFile = _temp.getAsFile();
-                            if(imageFile){
-                                imageFile.name = "[" + $rootScope.global.me.display_name + "] " +"upload"+ " - " + moment().format("YYYY-MM-DD HH:mm ss") + ".png";
-                                $files.push(imageFile);
-                            }
-                        }
-                        if(wtEditorConfig.parseImgUpload && $files.length > 0){
-                            wtEditorConfig.parseImgUpload($files,controller[0]);
-                        }
+                    var _html = _.find(theClipboardData.items,{type:'text/html'});
+                    if(!_html) {
+                        parseImg(theClipboardData, e);
                     }
                 });
                 $timeout(function () {
