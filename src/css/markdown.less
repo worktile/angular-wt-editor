@@ -633,45 +633,48 @@
   }
   /* Task styling */
   /* Default task */
-  .task {
-    stroke-width: 2;
+  .mermaid{
+    .task {
+      stroke-width: 2;
+    }
+    .taskText {
+      text-anchor: middle;
+      font-size: 11px;
+    }
+    .taskTextOutsideRight {
+      fill: black;
+      text-anchor: start;
+      font-size: 11px;
+    }
+    .taskTextOutsideLeft {
+      fill: black;
+      text-anchor: end;
+      font-size: 11px;
+    }
+    /* Specific task settings for the sections*/
+    .taskText0,
+    .taskText1,
+    .taskText2,
+    .taskText3 {
+      fill: white;
+    }
+    .task0,
+    .task1,
+    .task2,
+    .task3 {
+      fill: #22d7bb;
+      stroke: #22d7bb;
+    }
+    .taskTextOutside0,
+    .taskTextOutside2 {
+      fill: black;
+    }
+    .taskTextOutside1,
+    .taskTextOutside3 {
+      fill: black;
+    }
   }
-  .taskText {
-    text-anchor: middle;
-    font-size: 11px;
-  }
-  .taskTextOutsideRight {
-    fill: black;
-    text-anchor: start;
-    font-size: 11px;
-  }
-  .taskTextOutsideLeft {
-    fill: black;
-    text-anchor: end;
-    font-size: 11px;
-  }
-  /* Specific task settings for the sections*/
-  .taskText0,
-  .taskText1,
-  .taskText2,
-  .taskText3 {
-    fill: white;
-  }
-  .task0,
-  .task1,
-  .task2,
-  .task3 {
-    fill: #22d7bb;
-    stroke: #22d7bb;
-  }
-  .taskTextOutside0,
-  .taskTextOutside2 {
-    fill: black;
-  }
-  .taskTextOutside1,
-  .taskTextOutside3 {
-    fill: black;
-  }
+
   /* Active task */
   .active0,
   .active1,

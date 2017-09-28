@@ -241,7 +241,6 @@
   /* Today line */
   /* Task styling */
   /* Default task */
-  /* Specific task settings for the sections*/
   /* Active task */
   /* Completed task */
   /* Tasks on the critical line */
@@ -839,42 +838,45 @@
   stroke: #fc807e;
   stroke-width: 2px;
 }
-.markdown-body .task {
+.markdown-body .mermaid {
+  /* Specific task settings for the sections*/
+}
+.markdown-body .mermaid .task {
   stroke-width: 2;
 }
-.markdown-body .taskText {
+.markdown-body .mermaid .taskText {
   text-anchor: middle;
   font-size: 11px;
 }
-.markdown-body .taskTextOutsideRight {
+.markdown-body .mermaid .taskTextOutsideRight {
   fill: black;
   text-anchor: start;
   font-size: 11px;
 }
-.markdown-body .taskTextOutsideLeft {
+.markdown-body .mermaid .taskTextOutsideLeft {
   fill: black;
   text-anchor: end;
   font-size: 11px;
 }
-.markdown-body .taskText0,
-.markdown-body .taskText1,
-.markdown-body .taskText2,
-.markdown-body .taskText3 {
+.markdown-body .mermaid .taskText0,
+.markdown-body .mermaid .taskText1,
+.markdown-body .mermaid .taskText2,
+.markdown-body .mermaid .taskText3 {
   fill: white;
 }
-.markdown-body .task0,
-.markdown-body .task1,
-.markdown-body .task2,
-.markdown-body .task3 {
+.markdown-body .mermaid .task0,
+.markdown-body .mermaid .task1,
+.markdown-body .mermaid .task2,
+.markdown-body .mermaid .task3 {
   fill: #22d7bb;
   stroke: #22d7bb;
 }
-.markdown-body .taskTextOutside0,
-.markdown-body .taskTextOutside2 {
+.markdown-body .mermaid .taskTextOutside0,
+.markdown-body .mermaid .taskTextOutside2 {
   fill: black;
 }
-.markdown-body .taskTextOutside1,
-.markdown-body .taskTextOutside3 {
+.markdown-body .mermaid .taskTextOutside1,
+.markdown-body .mermaid .taskTextOutside3 {
   fill: black;
 }
 .markdown-body .active0,
