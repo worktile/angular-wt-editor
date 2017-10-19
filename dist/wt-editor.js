@@ -741,16 +741,16 @@ angular.module("wt-editor")
                                     controller[0].insertText(replaceStr, sel.start - ss.length, sel.end);
                                     controller[0].setFocus(sel.start + replaceStr.length, sel.start + replaceStr.length);
                                 } else {
-                                    controller[0].insertText(" _" + sel.text + "_ ", sel.start, sel.end);
+                                    controller[0].insertText(" *" + sel.text + "* ", sel.start, sel.end);
                                     controller[0].setFocus(sel.start, sel.start + 4 + sel.text.length);
                                 }
                             } else {
                                 var ss = controller[0].getRowText(sel.start);
                                 if (ss.length > 0) {
-                                    controller[0].insertText(" __ ", sel.start, sel.end, 2, 2);
+                                    controller[0].insertText(" ** ", sel.start, sel.end, 2, 2);
                                     controller[0].setFocus(sel.start + 2, sel.start + 2);
                                 } else {
-                                    controller[0].insertText("__", sel.start, sel.end, 1, 1);
+                                    controller[0].insertText("**", sel.start, sel.end, 1, 1);
                                     controller[0].setFocus(sel.start + 1, sel.start + 1);
                                 }
                             }
