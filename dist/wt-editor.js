@@ -1104,24 +1104,28 @@ angular.module("wt-editor")
 
                 }
 
+                var documentBindClick = function (ev){
+                    var _obj = $(ev.target);
+                    scope.$apply(function () {
+                        if (!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h') {
+                            vm.header_action = false;
+                        }
+                        if (!_obj.hasClass('fa-table') && _obj.attr('flag') != 'table') {
+                            vm.table_action = false;
+                        }
+                    });
+                }
+
                 //$('#wtEditorObj').bind('scroll', function (e) {
                 //    controller[0].setPriviewScroll()
                 //});
                 if(_.find(vm.toolbars,{id:0}) || _.find(vm.toolbars,{id:20})) {
-                    $(document).click(function (ev) {
-                        var _obj = $(ev.target);
-                        scope.$apply(function () {
-                            if (!_obj.hasClass('fa-header') && _obj.attr('flag') != 'h') {
-                                vm.header_action = false;
-                            }
-                            if (!_obj.hasClass('fa-table') && _obj.attr('flag') != 'table') {
-                                vm.table_action = false;
-                            }
-
-
-                        });
-                    });
+                    $(document).bind('click', documentBindClick);
                 }
+                scope.$on("$destroy", function() {
+                    $(document).unbind('click', documentBindClick);
+                });
+
                 $(window).on('resize', _.throttle(function () {
                     $timeout(function () {
                         vm.editorHeight.height = ($(element).find('.wt-editor-container-code').height()) + 'px';
