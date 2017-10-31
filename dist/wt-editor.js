@@ -1138,7 +1138,7 @@ angular.module("wt-editor")
                             // get the blob
                             var imageFile = theClipboardData.items[i].getAsFile();
                             if(imageFile){
-                                imageFile.name = "[" + $rootScope.global.me.display_name + "] " +"upload"+ " - " + moment().format("YYYY-MM-DD HH:mm ss") + ".png";
+                                imageFile.title = "[" + $rootScope.global.me.display_name + "] " +"upload"+ " - " + moment().format("YYYY-MM-DD HH:mm ss") + ".png";
                                 $files.push(imageFile);
                                 e.preventDefault();
                                 break;
