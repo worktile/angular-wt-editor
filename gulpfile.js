@@ -9,6 +9,7 @@ var ngTemplate = require('gulp-angular-templatecache');
 var merge = require('merge-stream');
 var autoprefixer = require('gulp-autoprefixer');
 var minifycss = require('gulp-minify-css');
+var umd = require('gulp-umd');
 
 var paths = {
     scripts: ['src/js/*.js'],
@@ -58,10 +59,62 @@ gulp.task('scripts:dev', function () {
 gulp.task('scripts:dist', ['templates:dev'],function () {
     return gulp.src(paths.scripts.concat(["src/wt-editor.tpl.js"]))
         .pipe(concat('wt-editor.js'))
+        .pipe(umd({
+          exports: function(file) {
+            return 'wtEditor';
+          },
+          namespace: function(file) {
+            return 'wtEditor';
+          },
+          dependencies: function(file) {
+            return [
+              {
+                name: '$',
+                amd: 'jquery',
+                cjs: 'jquery',
+                global: 'jQuery',
+                param: '$'
+              },
+              {
+                name: 'marked',
+                amd: 'marked',
+                cjs: 'marked',
+                global: 'marked',
+                param: 'marked'
+              }
+            ];
+          }
+        }))
         .pipe(gulp.dest('dist'));
 });
 gulp.task('scripts:dist_all_min', ['templates:dev'],function () {
     return gulp.src(paths.scripts.concat(["src/wt-editor.tpl.js"]))
+        .pipe(umd({
+          exports: function(file) {
+            return 'wtEditor';
+          },
+          namespace: function(file) {
+            return 'wtEditor';
+          },
+          dependencies: function(file) {
+            return [
+              {
+                name: '$',
+                amd: 'jquery',
+                cjs: 'jquery',
+                global: 'jQuery',
+                param: '$'
+              },
+              {
+                name: 'marked',
+                amd: 'marked',
+                cjs: 'marked',
+                global: 'marked',
+                param: 'marked'
+              }
+            ];
+          }
+        }))
         .pipe(uglify())
         .pipe(concat('wt-editor-min.js'))
         .pipe(gulp.dest('dist'));
