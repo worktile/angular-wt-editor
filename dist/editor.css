@@ -156,6 +156,18 @@
   box-sizing: border-box;
   width: 100%;
 }
+.wt-editor .wt-editor-container-code .wt-editor-textarea::-webkit-input-placeholder {
+  color: #cacaca;
+}
+.wt-editor .wt-editor-container-code .wt-editor-textarea:-moz-placeholder {
+  color: #cacaca;
+}
+.wt-editor .wt-editor-container-code .wt-editor-textarea::-moz-placeholder {
+  color: #cacaca;
+}
+.wt-editor .wt-editor-container-code .wt-editor-textarea::-ms-input-placeholder {
+  color: #cacaca;
+}
 .wt-editor .wt-editor-container-code .wt-editor-textarea:focus {
   border: 0;
   outline: none;

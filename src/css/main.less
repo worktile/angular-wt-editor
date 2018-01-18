@@ -21,6 +21,7 @@
 @layout-code-line-color:#ddd;
 @layout-table-menu-bg:#f3f3f3;
 @layout-table-menu-hover:#cfcfcf;
+@text-placeholder:#cacaca;
 /***layout***/
 .wt-editor-full-screen{
   position: absolute;
@@ -150,6 +151,8 @@
     overflow-x: hidden;
     overflow-y: auto;
 
+
+
     .wt-editor-textarea{
       border: 0;
       display: block;
@@ -159,6 +162,18 @@
       padding: 30px 15px;
       box-sizing: border-box;
       width: 100%;
+      &::-webkit-input-placeholder {
+        color: @text-placeholder;
+      }
+      &:-moz-placeholder {
+        color: @text-placeholder;
+      }
+      &::-moz-placeholder {
+        color: @text-placeholder;
+      }
+      &::-ms-input-placeholder {
+        color: @text-placeholder;
+      }
 
       &:focus {
         border  : 0;
