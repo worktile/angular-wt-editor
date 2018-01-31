@@ -843,7 +843,7 @@ angular.module("wt-editor")
                 break;
 
               case "link":
-                var iUrl = "http://xxx.com";
+                var iUrl = "http://example.com";
                 var _text = controller[0].getLocaleText('link-text');//链接文字
                 if (sel.text.length > 0) {
                   if (sel.text.indexOf('http') != -1) {
