@@ -1,6 +1,6 @@
 {
   "name": "angular-wt-editor",
-  "version": "1.3.9",
+  "version": "1.4.0",
   "homepage": "https://github.com/WorktileTech/angular-wt-editor",
   "authors": [
     "YCTech"
@@ -32,7 +32,7 @@
     "katex-build": null,
     "mermaid-min": null,
     "Caret.js": null,
-    "angular-elastic": "https://github.com/WorktileTech/angular-elastic.git#~2.5.14",
-    "thy-model": "angular-thy-model#^0.0.3"
+    "angular-elastic": "https://github.com/WorktileTech/angular-elastic.git#~2.5.16",
+    "thy-model": "angular-thy-model#^0.0.6"
   }
 }
