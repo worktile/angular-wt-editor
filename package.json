@@ -8,14 +8,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/WorktileTech/angular-wt-editor.git"
+        "url": "git+https://github.com/worktile/angular-wt-editor.git"
     },
     "author": "YCTech",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/WorktileTech/angular-wt-editor/issues"
+        "url": "https://github.com/worktile/angular-wt-editor/issues"
     },
-    "homepage": "https://github.com/WorktileTech/angular-wt-editor#readme",
+    "homepage": "https://github.com/worktile/angular-wt-editor#readme",
     "devDependencies": {
         "del": "^1.2.1",
         "gulp": "^3.9.0",
