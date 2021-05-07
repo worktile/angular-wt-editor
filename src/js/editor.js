@@ -1197,7 +1197,7 @@ angular.module("wt-editor")
                 $timeout(function() {
                     _.forEach(wtEditorConfig.extendButtons, function(obj, key) {
                         var _dom = $(element).find("[name=" + obj.name + "]");
-                        if (_dom.size() > 0) {
+                        if (_dom.length > 0) {
                             //_dom.html(obj.template);
                             var _scope = _dom.scope().$new();
                             if (obj.controller) {
