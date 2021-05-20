@@ -276,7 +276,7 @@
   border-color: #4078c0;
 }
 .markdown-body a {
-  color: #22d7bb;
+  color: #348fe4;
   text-decoration: none;
   background-color: transparent;
 }
@@ -591,7 +591,7 @@
 .markdown-body blockquote {
   padding: 0 15px;
   color: #666;
-  border-left: 3px solid #22d7bb;
+  border-left: 3px solid #348fe4;
 }
 .markdown-body blockquote > :first-child {
   margin-top: 0;
@@ -744,8 +744,8 @@
   fill: #333333;
 }
 .markdown-body .actor {
-  stroke: #22d7bb;
-  fill: #22d7bb;
+  stroke: #348fe4;
+  fill: #348fe4;
 }
 .markdown-body text.actor {
   fill: #fff;
@@ -880,8 +880,8 @@
 .markdown-body .mermaid .task1,
 .markdown-body .mermaid .task2,
 .markdown-body .mermaid .task3 {
-  fill: #22d7bb;
-  stroke: #22d7bb;
+  fill: #348fe4;
+  stroke: #348fe4;
 }
 .markdown-body .mermaid .taskTextOutside0,
 .markdown-body .mermaid .taskTextOutside2 {
