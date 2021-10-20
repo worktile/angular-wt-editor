@@ -1345,18 +1345,7 @@ angular.module("wt-editor")
                     pedantic: false,
                     sanitize: false,
                     smartLists: true,
-                    smartypants: true,
-                    isParagraphDefault: false,
-                    isImageDefault: false,
-                    isBlockquoteDefault: false,
-                    isHrDefault: false,
-                    isStrongDefault: false,
-                    isEmDefault: false,
-                    isCodespanDefault: false,
-                    isCodeDefault: false,
-                    isDelDefault: false,
-                    isHtmlDefault: false,
-                    isTextEscape: true
+                    smartypants: true
                 });
             };
 
