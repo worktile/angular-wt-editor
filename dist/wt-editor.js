@@ -33,14 +33,14 @@ angular.module("wt-editor")
             "heading": {
                 id: 0,
                 title: '标题',
-                className: 'fa fa-header',
+                className: 'wtf wtf-heading',
                 type: 'headingFns',
                 name: 'heading'
             },
             "bold": {
                 id: 1,
                 title: '粗体',
-                className: 'fa fa-bold',
+                className: 'wtf wtf-bold',
                 modifier: '**',
                 type: 'styleFn',
                 name: 'bold'
@@ -48,7 +48,7 @@ angular.module("wt-editor")
             "italic": {
                 id: 2,
                 title: '斜体',
-                className: 'fa fa-italic',
+                className: 'wtf wtf-italic',
                 modifier: '*',
                 type: 'styleFn',
                 name: 'italic'
@@ -56,7 +56,7 @@ angular.module("wt-editor")
             "underline": {
                 id: 3,
                 title: '下划线',
-                className: 'fa fa-underline',
+                className: 'wtf wtf-underline',
                 modifier: 'u',
                 type: 'styleFn',
                 name: 'underline'
@@ -64,7 +64,7 @@ angular.module("wt-editor")
             "strikethrough": {
                 id: 4,
                 title: '删除线',
-                className: 'fa fa-strikethrough',
+                className: 'wtf wtf-strikethrough',
                 modifier: '~~',
                 type: 'styleFn',
                 name: 'strikethrough'
@@ -120,14 +120,14 @@ angular.module("wt-editor")
             "hr": {
                 id: 11,
                 title: '横线',
-                className: 'fa fa-minus',
+                className: 'wtf wtf-minus',
                 type: 'styleFn',
                 name: 'hr'
             },
             "quote": {
                 id: 12,
                 title: '引用',
-                className: 'fa fa-quote-left',
+                className: 'wtf wtf-quote-left',
                 prefix: '> ',
                 type: 'styleFn',
                 name: 'quote'
@@ -135,7 +135,7 @@ angular.module("wt-editor")
             "list": {
                 id: 13,
                 title: '无序列表',
-                className: 'fa fa-list-ul',
+                className: 'wtf wtf-list-ul1',
                 prefix: '- ',
                 type: 'styleFn',
                 name: 'list'
@@ -143,7 +143,7 @@ angular.module("wt-editor")
             "list-2": {
                 id: 14,
                 title: '有序列表',
-                className: 'fa fa-list-ol',
+                className: 'wtf wtf-list-ol',
                 prefix: '1. ',
                 type: 'styleFn',
                 name: 'list-2'
@@ -151,7 +151,7 @@ angular.module("wt-editor")
             "square": {
                 id: 15,
                 title: '未完成任务列表',
-                className: 'fa fa-square-o',
+                className: 'wtf wtf-check-square',
                 prefix: '- [ ] ',
                 type: 'styleFn',
                 name: 'square'
@@ -159,7 +159,7 @@ angular.module("wt-editor")
             "check-square": {
                 id: 16,
                 title: '已完成任务列表',
-                className: 'fa fa-check-square-o',
+                className: 'wtf wtf-check-square-o',
                 prefix: '- [x] ',
                 type: 'styleFn',
                 name: 'check-square'
@@ -167,7 +167,7 @@ angular.module("wt-editor")
             "link": {
                 id: 17,
                 title: '链接',
-                className: 'fa fa-link',
+                className: 'wtf wtf-link',
                 text: '链接文字',
                 url: 'http://example.com',
                 type: 'styleFn',
@@ -176,7 +176,7 @@ angular.module("wt-editor")
             "image": {
                 id: 18,
                 title: '图片',
-                className: 'fa fa-image',
+                className: 'wtf wtf-image',
                 text: '图片描述',
                 url: 'http://example.com/example.png',
                 type: 'styleFn',
@@ -185,28 +185,28 @@ angular.module("wt-editor")
             "code": {
                 id: 19,
                 title: '代码',
-                className: 'fa fa-code',
+                className: 'wtf wtf-code',
                 type: 'styleFn',
                 name: 'code'
             },
             "table": {
                 id: 20,
                 title: '表格',
-                className: 'fa fa-table',
+                className: 'wtf wtf-table-editor',
                 type: 'tableFn',
                 name: 'table'
             },
             "emoji": {
                 id: 21,
                 title: 'Emoji 图标',
-                className: 'fa fa-smile-o',
+                className: 'wtf wtf-emoji',
                 target: 'emoji-modal',
                 type: 'emoji'
             },
             "math": {
                 id: 22,
                 title: '数学公式',
-                className: 'fa fa-superscript',
+                className: 'wtf wtf-superscript',
                 sample: 'E = mc^2',
                 type: 'mathFn',
                 name: 'math'
@@ -214,35 +214,35 @@ angular.module("wt-editor")
             "flow": {
                 id: 23,
                 title: '流程图',
-                className: 'fa fa-long-arrow-right',
+                className: 'wtf wtf-long-arrow-alt-right',
                 type: 'flowchart',
                 name: 'flow'
             },
             "diagram": {
                 id: 24,
                 title: '顺序图',
-                className: 'fa fa-exchange',
+                className: 'wtf wtf-exchange-alt',
                 type: 'diagram',
                 name: 'diagram'
             },
             "gantt": {
                 id: 25,
                 title: '甘特图',
-                className: 'fa fa-sliders',
+                className: 'wtf wtf-sliders',
                 type: 'gantt',
                 name: 'gantt'
             },
             "preview": {
                 id: 27,
                 title: '预览',
-                className: 'fa fa-columns',
+                className: 'wtf wtf-columns',
                 type: 'preview'
             },
             "expand": {
                 id: 28,
                 title: '最大化',
                 title2: '还原',
-                className: 'fa fa-expand',
+                className: 'wtf wtf-expand-arrows-alt',
                 type: 'expand'
             },
             "divider": {
